@@ -1,7 +1,18 @@
 import requests
 import json
 import readini
+import MySQLdb as mysql
+import sys
+import pprint
 from VerseReference import VerseReference
+
+def connect_to_mysql():
+	db_server = readini.get_ini_value('database', 'server')
+	db_user = readini.get_ini_value('database', 'user')
+	db_password = readini.get_ini_value('database', 'password')
+	db_name = readini.get_ini_value('database', 'database')
+
+	return mysql.connect(db_server, db_user, db_password, db_name)
 
 
 def process_newPosts(site_name, from_date, sepost_process_function, se_post_save_function):
@@ -26,7 +37,7 @@ def locate_references(se_post):
 	se_body = se_body.replace('"','')
 
 	nchunk_start=0
-	nchunk_size=1600
+	nchunk_size=1500
 	found_refs = []
 
 	while nchunk_start < len(se_body):
@@ -46,7 +57,7 @@ def locate_references(se_post):
 			print refparse.url
 		
 
-		nchunk_start += 1500
+		nchunk_start += 1450
 		#Note: I'm purposely backing up, so that I don't accidentally split a reference across chunks
 
 		return found_refs
@@ -56,23 +67,38 @@ def save_post_to_mysql(se_post, found_refs):
 		#print "No References found"
 		return
 
-	post_id = se_post['post_id']
-	owner = se_post['owner']['display_name'].encode('utf-8')
-	post_type = se_post['post_type'].encode('utf-8')[0]
-	title = se_post['title'].encode('utf-8')
-	link = se_post['link'].encode('utf-8')
-	score = se_post['score']
-	body = se_post['body'].encode('utf-8') #TODO: Get the tagged version rather than the placed, then inject it, along with some CSS styles to highlight the found references...
+	con = connect_to_mysql()
+	try:
+		cur = con.cursor()
 
-	qry_Insert_Post = "INSERT INTO post (sepost_id, owner, type, title, link, score, body) VALUES ({0}, '{1}', '{2}', '{3}', '{4}', {5}, '{6}')".format(post_id, owner, post_type, title, link, score, '<body>' )
-	print qry_Insert_Post
 
-	for found in found_refs:
-		refr = VerseReference(found['passage'].encode('utf-8'))
-		qry_Insert_Ref = "INSERT INTO foundrefs (sepost_id, reference, ref_book_num, ref_startchapter_num, ref_startverse_num, ref_endchapter_num, ref_endverse_num, se_post_index_start, se_post_reference_length) VALUES ('{0}', '{1}', {2}, {3}, {4}, {5}, {6}, {7}, {8});".format(post_id, refr.plain_ref, refr.book_num, refr.start_chapter, refr.start_verse, refr.end_chapter, refr.end_verse, found['textIndex'], found['textLength'])
-		print qry_Insert_Ref
+		post_id = se_post['post_id']
+		owner = se_post['owner']['display_name'].encode('utf-8')
+		post_type = se_post['post_type'].encode('utf-8')[0]
+		title = se_post['title'].encode('utf-8')
+		link = se_post['link'].encode('utf-8')
+		score = se_post['score']
+		body = se_post['body'].encode('utf-8').replace('\'', '\\\'') #TODO: Get the tagged version rather than the placed, then inject it, along with some CSS styles to highlight the found references...
 
-	pass
+		print "Inserting Post # {0} ({1})".format(post_id, title)
+		qry_Insert_Post = "INSERT INTO post (sepost_id, owner, type, title, link, score, body) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+		cur.execute(qry_Insert_Post, (post_id, owner, post_type, title, link, score, body))
+
+
+		for found in found_refs:
+			refr = VerseReference(found['passage'].encode('utf-8'))
+			print "  Reference Found: {0}".format(refr.plain_ref)
+			qry_Insert_Ref = "INSERT INTO foundrefs (sepost_id, reference, ref_book_num, ref_startchapter_num, ref_startverse_num, ref_endchapter_num, ref_endverse_num, se_post_index_start, se_post_reference_length) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+
+			cur.execute(qry_Insert_Ref, (post_id, refr.plain_ref, refr.book_num, refr.start_chapter, refr.start_verse, refr.end_chapter, refr.end_verse, found['textIndex'], found['textLength']))
+
+		con.commit()
+	except:
+		print "Unable to commit to database:"
+		pprint.pprint(sys.exc_info())
+		con.rollback()
+	finally:
+		con.close()
 
 biblia_apikey = readini.get_ini_value('keys', 'biblia_apikey')
 
@@ -82,4 +108,4 @@ for site_name in ['christianity', 'hermeneutics']:
 	print "{0}.stackexchange.com last checked on {1}".format(site_name, last_run_date)
 	process_newPosts(site_name, last_run_date, locate_references, save_post_to_mysql)
 
-	set_last_run(site_name)
+	readini.set_last_run(site_name)
