@@ -14,7 +14,6 @@ def connect_to_mysql():
 
 	return mysql.connect(db_server, db_user, db_password, db_name)
 
-
 def process_newPosts(site_name, from_date, sepost_process_function, se_post_save_function):
 
 	# !-My9VsefIqes2OA9EyxQhzUNuqNvraT4i - requires authentication
@@ -51,6 +50,7 @@ def locate_references(se_post):
 		if (refparse.status_code == 200):
 			foundrefs = json.loads(refparse.text)
 			for foundref in foundrefs['results']:
+				#TODO: Don't forget to add nChunkStart to the TextIndex start... 
 				found_refs.append( foundref )  #['passage'].encode('utf-8')
 		else:
 			print refparse.status_code

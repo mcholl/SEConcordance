@@ -1,0 +1,12 @@
+TODO LIST:
+
+Locate_references
+- Ideally, when I insert a reference into FoundRef, it should be unique for each sepost_id / reference combination.  Look into INSERT OR UPDATE for a fix.
+- add nChunkStart to the TextIndex start when scanning text for references. Otherwise, the index locations are off.
+
+Db.sql
+- Get my personal credentials out of there (this on github after all!)
+
+Make a webpage that lists posts by found references and links you to the post in SE
+Highlight the selected reference and show a snippet when you rollover the text
+Be able to specify a range of verses to display
