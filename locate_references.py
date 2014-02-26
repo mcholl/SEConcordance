@@ -86,7 +86,9 @@ def save_post_to_mysql(se_post, found_refs):
 
 
 		for found in found_refs:
-			refr = VerseReference(found['passage'].encode('utf-8'))
+			plain_ref = found['passage'].encode('utf-8')
+
+			refr = VerseReference(plain_ref)
 			print "  Reference Found: {0}".format(refr.plain_ref)
 			qry_Insert_Ref = "INSERT INTO foundrefs (sepost_id, reference, ref_book_num, ref_startchapter_num, ref_startverse_num, ref_endchapter_num, ref_endverse_num, se_post_index_start, se_post_reference_length) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
 

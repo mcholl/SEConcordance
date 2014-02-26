@@ -3,6 +3,7 @@ TODO LIST:
 Locate_references
 - Ideally, when I insert a reference into FoundRef, it should be unique for each sepost_id / reference combination.  Look into INSERT OR UPDATE for a fix.
 - add nChunkStart to the TextIndex start when scanning text for references. Otherwise, the index locations are off.
+- Verify the em dashes are being parsed correctly.  Also, in the database, change those to a regular dash.
 
 Db.sql
 - Get my personal credentials out of there (this on github after all!)
@@ -10,3 +11,7 @@ Db.sql
 Make a webpage that lists posts by found references and links you to the post in SE
 Highlight the selected reference and show a snippet when you rollover the text
 Be able to specify a range of verses to display
+Be sure to credit biblia.com (see their website)
+
+
+When it comes time to do a full-up import of hermeneutics and christianity, I should put a delay in there of 1 second per post.  I only get 5000 calls per hour, so a little bit of throttling is in order.
