@@ -50,7 +50,7 @@ def locate_references(se_post):
 		if (refparse.status_code == 200):
 			foundrefs = json.loads(refparse.text)
 			for foundref in foundrefs['results']:
-				#TODO: Don't forget to add nChunkStart to the TextIndex start... 
+				foundref['textIndex'] += nchunk_start
 				found_refs.append( foundref )  #['passage'].encode('utf-8')
 		else:
 			print refparse.status_code
@@ -81,7 +81,7 @@ def save_post_to_mysql(se_post, found_refs):
 		body = se_post['body'].encode('utf-8').replace('\'', '\\\'') #TODO: Get the tagged version rather than the placed, then inject it, along with some CSS styles to highlight the found references...
 
 		print "Inserting Post # {0} ({1})".format(post_id, title)
-		qry_Insert_Post = "INSERT INTO post (sepost_id, owner, type, title, link, score, body) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+		qry_Insert_Post = "INSERT INTO concordance_sepost (sepost_id, owner, type, title, link, score, body) VALUES (%s, %s, %s, %s, %s, %s, %s)"
 		cur.execute(qry_Insert_Post, (post_id, owner, post_type, title, link, score, body))
 
 
@@ -90,7 +90,7 @@ def save_post_to_mysql(se_post, found_refs):
 
 			refr = VerseReference(plain_ref)
 			print "  Reference Found: {0}".format(refr.plain_ref)
-			qry_Insert_Ref = "INSERT INTO foundrefs (sepost_id, reference, ref_book_num, ref_startchapter_num, ref_startverse_num, ref_endchapter_num, ref_endverse_num, se_post_index_start, se_post_reference_length) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+			qry_Insert_Ref = "INSERT INTO concordance_reference (sepost_id, reference, ref_book_num, ref_startchapter_num, ref_startverse_num, ref_endchapter_num, ref_endverse_num, se_post_index_start, se_post_reference_length) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
 
 			cur.execute(qry_Insert_Ref, (post_id, refr.plain_ref, refr.book_num, refr.start_chapter, refr.start_verse, refr.end_chapter, refr.end_verse, found['textIndex'], found['textLength']))
 
