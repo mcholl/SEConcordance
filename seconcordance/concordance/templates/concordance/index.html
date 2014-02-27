@@ -1,0 +1,9 @@
+{% if found_references_list %}
+	<ul>
+	{% for found_ref in found_references_list %}
+		<li>{{found_ref.reference}}</li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>The Concordance is currently empty!</p>
+{% endif %}

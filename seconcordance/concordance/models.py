@@ -10,7 +10,7 @@ class SEPost(models.Model):
 	score = models.IntegerField(help_text="Net of Up and Downvotes on post", db_column="score") 
 	body = models.TextField()
 
-class Reference(models.Model):
+class VerseReference(models.Model):	
 	id = models.AutoField(primary_key=True, db_column="reference_id")
 	#sepost = models.ForeignKey('SEPost')
 
@@ -23,3 +23,6 @@ class Reference(models.Model):
 	end_verse = models.SmallIntegerField(help_text="End Verse", db_column="ref_endverse_num")
 	start_index = models.SmallIntegerField(help_text="Position of the reference in the body of the post", db_column="se_post_index_start")
 	length = models.SmallIntegerField(help_text="length of the reference in body of the post", db_column="se_post_reference_length")
+
+	class Meta:
+		db_table="concordance_reference"

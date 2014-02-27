@@ -122,10 +122,10 @@ class VerseReference:
 			"2 John",
 			"3 John",
 			"Jude",
-			"Revalation"]
+			"Revelation"]
 
 		if book in all_books:
-			return all_books.index(book)
+			return all_books.index(book)+1
 
 		#TODO: If you are here, then the book is ambiguous.  Here, we need to make a best guess
 		#Alternatively, we can lean on the Biblia API, because they've done the work to break everything else up

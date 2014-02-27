@@ -8,6 +8,7 @@ Db.sql
 - Get my personal credentials out of there (this on github after all!)
 
 Make a webpage that lists posts by found references and links you to the post in SE
+	<a href="{{found_ref.sepost.se_link}}">{{found_ref.sepost.title}}</a>  in template
 Highlight the selected reference and show a snippet when you rollover the text
 Be able to specify a range of verses to display
 Be sure to credit biblia.com (see their website)
@@ -17,3 +18,14 @@ When it comes time to do a full-up import of hermeneutics and christianity, I sh
 
 ---
 @done - add nChunkStart to the TextIndex start when scanning text for references. Otherwise, the index locations are off.
+
+{% if found_references_list %}
+	<ul>
+	{% for found_ref in found_references_list %}
+		<li>{{found_ref.reference}}</li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>The Concordance is currently empty!</p>
+{% endif %}
+
