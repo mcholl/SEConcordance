@@ -7,7 +7,7 @@ from concordance.models import *
 # Create your views here.
 def index(request):
 
-	found_references_list = VerseReference.objects.order_by('book_num')
+	found_references_list = VerseReference.objects.order_by('book_num', 'start_chapter', 'start_verse')
 
 	template = loader.get_template('concordance/index.html')
 	context = RequestContext( request, {

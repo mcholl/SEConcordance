@@ -1,31 +1,29 @@
 TODO LIST:
 
 Locate_references
-- Ideally, when I insert a reference into FoundRef, it should be unique for each sepost_id / reference combination.  Look into INSERT OR UPDATE for a fix.
-- Verify the em dashes are being parsed correctly.  Also, in the database, change those to a regular dash.
+- Ideally, when I insert a reference into FoundRef, it should be unique for each sepost_id / reference combination.  Look into INSERT OR UPDATE for a fix. 
+- Handle duplicate post
+- Handle encoding better.  (fancy quotes)
 
 Db.sql
-- Get my personal credentials out of there (this on github after all!)
 
-Make a webpage that lists posts by found references and links you to the post in SE
-	<a href="{{found_ref.sepost.se_link}}">{{found_ref.sepost.title}}</a>  in template
+Views
+
 Highlight the selected reference and show a snippet when you rollover the text
 Be able to specify a range of verses to display
 Be sure to credit biblia.com (see their website)
-
+Add C.SE style sheets
 
 When it comes time to do a full-up import of hermeneutics and christianity, I should put a delay in there of 1 second per post.  I only get 5000 calls per hour, so a little bit of throttling is in order.
 
 ---
+Known Limitations:
+- Only the 66 books of the Protestant canon are recognized by the Biblia parser.  I'd need to get a lot more sophisticated before I can get Deuterocanonical or LDS scriptures recorginzed.
+
+---
 @done - add nChunkStart to the TextIndex start when scanning text for references. Otherwise, the index locations are off.
-
-{% if found_references_list %}
-	<ul>
-	{% for found_ref in found_references_list %}
-		<li>{{found_ref.reference}}</li>
-	{% endfor %}
-	</ul>
-{% else %}
-	<p>The Concordance is currently empty!</p>
-{% endif %}
-
+@done - Get my personal credentials out of Db.sql (this on github after all!)
+@done - I had the name of revelation wrong & every index needed to be bumped up by 1 - so I need to reimport :)
+@done - Verify the em dashes are being parsed correctly.  Also, in the database, change those to a regular dash.
+@done Make a webpage that lists posts by found references and links you to the post in SE
+	<a href="{{found_ref.sepost.se_link}}">{{found_ref.sepost.title}}</a>  in template

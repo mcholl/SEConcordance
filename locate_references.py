@@ -84,9 +84,8 @@ def save_post_to_mysql(se_post, found_refs):
 		qry_Insert_Post = "INSERT INTO concordance_sepost (sepost_id, owner, type, title, link, score, body) VALUES (%s, %s, %s, %s, %s, %s, %s)"
 		cur.execute(qry_Insert_Post, (post_id, owner, post_type, title, link, score, body))
 
-
 		for found in found_refs:
-			plain_ref = found['passage'].encode('utf-8')
+			plain_ref = found['passage'].replace(u"\u2014", "-").replace(u"\u2013", "-").encode('utf-8')
 
 			refr = VerseReference(plain_ref)
 			print "  Reference Found: {0}".format(refr.plain_ref)

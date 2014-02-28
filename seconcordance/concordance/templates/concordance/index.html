@@ -1,9 +1,34 @@
-{% if found_references_list %}
-	<ul>
-	{% for found_ref in found_references_list %}
-		<li>{{found_ref.reference}}</li>
-	{% endfor %}
-	</ul>
-{% else %}
-	<p>The Concordance is currently empty!</p>
-{% endif %}
+<link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/christianity/all.css?v=d419fa438ebb">
+
+<DIV id='container'>
+	<DIV id='header'></DIV>
+	<DIV id='content'>
+
+	{% if found_references_list %}
+
+		<TABLE>
+			{% for found_ref in found_references_list %}
+			<TR>
+				{% autoescape off %}
+				<TD>{{found_ref.reference}}</TD>
+				<TD>
+					{{found_ref.sepost.owner}}'s 
+					{% if found_ref.sepost.qa == "q" %}
+						question on
+					{% else %}
+						answer to
+					{% endif %} 
+				</TD>
+				<TD>
+					<a class='question-hyperlink' href="{{found_ref.sepost.se_link}}">{{found_ref.sepost.posttitle}}</a>
+				</TD>
+				{% endautoescape %}
+			</TR>
+			{% endfor %}
+		</TABLE>
+	{% else %}
+		<p>The Concordance is currently empty!</p>
+	{% endif %}
+
+	</DIV>
+</DIV>
