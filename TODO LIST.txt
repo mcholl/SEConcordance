@@ -4,6 +4,10 @@ Locate_references
 - Ideally, when I insert a reference into FoundRef, it should be unique for each sepost_id / reference combination.  Look into INSERT OR UPDATE for a fix. 
 - Handle duplicate post
 - Handle encoding better.  (fancy quotes)
+- I still have URLs, which after encoding, are still > 2000, and generate a 404.  I really need to get that right
+
+- Interestingly, Biblia will parse out Apocraphyal books :)  I just need to add them to my array.
+- Question: Does Biblia parse out LDS books?
 
 Db.sql
 

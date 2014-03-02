@@ -4,6 +4,7 @@ import readini
 import MySQLdb as mysql
 import sys
 import pprint
+import time
 from VerseReference import VerseReference
 
 def connect_to_mysql():
@@ -20,14 +21,32 @@ def process_newPosts(site_name, from_date, sepost_process_function, se_post_save
 	# !2.5sIHWRk9kld4Sb1Qn6N - no title
 	# !BJyHsUt9WLl9dRFPUz(Uyr874YYvNH
 
-	se_api_url = 'http://api.stackexchange.com/posts?fromdate={0}&order=desc&sort=creation&filter=!BJyHsUt9WLl9dRFPUz(Uyr874YYvNH&site={1}'.format(from_date, site_name)
-	r = requests.get(se_api_url)
+	npage = 1
+	has_more_pages = True
 
-	if (r.status_code == 200):
-		se_posts = json.loads(r.text)
-		for post in se_posts['items']:
-			found_refs = sepost_process_function(post)
-			se_post_save_function(post, found_refs)
+	while has_more_pages:
+		se_api_url = 'http://api.stackexchange.com/posts?fromdate={0}&order=asc&sort=creation&filter=!BJyHsUt9WLl9dRFPUz(Uyr874YYvNH&site={1}&page={2}&pagesize=100'.format(from_date, site_name, npage)
+		print se_api_url
+		r = requests.get(se_api_url)
+
+		if (r.status_code == 200):
+			se_posts = json.loads(r.text)
+			has_more_pages = se_posts['has_more']
+
+			for post in se_posts['items']:
+				found_refs = sepost_process_function(post)
+				se_post_save_function(post, found_refs)
+
+		#Wait in order to stay until rate limiting.  The real problem is the biblia api, which stops me at 5000.
+		#Since I'm doing somewhere near 200 requests per 100 se_posts, and I can do no more than 30 batches per hour, I will wait 2 minutes between batches.
+		if has_more_pages:
+			print "==========================================="
+			print "Waiting so as not to exceed API threshholds"
+			print "==========================================="
+			time.sleep(20)
+
+		npage += 1
+
 
 def locate_references(se_post):
 
@@ -53,12 +72,15 @@ def locate_references(se_post):
 				foundref['textIndex'] += nchunk_start
 				found_refs.append( foundref )  #['passage'].encode('utf-8')
 		else:
+			#TODO: Log Failed parsings for reprocessing.
 			print refparse.status_code
 			print refparse.url
 		
 
 		nchunk_start += 1450
 		#Note: I'm purposely backing up, so that I don't accidentally split a reference across chunks
+
+
 
 		return found_refs
 
@@ -81,8 +103,11 @@ def save_post_to_mysql(se_post, found_refs):
 		body = se_post['body'].encode('utf-8').replace('\'', '\\\'') #TODO: Get the tagged version rather than the placed, then inject it, along with some CSS styles to highlight the found references...
 
 		print "Inserting Post # {0} ({1})".format(post_id, title)
-		qry_Insert_Post = "INSERT INTO concordance_sepost (sepost_id, owner, type, title, link, score, body) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-		cur.execute(qry_Insert_Post, (post_id, owner, post_type, title, link, score, body))
+		qry_Insert_Post = "INSERT INTO concordance_sepost (sepost_id, owner, type, title, link, score, body) VALUES (%s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE title=%s, body=%s"
+		cur.execute(qry_Insert_Post, (post_id, owner, post_type, title, link, score, body, title, body))
+
+		qry_Clear_Refs = "DELETE FROM concordance_reference WHERE sepost_id=%s"
+		cur.execute(qry_Clear_Refs, (post_id))
 
 		for found in found_refs:
 			plain_ref = found['passage'].replace(u"\u2014", "-").replace(u"\u2013", "-").encode('utf-8')
@@ -97,6 +122,7 @@ def save_post_to_mysql(se_post, found_refs):
 	except:
 		print "Unable to commit to database:"
 		pprint.pprint(sys.exc_info())
+		#TODO: Log the failed entry to a log!
 		con.rollback()
 	finally:
 		con.close()

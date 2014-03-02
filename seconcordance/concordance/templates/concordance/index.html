@@ -1,7 +1,29 @@
 <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/christianity/all.css?v=d419fa438ebb">
+<STYLE type='text/css'>
+#content {
+	overflow: initial;
+}
+
+.classic {
+	margin: 1;
+	display: none;
+}
+
+a.tooltip :hover {
+	display: block;
+	background-color: yellow;
+}
+
+</STYLE>
+
+<SCRIPT type='text/javascript'>
+</SCRIPT>
 
 <DIV id='container'>
-	<DIV id='header'></DIV>
+	<DIV id='header'>
+		<LABEL for="filter">Show References</LABEL>
+		<INPUT id='filter' name='filter' type='text' placeholder='search' value='Gen 1:1 - Rev 22:20' />
+	</DIV>
 	<DIV id='content'>
 
 	{% if found_references_list %}
@@ -20,7 +42,11 @@
 					{% endif %} 
 				</TD>
 				<TD>
-					<a class='question-hyperlink' href="{{found_ref.sepost.se_link}}">{{found_ref.sepost.posttitle}}</a>
+					<a class='question-hyperlink tooltip' onhover='popup(this)' href="{{found_ref.sepost.se_link}}">
+						{{found_ref.sepost.posttitle}}
+					</a>
+					<span class='classic'>{{found_ref.preview_snippet}}</span>
+
 				</TD>
 				{% endautoescape %}
 			</TR>

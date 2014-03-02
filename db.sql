@@ -32,3 +32,10 @@ CREATE TABLE foundrefs (
 	se_post_index_start 	SMALLINT, 
 	se_post_reference_length	TINYINT);
 
+DROP VIEW IF EXISTS vw_snippets;
+CREATE VIEW vw_snippets AS 
+	SELECT r.sepost_id, r.reference, r.se_post_index_start, 
+	MID(p.body, IF(r.se_post_index_start-100<0,0,r.se_post_index_start-100), 100) 
+	FROM concordance_reference r 
+	LEFT JOIN concordance_sepost p ON p.sepost_id=r.sepost_id;
+

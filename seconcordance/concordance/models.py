@@ -24,6 +24,11 @@ class VerseReference(models.Model):
 	start_index = models.SmallIntegerField(help_text="Position of the reference in the body of the post", db_column="se_post_index_start")
 	length = models.SmallIntegerField(help_text="length of the reference in body of the post", db_column="se_post_reference_length")
 
+	@property
+	def preview_snippet(self):
+	 	return self.sepost.body[max(0,self.start_index-150): self.start_index + self.length + 150]
+
 	class Meta:
 		db_table="concordance_reference"
 		ordering = ["book_num", "start_chapter", "start_verse"]
+		
