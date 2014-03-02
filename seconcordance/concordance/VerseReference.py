@@ -11,8 +11,8 @@ class VerseReference:
 	book_num = 0
 	start_chapter = 0
 	start_verse = 0
-	end_chapter = 0
-	end_verse = 0
+	end_chapter = 1000
+	end_verse = 1000
 
 	biblia_apikey = readini.get_ini_value('keys', 'biblia_apikey')
 

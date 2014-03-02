@@ -1,7 +1,8 @@
 import ConfigParser
 from datetime import date, datetime, tzinfo, timedelta, time
 
-ini_file = 'seconcord.ini'
+#ini_file = 'seconcord.ini'
+ini_file = '/Users/mhollinger/Dropbox/Code/SEConcordance/seconcordance/concordance/seconcord.ini'
 
 def get_last_run(site_name):
     config = ConfigParser.ConfigParser()

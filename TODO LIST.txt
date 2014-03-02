@@ -9,11 +9,17 @@ Locate_references
 - Interestingly, Biblia will parse out Apocraphyal books :)  I just need to add them to my array.
 - Question: Does Biblia parse out LDS books?
 
+- Note: I may want to consider using the /?tag biblia api to add reference tags to all answers, then looking for the <cites>  That way, I get hypertext links everywhere.
+
 Db.sql
 
 Views
 
 Highlight the selected reference and show a snippet when you rollover the text
+
+
+- Note: My search filter is going to be wrong if I do something like Matthew 1 - 20.  Verses in Chapter 20 will be forgotten, because 20:1 > 20:0.  Basically I need to add a thing that says 0 = 1000
+
 Be able to specify a range of verses to display
 Be sure to credit biblia.com (see their website)
 Add C.SE style sheets
@@ -23,6 +29,7 @@ When it comes time to do a full-up import of hermeneutics and christianity, I sh
 ---
 Known Limitations:
 - Only the 66 books of the Protestant canon are recognized by the Biblia parser.  I'd need to get a lot more sophisticated before I can get Deuterocanonical or LDS scriptures recorginzed.
+  Not exactly true - apocraphyal books are recognized
 
 ---
 @done - add nChunkStart to the TextIndex start when scanning text for references. Otherwise, the index locations are off.
@@ -31,3 +38,6 @@ Known Limitations:
 @done - Verify the em dashes are being parsed correctly.  Also, in the database, change those to a regular dash.
 @done Make a webpage that lists posts by found references and links you to the post in SE
 	<a href="{{found_ref.sepost.se_link}}">{{found_ref.sepost.title}}</a>  in template
+
+
+	SELECT * FROM concordance_reference WHERE ref_book_num=%s AND ref_endchapter_num >= %s AND ref_endverse_num >= %s AND ref_startchapter_num <= %s AND ref_startverse_num <= %s

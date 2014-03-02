@@ -35,7 +35,9 @@ CREATE TABLE foundrefs (
 DROP VIEW IF EXISTS vw_snippets;
 CREATE VIEW vw_snippets AS 
 	SELECT r.sepost_id, r.reference, r.se_post_index_start, 
-	MID(p.body, IF(r.se_post_index_start-100<0,0,r.se_post_index_start-100), 100) 
+	MID(p.body, IF(r.se_post_index_start-100<0,0,r.se_post_index_start-100), 100) AS snippet,
+	r.ref_book_num, r.ref_startchapter_num, r.ref_startverse_num
 	FROM concordance_reference r 
-	LEFT JOIN concordance_sepost p ON p.sepost_id=r.sepost_id;
+	LEFT JOIN concordance_sepost p ON p.sepost_id=r.sepost_id
+	ORDER BY r.ref_book_num, r.ref_startchapter_num, r.ref_startverse_num;
 

@@ -11,5 +11,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
+    url(r'^search/(?P<filter_range>.+)$', views.search, name='search'),
 	url(r'^(?P<foundref_id>\d+)/$', views.detail, name='detail'),
 )

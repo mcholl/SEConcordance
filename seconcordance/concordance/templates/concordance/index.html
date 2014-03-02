@@ -22,9 +22,13 @@ a.tooltip :hover {
 <DIV id='container'>
 	<DIV id='header'>
 		<LABEL for="filter">Show References</LABEL>
-		<INPUT id='filter' name='filter' type='text' placeholder='search' value='Gen 1:1 - Rev 22:20' />
+		<INPUT id='filter' name='filter' type='text' placeholder='search' value='' />
 	</DIV>
 	<DIV id='content'>
+	{{ filter_range }}
+	{{ filter_ref.plain_ref }}
+	{{ filter_ref.book_num }}
+	{{ a_string }}
 
 	{% if found_references_list %}
 
@@ -56,5 +60,7 @@ a.tooltip :hover {
 		<p>The Concordance is currently empty!</p>
 	{% endif %}
 
+
 	</DIV>
+	
 </DIV>
