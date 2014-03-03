@@ -1,30 +1,26 @@
 TODO LIST:
 
+Search
+- I have the main search functionality has been implemented, but right now, I can't search beyond a single book - becaue my BibleReference object only has start book but no end book.  I need to expand that and the raw sql in the view in order to allow for a range of say Matthew - John (e.g. "Gospels")  Additionally, I should consider adding some keyword search ranges, as well as a graphical verse picker for this purpose...
+
 Locate_references
-- Ideally, when I insert a reference into FoundRef, it should be unique for each sepost_id / reference combination.  Look into INSERT OR UPDATE for a fix. 
-- Handle duplicate post
 - Handle encoding better.  (fancy quotes)
 - I still have URLs, which after encoding, are still > 2000, and generate a 404.  I really need to get that right
 
 - Interestingly, Biblia will parse out Apocraphyal books :)  I just need to add them to my array.
 - Question: Does Biblia parse out LDS books?
-
-- Note: I may want to consider using the /?tag biblia api to add reference tags to all answers, then looking for the <cites>  That way, I get hypertext links everywhere.
+- Log errors in a separate log file!  Ideally, I'd actually email that log to myself at the end, so that I see the errors!
 
 Db.sql
 
 Views
-
-Highlight the selected reference and show a snippet when you rollover the text
-
-
-- Note: My search filter is going to be wrong if I do something like Matthew 1 - 20.  Verses in Chapter 20 will be forgotten, because 20:1 > 20:0.  Basically I need to add a thing that says 0 = 1000
-
-Be able to specify a range of verses to display
-Be sure to credit biblia.com (see their website)
-Add C.SE style sheets
-
-When it comes time to do a full-up import of hermeneutics and christianity, I should put a delay in there of 1 second per post.  I only get 5000 calls per hour, so a little bit of throttling is in order.
+- Fix the widths afforded to references and who answred
+- Incorporate the Score metric (and consider - up/downvote split instead of raw score?)
+- Have a search button that actually calls search
+- Highlight the selected reference and show a snippet when you rollover the text. Note, the snippets are currently on the page, but I have them hidden for readibility.
+- Note: I may want to consider using the /?tag biblia api to add reference tags to all answers, then looking for the <cites>  That way, I get hypertext links everywhere.
+- Be sure to credit biblia.com (see their website)
+- Implement paging, restricting the list of displayed items to 30, 50, or 100.
 
 ---
 Known Limitations:
@@ -41,3 +37,11 @@ Known Limitations:
 
 
 	SELECT * FROM concordance_reference WHERE ref_book_num=%s AND ref_endchapter_num >= %s AND ref_endverse_num >= %s AND ref_startchapter_num <= %s AND ref_startverse_num <= %s
+@done - Ideally, when I insert a reference into FoundRef, it should be unique for each sepost_id / reference combination.  Look into INSERT OR UPDATE for a fix. (Netter solution - I do a DELETE before insert, thus getting rid of the old references!)
+@done - Handle duplicate post
+@done - Note: My search filter is going to be wrong if I do something like Matthew 1 - 20.  Verses in Chapter 20 will be forgotten, because 20:1 > 20:0.  Basically I need to add a thing that says 0 = 1000
+@done Be able to specify a range of verses to display
+@done Add C.SE style sheets
+
+@done When it comes time to do a full-up import of hermeneutics and christianity, I should put a delay in there of 1 second per post.  I only get 5000 calls per hour, so a little bit of throttling is in order.
+

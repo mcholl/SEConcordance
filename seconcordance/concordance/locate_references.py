@@ -100,7 +100,8 @@ def save_post_to_mysql(se_post, found_refs):
 		title = se_post['title'].encode('utf-8')
 		link = se_post['link'].encode('utf-8')
 		score = se_post['score']
-		body = se_post['body'].encode('utf-8').replace('\'', '\\\'') #TODO: Get the tagged version rather than the placed, then inject it, along with some CSS styles to highlight the found references...
+		body = se_post['body'].encode('utf-8').replace('\'', '\\\'') 
+		#TODO: Get the tagged version rather than the placed, then inject it, along with some CSS styles to highlight the found references...
 
 		print "Inserting Post # {0} ({1})".format(post_id, title)
 		qry_Insert_Post = "INSERT INTO concordance_sepost (sepost_id, owner, type, title, link, score, body) VALUES (%s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE title=%s, body=%s"
