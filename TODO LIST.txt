@@ -1,47 +1,63 @@
-TODO LIST:
+TODO LIST
 
-Search
-- I have the main search functionality has been implemented, but right now, I can't search beyond a single book - becaue my BibleReference object only has start book but no end book.  I need to expand that and the raw sql in the view in order to allow for a range of say Matthew - John (e.g. "Gospels")  Additionally, I should consider adding some keyword search ranges, as well as a graphical verse picker for this purpose...
+Search:
+- I have the main search functionality has been implemented, but right now, I can't search beyond a single book - because my BibleReference object only has start book but no end book.  I need to expand that and the raw sql in the view in order to allow for a range of say Matthew - John (e.g. "Gospels")  Additionally, I should consider adding some keyword search ranges, as well as a graphical verse picker for this purpose... @done(2014-03-03) 
 
-Locate_references
+Locate_references:
+- Log errors in a separate log file!  Ideally, I'd actually email that log to myself at the end, so that I see the errors!
+- Reimport, because I've changed books and added encoding!!
+- Test MultiBook filter ranges after  new import
+
 - Handle encoding better.  (fancy quotes)
 - I still have URLs, which after encoding, are still > 2000, and generate a 404.  I really need to get that right
 
-- Interestingly, Biblia will parse out Apocraphyal books :)  I just need to add them to my array.
 - Question: Does Biblia parse out LDS books?
-- Log errors in a separate log file!  Ideally, I'd actually email that log to myself at the end, so that I see the errors!
 
-Db.sql
 
-Views
-- Fix the widths afforded to references and who answred
-- Incorporate the Score metric (and consider - up/downvote split instead of raw score?)
-- Have a search button that actually calls search
+Db.sql:
+
+Views:
+
+- Be able to hide negatively scoring answers
+- Be able to hide questions or answers
+{%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}
+
 - Highlight the selected reference and show a snippet when you rollover the text. Note, the snippets are currently on the page, but I have them hidden for readibility.
-- Note: I may want to consider using the /?tag biblia api to add reference tags to all answers, then looking for the <cites>  That way, I get hypertext links everywhere.
-- Be sure to credit biblia.com (see their website)
+						<span class='classic'>{{found_ref.preview_snippet}}</span>
+
 - Implement paging, restricting the list of displayed items to 30, 50, or 100.
+- Make the Admin Interface usable by having the VerseReference and SEPost objects display meaningful information
 
 ---
 Known Limitations:
-- Only the 66 books of the Protestant canon are recognized by the Biblia parser.  I'd need to get a lot more sophisticated before I can get Deuterocanonical or LDS scriptures recorginzed.
-  Not exactly true - apocraphyal books are recognized
+
+- My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
 
 ---
-@done - add nChunkStart to the TextIndex start when scanning text for references. Otherwise, the index locations are off.
-@done - Get my personal credentials out of Db.sql (this on github after all!)
-@done - I had the name of revelation wrong & every index needed to be bumped up by 1 - so I need to reimport :)
-@done - Verify the em dashes are being parsed correctly.  Also, in the database, change those to a regular dash.
-@done Make a webpage that lists posts by found references and links you to the post in SE
-	<a href="{{found_ref.sepost.se_link}}">{{found_ref.sepost.title}}</a>  in template
+Archive:
+	@done  Not exactly true - apocraphyal books are recognized
+	- Only the 66 books of the Protestant canon are recognized by the Biblia parser.  I'd need to get a lot more sophisticated before I can get Deuterocanonical or LDS scriptures recorginzed. @done(2014-03-03)
+	@done - add nChunkStart to the TextIndex start when scanning text for references. Otherwise, the index locations are off.
+	@done - Get my personal credentials out of Db.sql (this on github after all!)
+	@done - I had the name of revelation wrong & every index needed to be bumped up by 1 - so I need to reimport :)
+	@done - Verify the em dashes are being parsed correctly.  Also, in the database, change those to a regular dash.
+	@done Make a webpage that lists posts by found references and links you to the post in SE
+		<a href="{{found_ref.sepost.se_link}}">{{found_ref.sepost.title}}</a>  in template
+	
+	
+		SELECT * FROM concordance_reference WHERE ref_book_num=%s AND ref_endchapter_num >= %s AND ref_endverse_num >= %s AND ref_startchapter_num <= %s AND ref_startverse_num <= %s
+	@done - Ideally, when I insert a reference into FoundRef, it should be unique for each sepost_id / reference combination.  Look into INSERT OR UPDATE for a fix. (Netter solution - I do a DELETE before insert, thus getting rid of the old references!)
+	@done - Handle duplicate post
+	@done - Note: My search filter is going to be wrong if I do something like Matthew 1 - 20.  Verses in Chapter 20 will be forgotten, because 20:1 > 20:0.  Basically I need to add a thing that says 0 = 1000
+	@done Be able to specify a range of verses to display
+	@done Add C.SE style sheets
+	@done When it comes time to do a full-up import of hermeneutics and christianity, I should put a delay in there of 1 second per post.  I only get 5000 calls per hour, so a little bit of throttling is in order.
+	@done - Have a search button that actually calls search
+	@done - Incorporate the Score metric (and consider - up/downvote split instead of raw score?)
+	@done - Tag the actual reference to biblia.
+	@done - Be sure to credit biblia.com (see their website)
+	@done - Fix the widths afforded to references and who answred
+	@done - Note: I may want to consider using the /?tag biblia api to add reference tags to all answers, then looking for the <cites>  That way, I get hypertext links everywhere.
 
 
-	SELECT * FROM concordance_reference WHERE ref_book_num=%s AND ref_endchapter_num >= %s AND ref_endverse_num >= %s AND ref_startchapter_num <= %s AND ref_startverse_num <= %s
-@done - Ideally, when I insert a reference into FoundRef, it should be unique for each sepost_id / reference combination.  Look into INSERT OR UPDATE for a fix. (Netter solution - I do a DELETE before insert, thus getting rid of the old references!)
-@done - Handle duplicate post
-@done - Note: My search filter is going to be wrong if I do something like Matthew 1 - 20.  Verses in Chapter 20 will be forgotten, because 20:1 > 20:0.  Basically I need to add a thing that says 0 = 1000
-@done Be able to specify a range of verses to display
-@done Add C.SE style sheets
-
-@done When it comes time to do a full-up import of hermeneutics and christianity, I should put a delay in there of 1 second per post.  I only get 5000 calls per hour, so a little bit of throttling is in order.
-
+	@done - Interestingly, Biblia will parse out Apocraphyal books :)  I just need to add them to my array.

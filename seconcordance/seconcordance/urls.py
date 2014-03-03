@@ -9,8 +9,11 @@ urlpatterns = patterns('',
     # url(r'^$', 'seconcordance.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.index, name='index'),
+
+    url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^search/$', views.empty_search, name='empty_search'),
     url(r'^search/(?P<filter_range>.+)$', views.search, name='search'),
-	url(r'^(?P<foundref_id>\d+)/$', views.detail, name='detail'),
+
 )

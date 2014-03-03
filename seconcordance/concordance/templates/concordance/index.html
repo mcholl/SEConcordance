@@ -1,3 +1,5 @@
+
+
 <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/christianity/all.css?v=d419fa438ebb">
 <STYLE type='text/css'>
 #content {
@@ -14,15 +16,40 @@ a.tooltip :hover {
 	background-color: yellow;
 }
 
+td { 
+	padding: 5px;
+}
+
+td.reference { width: 10%;}
+td.owner {width: 15%;}
+td.title {width: 75%;}
+
 </STYLE>
+
+<script>
+	var refTagger = {
+		settings: {
+			bibleVersion: "ESV"
+		}
+	};
+	(function(d, t) {
+		var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+		g.src = "//api.reftagger.com/v2/RefTagger.js";
+		s.parentNode.insertBefore(g, s);
+	}(document, "script"));
+</script>
 
 <SCRIPT type='text/javascript'>
 </SCRIPT>
 
 <DIV id='container'>
 	<DIV id='header'>
-		<LABEL for="filter">Show References</LABEL>
-		<INPUT id='filter' name='filter' type='text' placeholder='search' value='' />
+		<FORM method='GET' action='/search/'>
+			<!-- Note: Calls /search?passage=entered_reference is handled in urls.py-->
+			<LABEL for="filter_range">Show References</LABEL>
+			<INPUT id='filter_range' name='filter_range' type='text' placeholder='search' value='' />
+			<INPUT type='submit' />
+		</FORM>
 	</DIV>
 	<DIV id='content'>
 	{% if found_references_list %}
@@ -33,26 +60,27 @@ a.tooltip :hover {
 
 		<TABLE>
 			{% for found_ref in found_references_list %}
-			<TR>
-				{% autoescape off %}
-				<TD>{{found_ref.reference}}</TD>
-				<TD>
-					{{found_ref.sepost.owner}}'s 
-					{% if found_ref.sepost.qa == "q" %}
-						question on
-					{% else %}
-						answer to
-					{% endif %} 
-				</TD>
-				<TD>
-					<a class='question-hyperlink tooltip' onhover='popup(this)' href="{{found_ref.sepost.se_link}}">
-						{{found_ref.sepost.posttitle}}
-					</a>
-					<span class='classic'>{{found_ref.preview_snippet}}</span>
+				<TR class="{%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}">
+				
+					{% autoescape off %}
+					<TD class='reference'>{{found_ref.reference}}</TD>
+					<TD class='owner'>
+						{{found_ref.sepost.owner}}'s 
+						({%if found_ref.sepost.score > 0 %}+{% endif %} {{found_ref.sepost.score}})
 
-				</TD>
-				{% endautoescape %}
-			</TR>
+						{% if found_ref.sepost.qa == "q" %}question: {% else %}answer to{% endif %} 
+					</TD>
+
+					<TD class='title'>
+						<a class='question-hyperlink tooltip' onhover='popup(this)' href="{{found_ref.sepost.se_link}}">
+							{{found_ref.sepost.posttitle}}
+						</a>
+
+					</TD>
+					{% endautoescape %}
+
+				</TR>
+
 			{% endfor %}
 		</TABLE>
 	{% else %}
@@ -60,6 +88,8 @@ a.tooltip :hover {
 	{% endif %}
 
 
+		<a href="http://biblia.com/"><img src="http://api.biblia.com/PoweredByBiblia.png" alt="Powered by Biblia" /></a>
+This site uses the <a href="http://biblia.com/">Biblia</a> web services from <a href="http://www.logos.com/">Logos Bible Software</a>.
 	</DIV>
 	
 </DIV>

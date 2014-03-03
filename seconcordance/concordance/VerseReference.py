@@ -9,6 +9,7 @@ class BibleReference:
 
 	book = ""
 	book_num = 0
+	end_book_num = 0
 	start_chapter = 0
 	start_verse = 0
 	end_chapter = 0
@@ -53,6 +54,7 @@ class BibleReference:
 		the_book_name = self.book
 
 		self.book_num = self.parse_book_num(the_book_name)
+		self.end_book_num = self.parse_book_num(parts['endBook']) if 'endBook' in parts else self.book
 
 		return
 
@@ -99,6 +101,18 @@ class BibleReference:
 			"Haggai",
 			"Zechariah",
 			"Malachi",
+			"Tobit",
+			"Judith",
+			"Wisdom of Solomon",
+			"Sirach",
+			"Baruch",
+			"1 Maccabees",
+			"2 Maccabees",
+			"1 Esdras",
+			"2 Esdras",
+			"3 Esdras",
+			"4 Esdras",
+			"Manasses",
 			"Matthew",
 			"Mark",
 			"Luke",
