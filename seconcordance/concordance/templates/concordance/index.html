@@ -25,10 +25,9 @@ a.tooltip :hover {
 		<INPUT id='filter' name='filter' type='text' placeholder='search' value='' />
 	</DIV>
 	<DIV id='content'>
-	{{ filter_range }}
-	{{ filter_ref.plain_ref }}
-	{{ filter_ref.book_num }}
-	{{ a_string }}
+	{% if found_references_list %}
+		Only showing entries in range {{ filter_ref.plain_ref }}
+	{% endif %}
 
 	{% if found_references_list %}
 

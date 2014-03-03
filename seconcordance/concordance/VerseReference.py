@@ -2,7 +2,7 @@ import requests
 import json
 import readini
 
-class VerseReference:
+class BibleReference:
 	"""Class that allows references to be sorted, compared, etc..."""
 
 	plain_ref = ""   #Holds the textual representation (e.g. "1 Corinthians 13:4-7")
@@ -11,8 +11,8 @@ class VerseReference:
 	book_num = 0
 	start_chapter = 0
 	start_verse = 0
-	end_chapter = 1000
-	end_verse = 1000
+	end_chapter = 0
+	end_verse = 0
 
 	biblia_apikey = readini.get_ini_value('keys', 'biblia_apikey')
 
@@ -44,7 +44,10 @@ class VerseReference:
 		self.start_chapter = parts['chapter'] if 'chapter' in parts else 0
 		self.start_verse = parts['verse'] if 'verse' in parts else 0
 		self.end_chapter = parts['endChapter'] if 'endChapter' in parts else self.start_chapter
+		self.end_chapter = self.end_chapter if self.end_chapter > 0 else 1000
+
 		self.end_verse = parts['endVerse'] if 'endVerse' in parts else self.start_verse
+		self.end_verse = self.end_verse if self.end_verse > 0 else 1000
 
 		#Set the Book Number
 		the_book_name = self.book

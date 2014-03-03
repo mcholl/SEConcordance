@@ -1,19 +1,7 @@
 from django.db import models
+from django.db import connection
 
 # Create your models here.
-
-class RefManager(models.Manager):
-    def in_range(self, search_ref):
-    	qry_in_range = "SELECT * FROM concordance_reference WHERE ref_book_num=%s AND ref_endchapter_num >= %s AND ref_endverse_num >= %s AND ref_startchapter_num <= %s AND ref_startverse_num <= %s" 
-
-        from django.db import connection
-        cursor = connection.cursor()
-        cursor.execute(qry_in_range, (search_ref.book_num, search_ref.end_chapter, search_ref.end_verse, search_ref.start_chapter, search_ref.start_verse))
-        result_list = []
-        for row in cursor.fetchall():
-            p = self.model()
-            result_list.append(p)
-        return result_list
 
 
 class SEPost(models.Model):
@@ -37,9 +25,6 @@ class VerseReference(models.Model):
 	end_verse = models.SmallIntegerField(help_text="End Verse", db_column="ref_endverse_num")
 	start_index = models.SmallIntegerField(help_text="Position of the reference in the body of the post", db_column="se_post_index_start")
 	length = models.SmallIntegerField(help_text="length of the reference in body of the post", db_column="se_post_reference_length")
-
-	objects = models.Manager()
-	show = RefManager()
 
 	@property
 	def preview_snippet(self):

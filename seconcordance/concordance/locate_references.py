@@ -5,7 +5,7 @@ import MySQLdb as mysql
 import sys
 import pprint
 import time
-from VerseReference import VerseReference
+from VerseReference import BibleReference
 
 def connect_to_mysql():
 	db_server = readini.get_ini_value('database', 'server')
@@ -112,7 +112,7 @@ def save_post_to_mysql(se_post, found_refs):
 		for found in found_refs:
 			plain_ref = found['passage'].replace(u"\u2014", "-").replace(u"\u2013", "-").encode('utf-8')
 
-			refr = VerseReference(plain_ref)
+			refr = BibleReference(plain_ref)
 			print "  Reference Found: {0}".format(refr.plain_ref)
 			qry_Insert_Ref = "INSERT INTO concordance_reference (sepost_id, reference, ref_book_num, ref_startchapter_num, ref_startverse_num, ref_endchapter_num, ref_endverse_num, se_post_index_start, se_post_reference_length) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
 

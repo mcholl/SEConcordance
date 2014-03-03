@@ -22,20 +22,16 @@ def detail(request, found_ref):
 	return HttpResponse("Not implemented")
 
 def search(request, filter_range):
-	#filter_ref = VerseReference(filter_range)
+	search_ref = BibleReference(filter_range)
+	qry_in_range = "SELECT * FROM concordance_reference WHERE ref_book_num=%s AND ref_endchapter_num >= %s AND ref_endverse_num >= %s AND ref_startchapter_num <= %s AND ref_startverse_num <= %s ORDER BY ref_book_num, ref_startchapter_num, ref_startverse_num, ref_endchapter_num, ref_endverse_num"
+	params = tuple([search_ref.book_num, search_ref.start_chapter, search_ref.start_verse, search_ref.end_chapter, search_ref.end_verse]) 
 
-	filter_ref = VerseReference("John 3:16")
-	a_string = "This is a string"
-
-	#found_references_list = VerseReference.show.in_range(filter_ref)
-	#found_references_list = VerseReference.objects.order_by('book_num', 'start_chapter', 'start_verse')
-	found_references_list = None
+	found_references_list = VerseReference.objects.raw(qry_in_range, params)
 
 	template = loader.get_template('concordance/index.html')
 	context = RequestContext( request, {
 		'filter_range': filter_range,
-		'filter_ref': filter_ref,
+		'filter_ref': search_ref,
 		'found_references_list': found_references_list,
-		'a_string': a_string,
 		})
 	return HttpResponse(template.render(context))
