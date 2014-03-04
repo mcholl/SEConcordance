@@ -1,21 +1,24 @@
 SEConcordance To Do Items
 
 Locate_references:
-	- Question: How do I keep the scores up to date?
+	- @bug Question: How do I keep the scores up to date?
+	- @bug Some bodies have \' in them.  I should check my escaping sequences...
 Views:
-	- Why doesn't per_page_count set correctly?
+	- @bug Why doesn't per_page_count set correctly? It keeps sticking at 50 - even though the url changes correctly!
 	
 	- Consider using authetication credentials to just show the up/down split?
 
-	- Why is the line missing between questions sometimes?
-	- Why am I sometimes failing to start a new <TR> on certain questions?
+	- @bug Why is the line missing between questions sometimes?
+	- @bug Why am I sometimes failing to start a new <TR> on certain questions?
 		Hypothesis: What if I'm getting a set of found_refs - an append vs. a join or whatever...
+
+	- Consider saving the current state of the filters in a cookie, and restoring them
 		
 Visualization:
 	- At some point, I want a graph that shows the number of times each book / chapter is referenced in an answer :)
 
 Known Limitations:
-	- My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
+	- @bug My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
 	- Question: Should I also be parsing MiYodeya in addition to herm & c.se?
 Deployment:
 	- Create a VM with
@@ -24,8 +27,8 @@ Deployment:
 		- django
 		- apache
 	- Deploy the application
-	- Do a full import
-	- Sechedule the import to run on a schedule
+	- Do a full import from Jan 01 2011
+	- Schedule the import to run on a schedule
 	- Publicize it / Sell it
 
 Archive:
