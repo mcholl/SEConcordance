@@ -44,7 +44,7 @@ td.title {width: 75%;}
 
 <DIV id='container'>
 	<DIV id='header'>
-		<FORM method='GET' action='/search/'>
+		<FORM method='GET' action='/passages/'>
 			<!-- Note: Calls /search?passage=entered_reference is handled in urls.py-->
 			<LABEL for="filter_range">Limit Results to </LABEL>
 			<INPUT id='filter_range' name='filter_range' type='text' placeholder='search' value='{% if filter_range %}{{filter_range}}{% endif %}' />
@@ -71,10 +71,6 @@ td.title {width: 75%;}
 
 
 	<DIV id='content'>
-	{% if found_references_list %}
-		Only showing entries in range {{ filter_ref.plain_ref }}
-	{% endif %}
-
 	{% if found_references_list %}
 
 		<TABLE>

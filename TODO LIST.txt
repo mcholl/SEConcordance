@@ -33,17 +33,7 @@ Known Limitations:
 
 Snippets:
 
-		def questions(self):
-		cursor = connection.cursor()
-	    cursor.execute("""
-	        SELECT * FROM concordance_reference
-	        WHERE type='q'
-	        ORDER BY ref_book_num, ref_startchapter_num, ref_startverse_num, end_book_num, ref_endchapter_num, ref_endverse_num""")
-	    result_list = []
-	    for row in cursor.fetchall():
-	        p = self.model()
-	        result_list.append(p)
-	    return result_list
+
 
 Archive:
 	@done Db.sql: @project(@done Db.sql)

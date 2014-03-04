@@ -20,7 +20,6 @@ class PassageManager(models.Manager):
 		search_ref = BibleReference(filter_range)
 		if search_ref.plain_ref is None:
 			raise Exception("Unable to parse search criteria '{0}'".format(filter_range))
-
 		return super(PassageManager, self).get_queryset().filter(book_num__gte=search_ref.book_num).filter(end_chapter__gte=search_ref.start_chapter).filter(end_verse__gte=search_ref.start_verse).filter(end_book_num__lte=search_ref.end_book_num).filter(start_chapter__lte=search_ref.end_chapter).filter(start_verse__lte=search_ref.end_verse)
 
 class QuestionsManager(models.Manager):
@@ -28,10 +27,25 @@ class QuestionsManager(models.Manager):
 	def get_queryset(self):
 		return super(QuestionsManager, self).get_queryset().filter(sepost__qa="q")
 
+	#TODO: Really, this should be a mixin...
+	def in_range(self, filter_range):
+		search_ref = BibleReference(filter_range)
+		if search_ref.plain_ref is None:
+			raise Exception("Unable to parse search criteria '{0}'".format(filter_range))
+		return super(QuestionsManager, self).get_queryset().filter(book_num__gte=search_ref.book_num).filter(end_chapter__gte=search_ref.start_chapter).filter(end_verse__gte=search_ref.start_verse).filter(end_book_num__lte=search_ref.end_book_num).filter(start_chapter__lte=search_ref.end_chapter).filter(start_verse__lte=search_ref.end_verse)
+
+
 class AnswersManager(models.Manager):
 	#Returns VerseRefrences on posted Answers Only
 	def get_queryset(self):
 		return super(AnswersManager, self).get_queryset().filter(sepost__qa="a")
+
+	#TODO: Really, this should be a mixin...
+	def in_range(self, filter_range):
+		search_ref = BibleReference(filter_range)
+		if search_ref.plain_ref is None:
+			raise Exception("Unable to parse search criteria '{0}'".format(filter_range))
+		return super(AnswersManager, self).get_queryset().filter(book_num__gte=search_ref.book_num).filter(end_chapter__gte=search_ref.start_chapter).filter(end_verse__gte=search_ref.start_verse).filter(end_book_num__lte=search_ref.end_book_num).filter(start_chapter__lte=search_ref.end_chapter).filter(start_verse__lte=search_ref.end_verse)
 
 
 class PositiveScoreManager(models.Manager):
