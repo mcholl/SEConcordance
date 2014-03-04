@@ -5,9 +5,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'seconcordance.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
@@ -24,7 +21,19 @@ urlpatterns = patterns('',
 # Exmaple Urls:
 #	/answers 					returns a page showing every answer
 #	/answers/Matthew			returns a page showing all answers in Matthew
-#	/answers/?filter_range=Matthew-John		same as above, only in GET syntax, and I've expanded the range to be the entire set of the Gospels
+#	/answers/Matthew-John		same as above, only I've expanded the range to be the entire set of the Gospels
 
 #	/questions 					shows only questions.  Same 3 forms as above
 #	/passages 					shows both questions and answers.  Same 3 forms as above
+
+# Additionally, results can be filtered by adding any or all of the following ?parameters=value
+
+#   ?per_page_count=#           only shows # entries per page
+#   ?page=#                     shows page #
+
+#   ?score=[positive|negative|zero_or_more]     shows only references to questions or answers where the score is [>=1|<=-1|0 or more]
+#   ?site=[christianity|hermeneutics]           shows only references when the site is the one passed
+#   ?filter_range=(range)                       like form 3 above (e.g. "/answers/Matthew+5-7") only shows references that fall within the passed scope.  
+#                                               References can be within multiple books, but they remain within canonical order.  If the reference falls
+#                                               anywhere within the range, it is conisdered to be in the range. (e.g. John 3:16-20 would fall in the range John 3:1-17)
+

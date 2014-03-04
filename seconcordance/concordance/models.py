@@ -1,6 +1,7 @@
 from django.db import models
 from django.db import connection
 from VerseReference import *
+import re
 
 # Create your models here.
 class SEPost(models.Model):
@@ -12,6 +13,17 @@ class SEPost(models.Model):
 	score = models.IntegerField(help_text="Net of Up and Downvotes on post", db_column="score") 
 	body = models.TextField()
 
+	@property
+	def sitename(self):
+		#Extracts the sitename from http://sitename.stackexchange.com/q/####
+		p = re.compile(r'http://(?P<site>.+)\.stackexchange\.com')
+		m = p.search(self.se_link)
+		if m.groups('site'):
+			return m.groups('site')[0]
+
+		return "unknown"
+	
+
 class PassageManager(models.Manager):
 	#Given something like VerseReference.in_range('Matthew - John'), this Manager returns a filtered queryset of VerseReferences in the specified range
 	def in_range(self, filter_range):
@@ -20,7 +32,8 @@ class PassageManager(models.Manager):
 		except Exception, e:
 			raise Exception("Unable to parse search criteria '{0}'".format(filter_range))
 			
-		return super(PassageManager, self).get_queryset().filter(book_num__gte=search_ref.book_num).filter(end_chapter__gte=search_ref.start_chapter).filter(end_verse__gte=search_ref.start_verse).filter(end_book_num__lte=search_ref.end_book_num).filter(start_chapter__lte=search_ref.end_chapter).filter(start_verse__lte=search_ref.end_verse)
+		#return super(PassageManager, self).get_queryset().filter(book_num__gte=search_ref.book_num).filter(end_chapter__gte=search_ref.start_chapter).filter(end_verse__gte=search_ref.start_verse).filter(end_book_num__lte=search_ref.end_book_num).filter(start_chapter__lte=search_ref.end_chapter).filter(start_verse__lte=search_ref.end_verse)
+		return super(PassageManager, self).get_queryset().filter(book_num__gte=search_ref.book_num,end_chapter__gte=search_ref.start_chapter,end_verse__gte=search_ref.start_verse,end_book_num__lte=search_ref.end_book_num,start_chapter__lte=search_ref.end_chapter,start_verse__lte=search_ref.end_verse)
 
 class QuestionsManager(models.Manager):
 	#Returns VerseRefrences on posted Questions Only
@@ -32,7 +45,8 @@ class QuestionsManager(models.Manager):
 		search_ref = BibleReference(filter_range)
 		if search_ref.plain_ref is None:
 			raise Exception("Unable to parse search criteria '{0}'".format(filter_range))
-		return super(QuestionsManager, self).get_queryset().filter(book_num__gte=search_ref.book_num).filter(end_chapter__gte=search_ref.start_chapter).filter(end_verse__gte=search_ref.start_verse).filter(end_book_num__lte=search_ref.end_book_num).filter(start_chapter__lte=search_ref.end_chapter).filter(start_verse__lte=search_ref.end_verse)
+		#return super(QuestionsManager, self).get_queryset().filter(book_num__gte=search_ref.book_num).filter(end_chapter__gte=search_ref.start_chapter).filter(end_verse__gte=search_ref.start_verse).filter(end_book_num__lte=search_ref.end_book_num).filter(start_chapter__lte=search_ref.end_chapter).filter(start_verse__lte=search_ref.end_verse)
+		return super(PassageManager, self).get_queryset().filter(book_num__gte=search_ref.book_num,end_chapter__gte=search_ref.start_chapter,end_verse__gte=search_ref.start_verse,end_book_num__lte=search_ref.end_book_num,start_chapter__lte=search_ref.end_chapter,start_verse__lte=search_ref.end_verse)
 
 
 class AnswersManager(models.Manager):
@@ -46,19 +60,6 @@ class AnswersManager(models.Manager):
 		if search_ref.plain_ref is None:
 			raise Exception("Unable to parse search criteria '{0}'".format(filter_range))
 		return super(AnswersManager, self).get_queryset().filter(book_num__gte=search_ref.book_num).filter(end_chapter__gte=search_ref.start_chapter).filter(end_verse__gte=search_ref.start_verse).filter(end_book_num__lte=search_ref.end_book_num).filter(start_chapter__lte=search_ref.end_chapter).filter(start_verse__lte=search_ref.end_verse)
-
-
-class PositiveScoreManager(models.Manager):
-	def get_queryset(self):
-		return super(QuestionsManager, self).get_queryset().filter(score>0)
-
-class ZeroScoreManager(models.Manager):
-	def get_queryset(self):
-		return super(QuestionsManager, self).get_queryset().filter(score==0)
-
-class NegativeScoreManager(models.Manager):
-	def get_queryset(self):
-		return super(QuestionsManager, self).get_queryset().filter(score<0)
 
 class VerseReference(models.Model):	
 	id = models.AutoField(primary_key=True, db_column="reference_id")
@@ -77,9 +78,6 @@ class VerseReference(models.Model):
 	objects = models.Manager()
 	answers = AnswersManager()
 	questions = QuestionsManager()
-	positives = PositiveScoreManager()
-	zeroes = ZeroScoreManager()
-	negatives = NegativeScoreManager()
 
 	passages = PassageManager()
 

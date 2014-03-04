@@ -9,10 +9,9 @@ from VerseReference import *
 import pprint
 
 from concordance.models import *
+per_page_count=50
 
 # Create your views here.
-per_page_count=100
-
 def index(request):
 	return passages(request, "")
 
@@ -39,10 +38,10 @@ def get_passages(request):
 	filter_range = request.GET.get('filter_range', '')
 	return passages(request, filter_range)
 
-
 def paginate(request, found_references):
 	#Helper method to paginate the result set.  found_references is a list containing results of the queryset.  Need request to read the page parameter, if passed
 
+	per_page_count=request.GET.get('per_page_count', 100)
 	paginator = Paginator(found_references, per_page_count)
 
 	page = request.GET.get('page')
@@ -57,7 +56,6 @@ def paginate(request, found_references):
 
 	return found_references_list
 
-
 def generic_results(request, filter_method, filter_range):
 	#Helper function - answers, questions, and passages all work the same way: VerseReference.answers.in_range, for example is the population
 	try:
@@ -68,9 +66,30 @@ def generic_results(request, filter_method, filter_range):
 	except:
 		raise Http404 
 
+	#Allow for filters of score=positive (1 or more), negative, zero_or_more
+	filter_score = request.GET.get('score', '')
+	if filter_score != "":
+		if filter_score[0:1].lower() == "p":
+			population = population.filter(sepost__score__gt=0)
+		elif filter_score[0:1].lower() == "n":
+			population = population.filter(sepost__score__lt=0)
+		else:
+			population = population.filter(sepost__score__gte=0)
+
+	#Allow for filters of site=christianity, hermeneutics
+	filter_site = request.GET.get('site','')
+	if filter_site != "":
+		population = population.filter(sepost__se_link__contains=filter_site)
+
+	#Pass the results to the rendered template
 	context = {
 		'found_references_list': paginate(request, list(population)),
-		'filter_range': filter_range,
+		'filters': {
+			'range': filter_range,
+			'score': filter_score,
+			'site': filter_site,
+			'per_page_count': per_page_count,
+		}
 	}
 	return render(request, 'concordance/index.html', context) 
 
