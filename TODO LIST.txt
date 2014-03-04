@@ -1,11 +1,6 @@
 TODO LIST
 
 Locate_references:
-- Log errors in a separate log file!  Ideally, I'd actually email that log to myself at the end, so that I see the errors!
-
-- Handle encoding better.  (fancy quotes)
-- Get rid of &quot; (") and &#39; (')
-- I still have URLs, which after encoding, are still > 2000, and generate a 404.  I really need to get that right
 
 Views:
 - Be able to hide negatively scoring answers
@@ -38,6 +33,11 @@ Deployment:
 	- Publicize it / Sell it
 
 Archive:
+	- Log errors in a separate log file!  Ideally, I'd actually email that log to myself at the end, so that I see the errors! @done(2014-03-04)
+	- Handle encoding better.  (fancy quotes) @done(2014-03-04)
+	- Get rid of &quot; (") and &#39; (') @done(2014-03-04)
+	- I still have URLs, which after encoding, are still > 2000, and generate a 404.  I really need to get that right @done(2014-03-04)
+	
 	- Make the Admin Interface usable by having the VerseReference and SEPost objects display meaningful information @done(2014-03-04)
 	- Consider hiding the Author / Score information to the rollover, along with the snippet @done(2014-03-04)
 	- Highlight the selected reference and show a snippet when you rollover the text. Note, the snippets are currently on the page, but I have them hidden for readibility. @done(2014-03-04)
