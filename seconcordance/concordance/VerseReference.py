@@ -54,7 +54,7 @@ class BibleReference:
 		the_book_name = self.book
 
 		self.book_num = self.parse_book_num(the_book_name)
-		self.end_book_num = self.parse_book_num(parts['endBook']) if 'endBook' in parts else self.book
+		self.end_book_num = self.parse_book_num(parts['endBook']) if 'endBook' in parts else self.book_num
 
 		return
 

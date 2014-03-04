@@ -19,7 +19,7 @@ class VerseReference(models.Model):
 
 	reference = models.CharField(max_length=64, help_text="Plain text reference e.g. '1 Corinthians 13:4-7'", db_column="reference") 
 	book_num = models.SmallIntegerField(help_text="Numerical position of canonical book, for sorting", db_column="ref_book_num") 
-	end_book_num = models.SmallIntegerField(help_text="Numerical position of canonical book, for sorting", db_column="ref_book_num")
+	end_book_num = models.SmallIntegerField(help_text="Numerical position of canonical book, for sorting", db_column="end_book_num")
 	start_chapter = models.SmallIntegerField(help_text="Starting Chapter of the Reference", db_column="ref_startchapter_num")
 	start_verse = models.SmallIntegerField(help_text="Starting verse", db_column="ref_startverse_num") 
 	end_chapter = models.SmallIntegerField(help_text="End chapter", db_column="ref_endchapter_num") 

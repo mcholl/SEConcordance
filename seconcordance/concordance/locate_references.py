@@ -115,9 +115,9 @@ def save_post_to_mysql(se_post, found_refs):
 
 			refr = BibleReference(plain_ref)
 			print "  Reference Found: {0}".format(refr.plain_ref)
-			qry_Insert_Ref = "INSERT INTO concordance_reference (sepost_id, reference, ref_book_num, ref_startchapter_num, ref_startverse_num, ref_endchapter_num, ref_endverse_num, se_post_index_start, se_post_reference_length) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+			qry_Insert_Ref = "INSERT INTO concordance_reference (sepost_id, reference, ref_book_num, end_book_num, ref_startchapter_num, ref_startverse_num, ref_endchapter_num, ref_endverse_num, se_post_index_start, se_post_reference_length) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
 
-			cur.execute(qry_Insert_Ref, (post_id, refr.plain_ref, refr.book_num, refr.start_chapter, refr.start_verse, refr.end_chapter, refr.end_verse, found['textIndex'], found['textLength']))
+			cur.execute(qry_Insert_Ref, (post_id, refr.plain_ref, refr.book_num, refr.end_book_num, refr.start_chapter, refr.start_verse, refr.end_chapter, refr.end_verse, found['textIndex'], found['textLength']))
 
 		con.commit()
 	except:
