@@ -46,11 +46,30 @@ td.title {width: 75%;}
 	<DIV id='header'>
 		<FORM method='GET' action='/search/'>
 			<!-- Note: Calls /search?passage=entered_reference is handled in urls.py-->
-			<LABEL for="filter_range">Show References</LABEL>
-			<INPUT id='filter_range' name='filter_range' type='text' placeholder='search' value='' />
+			<LABEL for="filter_range">Limit Results to </LABEL>
+			<INPUT id='filter_range' name='filter_range' type='text' placeholder='search' value='{% if filter_range %}{{filter_range}}{% endif %}' />
 			<INPUT type='submit' />
 		</FORM>
+
+		<div class="pagination">
+		    <span class="step-links">
+		        {% if found_references_list.has_previous %}
+		            <a href="?{% if filter_range %}filter_range={{filter_range}}&{% endif %}page={{ found_references_list.previous_page_number }}">previous</a>
+		        {% endif %}
+
+		        <span class="current">
+		            Page {{ found_references_list.number }} of {{ found_references_list.paginator.num_pages }}
+		        </span>
+
+		        {% if found_references_list.has_next %}
+		            <a href="?{% if filter_range %}filter_range={{filter_range}}&{% endif %}page={{ found_references_list.next_page_number }}">next</a>
+		        {% endif %}
+		    </span>
+		</div>
+
 	</DIV>
+
+
 	<DIV id='content'>
 	{% if found_references_list %}
 		Only showing entries in range {{ filter_ref.plain_ref }}
@@ -61,12 +80,12 @@ td.title {width: 75%;}
 		<TABLE>
 			{% for found_ref in found_references_list %}
 				<TR class="{%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}">
-				
+
 					{% autoescape off %}
 					<TD class='reference'>{{found_ref.reference}}</TD>
 					<TD class='owner'>
 						{{found_ref.sepost.owner}}'s 
-						({%if found_ref.sepost.score > 0 %}+{% endif %} {{found_ref.sepost.score}})
+						({%if found_ref.sepost.score > 0 %}+{% endif %}{{found_ref.sepost.score}} score)
 
 						{% if found_ref.sepost.qa == "q" %}question: {% else %}answer to{% endif %} 
 					</TD>

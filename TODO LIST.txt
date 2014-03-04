@@ -1,40 +1,43 @@
 TODO LIST
 
-Search:
-- I have the main search functionality has been implemented, but right now, I can't search beyond a single book - because my BibleReference object only has start book but no end book.  I need to expand that and the raw sql in the view in order to allow for a range of say Matthew - John (e.g. "Gospels")  Additionally, I should consider adding some keyword search ranges, as well as a graphical verse picker for this purpose... @done(2014-03-03) 
-
 Locate_references:
 - Log errors in a separate log file!  Ideally, I'd actually email that log to myself at the end, so that I see the errors!
 - Reimport, because I've changed books and added encoding!!
-- Test MultiBook filter ranges after  new import
 
 - Handle encoding better.  (fancy quotes)
 - I still have URLs, which after encoding, are still > 2000, and generate a 404.  I really need to get that right
 
-- Question: Does Biblia parse out LDS books?
-
-
-Db.sql:
-
 Views:
+- Consider hiding the Author / Score information to the rollover, along with the snippet
 
 - Be able to hide negatively scoring answers
 - Be able to hide questions or answers
 {%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}
+	Note: Actually, this is where I'd want a Manager - for .scored.positive, .scored.positiveorzero, .questions, .answers… Thta way, pagination works correctly :)
 
 - Highlight the selected reference and show a snippet when you rollover the text. Note, the snippets are currently on the page, but I have them hidden for readibility.
 						<span class='classic'>{{found_ref.preview_snippet}}</span>
 
-- Implement paging, restricting the list of displayed items to 30, 50, or 100.
+- Allow the user to restricting the list of displayed items to 30, 50, or 100.
 - Make the Admin Interface usable by having the VerseReference and SEPost objects display meaningful information
+- It would be a nice touch if ref.ly could tag whole chapters (e.g. Genesis 1:1 works, but Genesis 1 does not)
+- Consider adding a thing to let you choose books.
 
----
 Known Limitations:
 
 - My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
 
----
 Archive:
+	@done Db.sql: @project(@done Db.sql)
+	
+	@done Search: @project(@done Search)
+	
+	- Implement paging,  @done(2014-03-03)
+	- I have the main search functionality has been implemented, but right now, I can't search beyond a single book - because my BibleReference object only has start book but no end book.  I need to expand that and the raw sql in the view in order to allow for a range of say Matthew - John (e.g. "Gospels")  Additionally, I should consider adding some keyword search ranges, as well as a graphical verse picker for this purpose... @done(2014-03-03) 
+	- Test MultiBook filter ranges after  new import @done(2014-03-03)
+	- Question: Does Biblia parse out LDS books? @done(2014-03-03) Nope!
+	
+	
 	@done  Not exactly true - apocraphyal books are recognized
 	- Only the 66 books of the Protestant canon are recognized by the Biblia parser.  I'd need to get a lot more sophisticated before I can get Deuterocanonical or LDS scriptures recorginzed. @done(2014-03-03)
 	@done - add nChunkStart to the TextIndex start when scanning text for references. Otherwise, the index locations are off.
