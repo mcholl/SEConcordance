@@ -9,15 +9,21 @@ Locate_references:
 
 Views:
 - Be able to hide negatively scoring answers
-
+- Store preferences in a cookie
 - Allow the user to restricting the list of displayed items to 30, 50, or 100.
+
+- Make the Score more visible, like the votes on the main page of C.SE.
+- Maybe identify whether it is C.SE or Herm?
+
 - It would be a nice touch if ref.ly could tag whole chapters (e.g. Genesis 1:1 works, but Genesis 1 does not)
 - Consider adding a thing to let you choose books by clicking wit the mouse rather than typing
 
 - Question: Can I do the search update in a more Ajaxy fashion?  (Do I want to?)
-
+- Why is the image missing on the Biblia shoutout?
+- Why is the line missing between questions sometimes?
 Known Limitations:
 - My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
+- Question: Should I also be parsing MiYodeya in addition to herm & c.se?
 
 
 Deployment:
