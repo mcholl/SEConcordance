@@ -4,28 +4,35 @@ Locate_references:
 - Log errors in a separate log file!  Ideally, I'd actually email that log to myself at the end, so that I see the errors!
 
 - Handle encoding better.  (fancy quotes)
+- Get rid of &quot; (") and &#39; (')
 - I still have URLs, which after encoding, are still > 2000, and generate a 404.  I really need to get that right
 
 Views:
 - Be able to hide negatively scoring answers
 
 - Allow the user to restricting the list of displayed items to 30, 50, or 100.
-- Make the Admin Interface usable by having the VerseReference and SEPost objects display meaningful information
 - It would be a nice touch if ref.ly could tag whole chapters (e.g. Genesis 1:1 works, but Genesis 1 does not)
 - Consider adding a thing to let you choose books by clicking wit the mouse rather than typing
 
 - Question: Can I do the search update in a more Ajaxy fashion?  (Do I want to?)
 
 Known Limitations:
-
 - My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
 
 
-Snippets:
-
-
+Deployment:
+	- Create a VM with
+		- mysql
+		- python
+		- django
+		- apache
+	- Deploy the application
+	- Do a full import
+	- Sechedule the import to run on a schedule
+	- Publicize it / Sell it
 
 Archive:
+	- Make the Admin Interface usable by having the VerseReference and SEPost objects display meaningful information @done(2014-03-04)
 	- Consider hiding the Author / Score information to the rollover, along with the snippet @done(2014-03-04)
 	- Highlight the selected reference and show a snippet when you rollover the text. Note, the snippets are currently on the page, but I have them hidden for readibility. @done(2014-03-04)
 							<span class='classic'>{{found_ref.preview_snippet}}</span>

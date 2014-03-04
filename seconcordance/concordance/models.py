@@ -3,8 +3,6 @@ from django.db import connection
 from VerseReference import *
 
 # Create your models here.
-
-
 class SEPost(models.Model):
 	sepost = models.CharField(max_length=12, help_text="Stack Exchange Post Id", db_column="sepost_id", primary_key=True) 
 	owner = models.CharField(max_length=32, help_text="Display Name of the Post author", db_column="owner")
