@@ -16,4 +16,10 @@ urlpatterns = patterns('',
     url(r'^search/$', views.empty_search, name='empty_search'),
     url(r'^search/(?P<filter_range>.+)$', views.search, name='search'),
 
+    url(r'^answers/$', views.empty_answers, name='empty_answers'),
+    url(r'^answers/(?P<filter_range>.+)$', views.answers, name='answers'),
+
+    url(r'^passages/$', views.get_passages, name='get_passages'),
+    url(r'^passages/(?P<filter_range>.+)$', views.passages, name='passages'),
+
 )

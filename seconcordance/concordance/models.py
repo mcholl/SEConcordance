@@ -1,5 +1,6 @@
 from django.db import models
 from django.db import connection
+from VerseReference import *
 
 # Create your models here.
 
@@ -12,6 +13,38 @@ class SEPost(models.Model):
 	se_link = models.URLField(max_length=255, help_text="link to the post on stack exchange", db_column="link")
 	score = models.IntegerField(help_text="Net of Up and Downvotes on post", db_column="score") 
 	body = models.TextField()
+
+class PassageManager(models.Manager):
+	#Given something like VerseReference.in_range('Matthew - John'), this Manager returns a filtered queryset of VerseReferences in the specified range
+	def in_range(self, filter_range):
+		search_ref = BibleReference(filter_range)
+		if search_ref.plain_ref is None:
+			raise Exception("Unable to parse search criteria '{0}'".format(filter_range))
+
+		return super(PassageManager, self).get_queryset().filter(book_num__gte=search_ref.book_num).filter(end_chapter__gte=search_ref.start_chapter).filter(end_verse__gte=search_ref.start_verse).filter(end_book_num__lte=search_ref.end_book_num).filter(start_chapter__lte=search_ref.end_chapter).filter(start_verse__lte=search_ref.end_verse)
+
+class QuestionsManager(models.Manager):
+	#Returns VerseRefrences on posted Questions Only
+	def get_queryset(self):
+		return super(QuestionsManager, self).get_queryset().filter(sepost__qa="q")
+
+class AnswersManager(models.Manager):
+	#Returns VerseRefrences on posted Answers Only
+	def get_queryset(self):
+		return super(AnswersManager, self).get_queryset().filter(sepost__qa="a")
+
+
+class PositiveScoreManager(models.Manager):
+	def get_queryset(self):
+		return super(QuestionsManager, self).get_queryset().filter(score>0)
+
+class ZeroScoreManager(models.Manager):
+	def get_queryset(self):
+		return super(QuestionsManager, self).get_queryset().filter(score==0)
+
+class NegativeScoreManager(models.Manager):
+	def get_queryset(self):
+		return super(QuestionsManager, self).get_queryset().filter(score<0)
 
 class VerseReference(models.Model):	
 	id = models.AutoField(primary_key=True, db_column="reference_id")
@@ -27,12 +60,21 @@ class VerseReference(models.Model):
 	start_index = models.SmallIntegerField(help_text="Position of the reference in the body of the post", db_column="se_post_index_start")
 	length = models.SmallIntegerField(help_text="length of the reference in body of the post", db_column="se_post_reference_length")
 
+	objects = models.Manager()
+	answers = AnswersManager()
+	questions = QuestionsManager()
+	positives = PositiveScoreManager()
+	zeroes = ZeroScoreManager()
+	negatives = NegativeScoreManager()
+
+	passages = PassageManager()
+
 	@property
 	def preview_snippet(self):
 	 	return self.sepost.body[max(0,self.start_index-150): self.start_index + self.length + 150]
 
 	class Meta:
 		db_table="concordance_reference"
-		ordering = ["book_num", "start_chapter", "start_verse"]
+		ordering = ["book_num", "start_chapter", "start_verse", "end_book_num", "end_chapter", "end_verse"]
 
 

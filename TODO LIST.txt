@@ -2,7 +2,7 @@ TODO LIST
 
 Locate_references:
 - Log errors in a separate log file!  Ideally, I'd actually email that log to myself at the end, so that I see the errors!
-- Reimport, because I've changed books and added encoding!!
+- Reimport, because I've changed books and added encoding!! @done(2014-03-03)
 
 - Handle encoding better.  (fancy quotes)
 - I still have URLs, which after encoding, are still > 2000, and generate a 404.  I really need to get that right
@@ -21,11 +21,29 @@ Views:
 - Allow the user to restricting the list of displayed items to 30, 50, or 100.
 - Make the Admin Interface usable by having the VerseReference and SEPost objects display meaningful information
 - It would be a nice touch if ref.ly could tag whole chapters (e.g. Genesis 1:1 works, but Genesis 1 does not)
-- Consider adding a thing to let you choose books.
+- Consider adding a thing to let you choose books by clicking wit the mouse rather than typing
+- Handle a bogus search filter criteria
+
+- Question: Can I do the search update in a more Ajaxy fashion?  (Do I want to?)
 
 Known Limitations:
 
 - My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
+
+
+Snippets:
+
+		def questions(self):
+		cursor = connection.cursor()
+	    cursor.execute("""
+	        SELECT * FROM concordance_reference
+	        WHERE type='q'
+	        ORDER BY ref_book_num, ref_startchapter_num, ref_startverse_num, end_book_num, ref_endchapter_num, ref_endverse_num""")
+	    result_list = []
+	    for row in cursor.fetchall():
+	        p = self.model()
+	        result_list.append(p)
+	    return result_list
 
 Archive:
 	@done Db.sql: @project(@done Db.sql)
