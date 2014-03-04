@@ -24,6 +24,8 @@ class BibleReference:
 		self.plain_ref = verse_reference
 		self.parse()
 
+	def is_valid(self):
+		return (self.book_num > 0)
 
 	def parse(self):
 		#Use the Biblia API to parse the reference
@@ -37,10 +39,11 @@ class BibleReference:
 			print refparse.status_code
 			raise Exception("Error parsing reference:"+refparse.status_code+" on "+refparser_url)
 
-		if not foundref:
-			raise FormatError('Unknown Reference: '+thereference)
-		
-		parts = foundref['passages'][0]['parts']
+		try:
+			parts = foundref['passages'][0]['parts']
+		except:
+			raise Exception('Unable to parse Reference: '+self.plain_ref)
+
 		self.book = parts['book']
 		self.start_chapter = parts['chapter'] if 'chapter' in parts else 0
 		self.start_verse = parts['verse'] if 'verse' in parts else 0
@@ -57,7 +60,6 @@ class BibleReference:
 		self.end_book_num = self.parse_book_num(parts['endBook']) if 'endBook' in parts else self.book_num
 
 		return
-
 
 	def parse_book_num(self, book):
 

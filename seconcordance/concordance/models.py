@@ -17,9 +17,11 @@ class SEPost(models.Model):
 class PassageManager(models.Manager):
 	#Given something like VerseReference.in_range('Matthew - John'), this Manager returns a filtered queryset of VerseReferences in the specified range
 	def in_range(self, filter_range):
-		search_ref = BibleReference(filter_range)
-		if search_ref.plain_ref is None:
+		try:
+			search_ref = BibleReference(filter_range)
+		except Exception, e:
 			raise Exception("Unable to parse search criteria '{0}'".format(filter_range))
+			
 		return super(PassageManager, self).get_queryset().filter(book_num__gte=search_ref.book_num).filter(end_chapter__gte=search_ref.start_chapter).filter(end_verse__gte=search_ref.start_verse).filter(end_book_num__lte=search_ref.end_book_num).filter(start_chapter__lte=search_ref.end_chapter).filter(start_verse__lte=search_ref.end_verse)
 
 class QuestionsManager(models.Manager):

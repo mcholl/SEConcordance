@@ -2,27 +2,17 @@ TODO LIST
 
 Locate_references:
 - Log errors in a separate log file!  Ideally, I'd actually email that log to myself at the end, so that I see the errors!
-- Reimport, because I've changed books and added encoding!! @done(2014-03-03)
 
 - Handle encoding better.  (fancy quotes)
 - I still have URLs, which after encoding, are still > 2000, and generate a 404.  I really need to get that right
 
 Views:
-- Consider hiding the Author / Score information to the rollover, along with the snippet
-
 - Be able to hide negatively scoring answers
-- Be able to hide questions or answers
-{%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}
-	Note: Actually, this is where I'd want a Manager - for .scored.positive, .scored.positiveorzero, .questions, .answers… Thta way, pagination works correctly :)
-
-- Highlight the selected reference and show a snippet when you rollover the text. Note, the snippets are currently on the page, but I have them hidden for readibility.
-						<span class='classic'>{{found_ref.preview_snippet}}</span>
 
 - Allow the user to restricting the list of displayed items to 30, 50, or 100.
 - Make the Admin Interface usable by having the VerseReference and SEPost objects display meaningful information
 - It would be a nice touch if ref.ly could tag whole chapters (e.g. Genesis 1:1 works, but Genesis 1 does not)
 - Consider adding a thing to let you choose books by clicking wit the mouse rather than typing
-- Handle a bogus search filter criteria
 
 - Question: Can I do the search update in a more Ajaxy fashion?  (Do I want to?)
 
@@ -36,6 +26,16 @@ Snippets:
 
 
 Archive:
+	- Consider hiding the Author / Score information to the rollover, along with the snippet @done(2014-03-04)
+	- Highlight the selected reference and show a snippet when you rollover the text. Note, the snippets are currently on the page, but I have them hidden for readibility. @done(2014-03-04)
+							<span class='classic'>{{found_ref.preview_snippet}}</span>
+						Actually, I like having the preview like the main does.  So, no need for hover!
+	- Be able to hide questions or answers @done(2014-03-04)
+		{%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}
+		Note: Actually, this is where I'd want a Manager - for .scored.positive, .scored.positiveorzero, .questions, .answers… Thta way, pagination works correctly :)
+	- Reimport, because I've changed books and added encoding!! @done(2014-03-03)
+	- Handle a bogus search filter criteria @done(2014-03-04)
+		I've gotten it to send out a 404 if you pass bogus references.  Probably I should have a friendly page that says "That isn't a book range I understand"
 	@done Db.sql: @project(@done Db.sql)
 	
 	@done Search: @project(@done Search)

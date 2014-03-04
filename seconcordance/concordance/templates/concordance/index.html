@@ -6,23 +6,15 @@
 	overflow: initial;
 }
 
-.classic {
-	margin: 1;
-	display: none;
-}
-
-a.tooltip :hover {
-	display: block;
-	background-color: yellow;
-}
-
 td { 
 	padding: 5px;
 }
 
-td.reference { width: 10%;}
-td.owner {width: 15%;}
-td.title {width: 75%;}
+td.reference { 
+	width: 20%;
+	vertical-align: top;
+}
+td.title {width: 80%;}
 
 </STYLE>
 
@@ -78,18 +70,35 @@ td.title {width: 75%;}
 				<TR class="{%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}">
 
 					{% autoescape off %}
-					<TD class='reference'>{{found_ref.reference}}</TD>
-					<TD class='owner'>
-						{{found_ref.sepost.owner}}'s 
-						({%if found_ref.sepost.score > 0 %}+{% endif %}{{found_ref.sepost.score}} score)
+					<TD class='reference'>
+						<strong>
+							{{found_ref.reference}}
+						</strong>
+						
+						<br />
 
-						{% if found_ref.sepost.qa == "q" %}question: {% else %}answer to{% endif %} 
+						<span class='vote-count-pass'>
+							{%if found_ref.sepost.score > 0 %}+{% endif %}{{found_ref.sepost.score}}
+						</span>
+
+						<div class="started">
+							{% if found_ref.sepost.qa == "q" %}question from {% else %}answer by{% endif %} 
+							{{found_ref.sepost.owner}}
+						</div>
+						
 					</TD>
 
 					<TD class='title'>
-						<a class='question-hyperlink tooltip' onhover='popup(this)' href="{{found_ref.sepost.se_link}}">
-							{{found_ref.sepost.posttitle}}
-						</a>
+						<div class="summary">
+							<h3>
+								<a class='question-hyperlink tooltip' onhover='popup(this)' href="{{found_ref.sepost.se_link}}">
+									{{found_ref.sepost.posttitle}}
+								</a>
+							</h3>
+							<div class="excerpt">
+								{{found_ref.preview_snippet}}
+							</div>
+						</div>
 
 					</TD>
 					{% endautoescape %}

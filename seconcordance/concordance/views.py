@@ -3,6 +3,7 @@ from django.template import RequestContext, loader
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import django.shortcuts
+from django.http import Http404
 
 from VerseReference import *
 import pprint
@@ -59,10 +60,13 @@ def paginate(request, found_references):
 
 def generic_results(request, filter_method, filter_range):
 	#Helper function - answers, questions, and passages all work the same way: VerseReference.answers.in_range, for example is the population
-	if filter_range is None or filter_range == "":
-		population = filter_method.all()
-	else:
-		population = filter_method.in_range(filter_range)
+	try:
+		if filter_range is None or filter_range == "":
+			population = filter_method.all()
+		else:
+			population = filter_method.in_range(filter_range)
+	except:
+		raise Http404 
 
 	context = {
 		'found_references_list': paginate(request, list(population)),
