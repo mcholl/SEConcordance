@@ -5,9 +5,6 @@ Locate_references:
 Views:
 	
 	- Consider using authetication credentials to just show the up/down split?
-
-	- @bug Why is the line missing between questions sometimes?
-
 	- Consider saving the current state of the filters in a cookie, and restoring them
 		
 Visualization:
@@ -28,6 +25,8 @@ Deployment:
 	- Publicize it / Sell it
 
 Archive:
+	- @bug Why is the line missing between questions sometimes? @done(2014-03-04) @project(Views)
+		Interesting - it is a border-bottom on all .answer, but not on .question… Why? Just the way the style sheet was done.  I'm overrideing for my needs.
 	- @bug Some bodies have \' in them.  I should check my escaping sequences... @done(2014-03-04) @project(Locate_references)
 	- @bug Why am I sometimes failing to start a new <TR> on certain questions? @done(2014-03-04) @project(Views)
 		Hypothesis: What if I'm getting a set of found_refs - an append vs. a join or whatever...
