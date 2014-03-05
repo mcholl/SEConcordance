@@ -2,11 +2,9 @@ SEConcordance To Do Items
 
 Locate_references:
 	- @bug Question: How do I keep the scores up to date?
+		I suppose I could write a second agent that would simply retrieve the current score (maybe score, up & down votes!) on each post, and each entry.   Currently, the activity on Christianity is that I can import a year's worth of data, and parse it, in under an hour.  Just retriving all the scores - especially since there would be no posting, then updating each record in the table, really wouldn't be that big of a deal...
 Views:
-	
 	- Consider using authetication credentials to just show the up/down split?
-	- Consider saving the current state of the filters in a cookie, and restoring them
-		
 Visualization:
 	- At some point, I want a graph that shows the number of times each book / chapter is referenced in an answer :)
 
@@ -25,6 +23,8 @@ Deployment:
 	- Publicize it / Sell it
 
 Archive:
+	- Consider saving the current state of the filters in a cookie, and restoring them @done(2014-03-04) @project(Views)
+		Answer: No.  It's a lot of work to write, and not really something the user especially expects...	
 	- @bug Why is the line missing between questions sometimes? @done(2014-03-04) @project(Views)
 		Interesting - it is a border-bottom on all .answer, but not on .question… Why? Just the way the style sheet was done.  I'm overrideing for my needs.
 	- @bug Some bodies have \' in them.  I should check my escaping sequences... @done(2014-03-04) @project(Locate_references)
