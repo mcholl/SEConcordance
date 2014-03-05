@@ -23,6 +23,8 @@ Deployment:
 	- Publicize it / Sell it
 
 Archive:
+	- Consider duplicating the page buttons at top and bottom of the screen @done(2014-03-04) @project(Views)
+	- Consider placing the Div Header outside of the actual grahical space, but above the questions... @done(2014-03-04) @project(Views)
 	- Consider saving the current state of the filters in a cookie, and restoring them @done(2014-03-04) @project(Views)
 		Answer: No.  It's a lot of work to write, and not really something the user especially expects...	
 	- @bug Why is the line missing between questions sometimes? @done(2014-03-04) @project(Views)

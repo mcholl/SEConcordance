@@ -49,63 +49,69 @@
 	<BODY>
 		<DIV id='container'>
 			<DIV id='header'>
-				<FORM id='settings' method='GET' action='/passages/'>
-					<SELECT id='qa' onChange='window.location.href=$("#qa :selected").val()+"?"+window.location.href.split("?")[1]'>
-						<OPTION value='/passages/'>Show Q&A</OPTION>
-						<OPTION value='/answers/'>Only Answers</OPTION>
-						<OPTION value='/questions/'>Only Questions</OPTION>
-					</SELECT>
-
-					<SELECT id='select_site' onChange="$('#site').val($('#select_site :selected').val());submit()">
-						<OPTION value=''>All Sites</OPTION>
-						<OPTION value='christianity' {% if filters.site == "christianity" %}selected{% endif %} >Christianity</OPTION>
-						<OPTION value='hermenutics'  {% if filters.site == "hermeneutics" %}selected{% endif %} >Hermeneutics</OPTION>
-					</SELECT>
-
-					<SELECT id='select_score'  onChange="$('#score').val($('#select_score :selected').val());submit()">
-						<OPTION value=''>All responses regardless of score</OPTION>
-						<OPTION value='positive'  {% if "p" in filters.score %}selected{% endif %} >Show upvoted posts only (1 or more)</OPTION>
-						<OPTION value='zero_or_more' {% if "z" in filters.score  %}selected{% endif %}  >Show posts with score of 0 or more</OPTION>
-						<OPTION value='negative' {% if "n" in filters.score %}selected{% endif %}  >Show downvoted posts only (less than 0)</OPTION>
-					</SELECT>
-
-					<SELECT id='select_ppc' onChange="$('#per_page_count').val($('#select_ppc :selected').val());submit()">
-						<OPTION value='10' {% if filters.per_page_count == '10' %} selected {% endif %}>10 per page</OPTION>
-						<OPTION value='25' {% if filters.per_page_count == '25' %} selected {% endif %}>25 per page</OPTION>
-						<OPTION value='50' {% if filters.per_page_count == '50' %} selected {% endif %}>50 per page</OPTION>
-						<OPTION value='100' {% if filters.per_page_count == '100' %} selected {% endif %}>100 per page</OPTION>
-					</SELECT>
-
-					<!-- Note: Calls /search?passage=entered_reference is handled in urls.py-->
-					<LABEL for="filter_range">Limit Results to </LABEL>
-					<INPUT id='filter_range' name='filter_range' type='text' placeholder='search' value='{% if filters.range %}{{filters.range}}{% endif %}' />
-					<INPUT type='submit' />
-
-					<!--{{filters}}-->
-
-					<INPUT type='hidden' id='score' name='score' value='{{filters.score}}' />
-					<INPUT type='hidden' id='site' name='site' value='{{filters.site}}' />
-					<INPUT type='hidden' id='per_page_count' name='per_page_count' value='{{filters.per_page_count}}' />
-
-					<div class="pagination">
-					    <span class="step-links">
-					        {% if found_references_list.has_previous %}
-					            <a href="?{% if filters.range %}filter_range={{filters.range}}&{% endif %}{% if filters.score %}score={{filters.score}}&{% endif %}{% if filters.site %}site={{filters.site}}&{% endif %}{% if filters.per_page_count %}per_page_count={{filters.per_page_count}}&{% endif %}page={{ found_references_list.previous_page_number }}">previous</a>
-					        {% endif %}
-
-					        <span class="current">
-					            Page <INPUT type='text' id='page' name='page' onBlur='submit()' value='{{ found_references_list.number }}' /> of {{ found_references_list.paginator.num_pages }}
-					        </span>
-
-					        {% if found_references_list.has_next %}
-					            <a href="?{% if filters.range %}filter_range={{filters.range}}&{% endif %}{% if filters.score %}score={{filters.score}}&{% endif %}{% if filters.site %}site={{filters.site}}&{% endif %}{% if filters.per_page_count %}per_page_count={{filters.per_page_count}}&{% endif %}page={{ found_references_list.next_page_number }}">next</a>
-					        {% endif %}
-					    </span>
-					</div>
-				</FORM>
+				<h1>Stack Exchange Concordance <i>BETA</i></h1>
+				Please leave feedback on this meta question: (tbd).
 			</DIV>
 
 			<DIV id='content'>
+				<DIV id='subheader'>
+					<FORM id='settings' method='GET' action='/passages/'>
+						<SELECT id='qa' onChange='window.location.href=$("#qa :selected").val()+"?"+window.location.href.split("?")[1]'>
+							<OPTION value='/passages/'>Show Q&A</OPTION>
+							<OPTION value='/answers/'>Only Answers</OPTION>
+							<OPTION value='/questions/'>Only Questions</OPTION>
+						</SELECT>
+
+						<SELECT id='select_site' onChange="$('#site').val($('#select_site :selected').val());submit()">
+							<OPTION value=''>All Sites</OPTION>
+							<OPTION value='christianity' {% if filters.site == "christianity" %}selected{% endif %} >Christianity</OPTION>
+							<OPTION value='hermenutics'  {% if filters.site == "hermeneutics" %}selected{% endif %} >Hermeneutics</OPTION>
+						</SELECT>
+
+						<SELECT id='select_score'  onChange="$('#score').val($('#select_score :selected').val());submit()">
+							<OPTION value=''>All responses regardless of score</OPTION>
+							<OPTION value='positive'  {% if "p" in filters.score %}selected{% endif %} >Show upvoted posts only (1 or more)</OPTION>
+							<OPTION value='zero_or_more' {% if "z" in filters.score  %}selected{% endif %}  >Show posts with score of 0 or more</OPTION>
+							<OPTION value='negative' {% if "n" in filters.score %}selected{% endif %}  >Show downvoted posts only (less than 0)</OPTION>
+						</SELECT>
+
+						<SELECT id='select_ppc' onChange="$('#per_page_count').val($('#select_ppc :selected').val());submit()">
+							<OPTION value='10' {% if filters.per_page_count == '10' %} selected {% endif %}>10 per page</OPTION>
+							<OPTION value='25' {% if filters.per_page_count == '25' %} selected {% endif %}>25 per page</OPTION>
+							<OPTION value='50' {% if filters.per_page_count == '50' %} selected {% endif %}>50 per page</OPTION>
+							<OPTION value='100' {% if filters.per_page_count == '100' %} selected {% endif %}>100 per page</OPTION>
+						</SELECT>
+
+						<!-- Note: Calls /search?passage=entered_reference is handled in urls.py-->
+						<LABEL for="filter_range">Limit Results to </LABEL>
+						<INPUT id='filter_range' name='filter_range' type='text' placeholder='search' value='{% if filters.range %}{{filters.range}}{% endif %}' />
+						<INPUT type='submit' />
+
+						<!--{{filters}}-->
+
+						<INPUT type='hidden' id='score' name='score' value='{{filters.score}}' />
+						<INPUT type='hidden' id='site' name='site' value='{{filters.site}}' />
+						<INPUT type='hidden' id='per_page_count' name='per_page_count' value='{{filters.per_page_count}}' />
+
+						<div class="pagination">
+						    <span class="step-links">
+						        {% if found_references_list.has_previous %}
+						            <a href="?{% if filters.range %}filter_range={{filters.range}}&{% endif %}{% if filters.score %}score={{filters.score}}&{% endif %}{% if filters.site %}site={{filters.site}}&{% endif %}{% if filters.per_page_count %}per_page_count={{filters.per_page_count}}&{% endif %}page={{ found_references_list.previous_page_number }}">previous</a>
+						        {% endif %}
+
+						        <span class="current">
+						            Page <INPUT type='text' id='page' name='page' onBlur='submit()' value='{{ found_references_list.number }}' /> of {{ found_references_list.paginator.num_pages }}
+						        </span>
+
+						        {% if found_references_list.has_next %}
+						            <a href="?{% if filters.range %}filter_range={{filters.range}}&{% endif %}{% if filters.score %}score={{filters.score}}&{% endif %}{% if filters.site %}site={{filters.site}}&{% endif %}{% if filters.per_page_count %}per_page_count={{filters.per_page_count}}&{% endif %}page={{ found_references_list.next_page_number }}">next</a>
+						        {% endif %}
+						    </span>
+						</div>
+					</FORM>
+				</DIV>
+
+				<DIV id='qlist-wrapper'>
 				{% if found_references_list %}
 
 					<TABLE>
@@ -117,18 +123,18 @@
 										{{found_ref.reference}}
 									</strong>
 									
-									<br />
-
-									<span class='vote-count-pass'>
-										{%if found_ref.sepost.score > 0 %}+{% endif %}{{found_ref.sepost.score}}
-									</span>
-
 									<div class="started">
 										{% if found_ref.sepost.qa == "q" %}question from {% else %}answer by{% endif %} 
 										{{found_ref.sepost.owner}}
 										on
 										{{found_ref.sepost.sitename}}
 									</div>
+									<br />
+
+									<span class='vote-count-pass'>
+										{%if found_ref.sepost.score > 0 %}+{% endif %}{{found_ref.sepost.score}}
+									</span>
+
 									
 								</TD>
 
@@ -154,12 +160,41 @@
 				{% else %}
 					<p>The are no references in the concordance for the specified range.</p>
 				{% endif %}
+				</DIV>
 			</DIV>
 
+			<div class="pagination">
+			    <span class="step-links">
+			        {% if found_references_list.has_previous %}
+			            <a href="?{% if filters.range %}filter_range={{filters.range}}&{% endif %}{% if filters.score %}score={{filters.score}}&{% endif %}{% if filters.site %}site={{filters.site}}&{% endif %}{% if filters.per_page_count %}per_page_count={{filters.per_page_count}}&{% endif %}page={{ found_references_list.previous_page_number }}">previous</a>
+			        {% endif %}
+
+			        <span class="current">
+			            Page {{ found_references_list.number }} of {{ found_references_list.paginator.num_pages }}
+			        </span>
+
+			        {% if found_references_list.has_next %}
+			            <a href="?{% if filters.range %}filter_range={{filters.range}}&{% endif %}{% if filters.score %}score={{filters.score}}&{% endif %}{% if filters.site %}site={{filters.site}}&{% endif %}{% if filters.per_page_count %}per_page_count={{filters.per_page_count}}&{% endif %}page={{ found_references_list.next_page_number }}">next</a>
+			        {% endif %}
+			    </span>
+			</div>
+
 			<DIV id='footer' class='categories'>
-				<a href="http://biblia.com/"><img src="http://api.biblia.com/docs/media/PoweredByBiblia.png" alt="Powered by Biblia" /></a>
-				This site uses the <a href="http://biblia.com/">Biblia</a> web services from <a href="http://www.logos.com/">Logos Bible Software</a>.
+				<DIV>
+					<a href="http://biblia.com/"><img src="http://api.biblia.com/docs/media/PoweredByBiblia.png" alt="Powered by Biblia" /></a>
+					This site uses the <a href="http://biblia.com/">Biblia</a> web services from <a href="http://www.logos.com/">Logos Bible Software</a>.
+				</DIV>
+
+				<BR />
+				<BR />
+				<BR />
+
+				<DIV>
+					<p>Brought to you by:</p>
+					<a title="&lt;img src=&quot;http://stackexchange.com/users/flair/45534.png&quot; width=&quot;208&quot; height=&quot;58&quot; alt=&quot;profile for Affable Geek on Stack Exchange, a network of free, community-driven Q&amp;A sites&quot; title=&quot;profile for Affable Geek on Stack Exchange, a network of free, community-driven Q&amp;A sites&quot; /&gt;" href="http://stackexchange.com/users/45534/affable-geek"><img src="http://stackexchange.com/users/flair/45534.png" width="208" height="58" alt="profile for Affable Geek on Stack Exchange, a network of free, community-driven Q&#038;A sites" title="profile for Affable Geek on Stack Exchange, a network of free, community-driven Q&#038;A sites" /></a>
+				</DIV>
 			</DIV>
+
 		</DIV>
 	</BODY>
 </HTML>
