@@ -2,15 +2,11 @@ SEConcordance To Do Items
 
 Locate_references:
 	- @bug Question: How do I keep the scores up to date?
-	- @bug Some bodies have \' in them.  I should check my escaping sequences...
 Views:
-	- @bug Why doesn't per_page_count set correctly? It keeps sticking at 50 - even though the url changes correctly!
 	
 	- Consider using authetication credentials to just show the up/down split?
 
 	- @bug Why is the line missing between questions sometimes?
-	- @bug Why am I sometimes failing to start a new <TR> on certain questions?
-		Hypothesis: What if I'm getting a set of found_refs - an append vs. a join or whatever...
 
 	- Consider saving the current state of the filters in a cookie, and restoring them
 		
@@ -32,6 +28,11 @@ Deployment:
 	- Publicize it / Sell it
 
 Archive:
+	- @bug Some bodies have \' in them.  I should check my escaping sequences... @done(2014-03-04) @project(Locate_references)
+	- @bug Why am I sometimes failing to start a new <TR> on certain questions? @done(2014-03-04) @project(Views)
+		Hypothesis: What if I'm getting a set of found_refs - an append vs. a join or whatever...
+		Nope: The answer had to do with autoescape.  With autoescape off, if the snippet broke while, say, an open tag was being shown, it would throw off the rest of the row.  For now, I can just do autoescaping of the title, owner, and references - but I wonder if I need to do a more intelligent parsing of the snippet…  In some ways, stripping out the tags might actually be a good idea...
+	- @bug Why doesn't per_page_count set correctly? It keeps sticking at 50 - even though the url changes correctly! @done(2014-03-04) @project(Views)
 	- Have a mechanism for altering the filters  @done(2014-03-04) @project(Views)
 		- button to hide / unhide settings (jqueryui) @done(2014-03-04)
 		- <SELECT> to set the type='hiddens', then do a submit @done(2014-03-04)

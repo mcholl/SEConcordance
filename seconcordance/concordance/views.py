@@ -9,7 +9,6 @@ from VerseReference import *
 import pprint
 
 from concordance.models import *
-per_page_count=50
 
 # Create your views here.
 def index(request):
@@ -41,7 +40,7 @@ def get_passages(request):
 def paginate(request, found_references):
 	#Helper method to paginate the result set.  found_references is a list containing results of the queryset.  Need request to read the page parameter, if passed
 
-	per_page_count=request.GET.get('per_page_count', 100)
+	per_page_count=request.GET.get('per_page_count', 25)
 	paginator = Paginator(found_references, per_page_count)
 
 	page = request.GET.get('page')
@@ -80,6 +79,8 @@ def generic_results(request, filter_method, filter_range):
 	filter_site = request.GET.get('site','')
 	if filter_site != "":
 		population = population.filter(sepost__se_link__contains=filter_site)
+
+	per_page_count=request.GET.get('per_page_count', 25)
 
 	#Pass the results to the rendered template
 	context = {

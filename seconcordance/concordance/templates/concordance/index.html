@@ -50,24 +50,24 @@ INPUT#page { width: 30px;}
 				<OPTION value='/questions/'>Only Questions</OPTION>
 			</SELECT>
 
-			<SELECT id='select_site' onChange="$('#site').val($('#select_site').val());submit()">
+			<SELECT id='select_site' onChange="$('#site').val($('#select_site :selected').val());submit()">
 				<OPTION value=''>All Sites</OPTION>
 				<OPTION value='christianity' {% if filters.site == "christianity" %}selected{% endif %} >Christianity</OPTION>
 				<OPTION value='hermenutics'  {% if filters.site == "hermeneutics" %}selected{% endif %} >Hermeneutics</OPTION>
 			</SELECT>
 
-			<SELECT id='select_score'  onChange="$('#score').val($('#select_score').val());submit()">
+			<SELECT id='select_score'  onChange="$('#score').val($('#select_score :selected').val());submit()">
 				<OPTION value=''>All responses regardless of score</OPTION>
 				<OPTION value='positive'  {% if "p" in filters.score %}selected{% endif %} >Show upvoted posts only (1 or more)</OPTION>
 				<OPTION value='zero_or_more' {% if "z" in filters.score  %}selected{% endif %}  >Show posts with score of 0 or more</OPTION>
 				<OPTION value='negative' {% if "n" in filters.score %}selected{% endif %}  >Show downvoted posts only (less than 0)</OPTION>
 			</SELECT>
 
-			<SELECT id='select_ppc' onChange="$('#per_page_count').val($('#select_ppc').val());submit()">
-				<OPTION value='100' {% if filters.per_page_count == 100 %} selected {% endif %} >100 per page</OPTION>
-				<OPTION value='50' {% if filters.per_page_count == 50 %} selected {% endif %}  >50 per page</OPTION>
-				<OPTION value='25' {% if filters.per_page_count == 25 %} selected {% endif %}  >25 per page</OPTION>
-				<OPTION value='10' {% if filters.per_page_count == 10 %} selected {% endif %}  >10 per page</OPTION>
+			<SELECT id='select_ppc' onChange="$('#per_page_count').val($('#select_ppc :selected').val());submit()">
+				<OPTION value='10' {% if filters.per_page_count == '10' %} selected {% endif %}>10 per page</OPTION>
+				<OPTION value='25' {% if filters.per_page_count == '25' %} selected {% endif %}>25 per page</OPTION>
+				<OPTION value='50' {% if filters.per_page_count == '50' %} selected {% endif %}>50 per page</OPTION>
+				<OPTION value='100' {% if filters.per_page_count == '100' %} selected {% endif %}>100 per page</OPTION>
 			</SELECT>
 
 			<!-- Note: Calls /search?passage=entered_reference is handled in urls.py-->
@@ -75,7 +75,7 @@ INPUT#page { width: 30px;}
 			<INPUT id='filter_range' name='filter_range' type='text' placeholder='search' value='{% if filters.range %}{{filters.range}}{% endif %}' />
 			<INPUT type='submit' />
 
-		<!--{{filters}}-->
+			<!--{{filters}}-->
 
 			<INPUT type='hidden' id='score' name='score' value='{{filters.score}}' />
 			<INPUT type='hidden' id='site' name='site' value='{{filters.site}}' />
@@ -108,8 +108,7 @@ INPUT#page { width: 30px;}
 
 		<TABLE>
 			{% for found_ref in found_references_list %}
-				<TR class="{%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}">
-
+				<TR class="{% cycle 'row1' 'row2' %}{%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}">
 					{% autoescape off %}
 					<TD class='reference'>
 						<strong>
@@ -139,7 +138,7 @@ INPUT#page { width: 30px;}
 								</a>
 							</h3>
 							<div class="excerpt">
-								{{found_ref.preview_snippet}}
+								{{found_ref.preview_snippet|escape}}
 							</div>
 						</div>
 
@@ -155,6 +154,8 @@ INPUT#page { width: 30px;}
 	{% endif %}
 
 
+	</DIV>
+	<DIV id='footer' class='categories'>
 		<a href="http://biblia.com/"><img src="http://api.biblia.com/docs/media/PoweredByBiblia.png" alt="Powered by Biblia" /></a>
 		This site uses the <a href="http://biblia.com/">Biblia</a> web services from <a href="http://www.logos.com/">Logos Bible Software</a>.
 	</DIV>
