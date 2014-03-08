@@ -37,3 +37,5 @@ urlpatterns = patterns('',
 #                                               References can be within multiple books, but they remain within canonical order.  If the reference falls
 #                                               anywhere within the range, it is conisdered to be in the range. (e.g. John 3:16-20 would fall in the range John 3:1-17)
 
+# 	?search=my_term&filter_range	will search the bodies and titles of all posts for the passed terms.
+

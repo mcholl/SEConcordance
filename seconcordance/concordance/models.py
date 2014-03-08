@@ -48,7 +48,6 @@ class QuestionsManager(models.Manager):
 		#return super(QuestionsManager, self).get_queryset().filter(book_num__gte=search_ref.book_num).filter(end_chapter__gte=search_ref.start_chapter).filter(end_verse__gte=search_ref.start_verse).filter(end_book_num__lte=search_ref.end_book_num).filter(start_chapter__lte=search_ref.end_chapter).filter(start_verse__lte=search_ref.end_verse)
 		return super(PassageManager, self).get_queryset().filter(book_num__gte=search_ref.book_num,end_chapter__gte=search_ref.start_chapter,end_verse__gte=search_ref.start_verse,end_book_num__lte=search_ref.end_book_num,start_chapter__lte=search_ref.end_chapter,start_verse__lte=search_ref.end_verse)
 
-
 class AnswersManager(models.Manager):
 	#Returns VerseRefrences on posted Answers Only
 	def get_queryset(self):
