@@ -1,23 +1,24 @@
 SEConcordance To Do Items
 
+Deployment:
+	- Schedule the import to run on a schedule
+
 Locate_references:
-	- My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
 Views:
 	- Highlight the found reference in some fashion (background-color: yellow?) or at least tag the found thing…
-	- It might be nice if the tags associated with the posts where hown where the score is.  They should also be filter keys...
+	- It might be nice if the tags associated with the posts where shown where the score is.  They should also be filter keys…
 Visualization:
 	- At some point, I want a graph that shows the number of times each book / chapter is referenced in an answer :)
 
 Known Limitations:
 	- Question: Should I also be parsing MiYodeya in addition to herm & c.se?
 		I can ask Shog or Monica Cellio, but I think the answer is no - there is much more midrash and less Torah.
-	- No parsing of LDS books.  And, if the Biblia API ever goes away, I'd need to rewrite it...
-Deployment:
-	- Do a full import from Jan 01 2011
-	- Schedule the import to run on a schedule
-	- Publicize it / Sell it
+	- No parsing of LDS books.  And, if the Biblia API ever goes away, I'd need to rewrite it... 
+	- My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
 
+	
 Archive:
+	- Do a full import from Jan 01 2011 @done(2014-03-10) @project(Deployment)
 	- Add a /search/url that would let you search the body and title of posts within a specific canoncial range. @done(2014-03-10) @project(Views)
 	- &quot; and &#39; need to be replaced.  (HTML Entities as a whole…) http://stackoverflow.com/questions/2087370/decode-html-entities-in-python-string @done(2014-03-10) @project(Locate_references)
 	
