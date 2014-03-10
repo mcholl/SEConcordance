@@ -96,16 +96,16 @@ def save_post_to_mysql(se_post, found_refs):
 			con.close()
 		return
 
-	try:
-		post_id = se_post['post_id']
-		owner = se_post['owner']['display_name'].encode('utf-8')
-		post_type = se_post['post_type'].encode('utf-8')[0]
-		title = se_post['title'].replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8')
-		link = se_post['link'].encode('utf-8')
-		score = se_post['score']
-		body = se_post['body'].replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8') 
-		#TODO: Get the tagged version rather than the placed, then inject it, along with some CSS styles to highlight the found references...
+	post_id = se_post['post_id']
+	owner = se_post['owner']['display_name'].encode('utf-8')
+	post_type = se_post['post_type'].encode('utf-8')[0]
+	title = se_post['title'].replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8')
+	link = se_post['link'].encode('utf-8')
+	score = se_post['score']
+	body = se_post['body'].replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8') 
+	#TODO: Get the tagged version rather than the placed, then inject it, along with some CSS styles to highlight the found references...
 
+	try:
 		logging.info( "Inserting Post # {0} ({1})".format(post_id, title))
 		qry_Insert_Post = "INSERT INTO concordance_sepost (sepost_id, owner, type, title, link, score, body) VALUES (%s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE title=%s, body=%s"
 		cur.execute(qry_Insert_Post, (post_id, owner, post_type, title, link, score, body, title, body))
