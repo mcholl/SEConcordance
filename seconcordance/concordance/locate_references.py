@@ -73,7 +73,7 @@ def locate_references(se_post):
 				found_refs.append( foundref )  #['passage'].encode('utf-8')
 		else:
 			logging.warning( "Status Code {0}: Failed to retrieve valid parsing info at {1}".format(refparse.status_code, refparse.url))
-			logging.warning( "  returned text is: =>{0}<=".format(reparse.text))
+			logging.warning( "  returned text is: =>{0}<=".format(refparse.text))
 
 		nchunk_start += 1450
 		#Note: I'm purposely backing up, so that I don't accidentally split a reference across chunks
@@ -96,14 +96,22 @@ def save_post_to_mysql(se_post, found_refs):
 			con.close()
 		return
 
-	post_id = se_post['post_id']
-	owner = se_post['owner']['display_name'].encode('utf-8')
-	post_type = se_post['post_type'].encode('utf-8')[0]
-	title = se_post['title'].replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8')
-	link = se_post['link'].encode('utf-8')
-	score = se_post['score']
-	body = se_post['body'].replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8') 
-	#TODO: Get the tagged version rather than the placed, then inject it, along with some CSS styles to highlight the found references...
+	try:
+		post_id = se_post['post_id']
+		owner = se_post['owner']['display_name'].encode('utf-8')
+		post_type = se_post['post_type'].encode('utf-8')[0]
+		title = se_post['title'].replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8')
+		link = se_post['link'].encode('utf-8')
+		score = se_post['score']
+		body = se_post['body'].replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8') 
+		#TODO: Get the tagged version rather than the placed, then inject it, along with some CSS styles to highlight the found references...
+	except Exception, e:
+		logging.warning( "se_post not as expected.  received {0}:".format(se_post))
+		logging.exception( e )
+		con.rollback()
+		if con.open:
+			con.close()
+		return
 
 	try:
 		logging.info( "Inserting Post # {0} ({1})".format(post_id, title))
@@ -119,7 +127,7 @@ def save_post_to_mysql(se_post, found_refs):
 
 	try:
 		qry_Clear_Refs = "DELETE FROM concordance_reference WHERE sepost_id=%s"
-		cur.execute(qry_Clear_Refs, (post_id))
+		cur.execute(qry_Clear_Refs, (post_id,))
 	except Exception, e:
 		logging.warning( "Unable to commit post {0} to database at {1} using {2}:".format(post_id, link, qry_Clear_Refs))
 		logging.exception( e )

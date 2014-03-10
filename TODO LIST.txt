@@ -1,13 +1,16 @@
 SEConcordance To Do Items
 
 Locate_references:
-	- @bug Import failed when I triggered the try: except.
+	- @bug Import failed when I triggered the try: except. @done(2014-03-09)
 	- @bug My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
-	- @bug Question: How do I keep the scores up to date?
+	- @bug &quot; and &#39; need to be replaced.  (HTML Entities as a whole…) http://stackoverflow.com/questions/2087370/decode-html-entities-in-python-string
+	- @bug If the owner has deleted himself, owner display name doesn't come through. e.g.: http://hermeneutics.stackexchange.com/q/8527.  In these instances, just handle the owner name... 
+	- @bug Question: How do I keep the scores up to date? 
 		I suppose I could write a second agent that would simply retrieve the current score (maybe score, up & down votes!) on each post, and each entry.   Currently, the activity on Christianity is that I can import a year's worth of data, and parse it, in under an hour.  Just retriving all the scores - especially since there would be no posting, then updating each record in the table, really wouldn't be that big of a deal...
 	- Consider using authetication credentials to just show the up/down split?
 Views:
 	- Add a /search/url that would let you search the body and title of posts within a specific canoncial range.
+	- Highlight the found reference in some fashion (background-color: yellow?) or at least tag the found thing...
 Visualization:
 	- At some point, I want a graph that shows the number of times each book / chapter is referenced in an answer :)
 
