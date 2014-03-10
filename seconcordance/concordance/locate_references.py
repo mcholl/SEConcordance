@@ -48,6 +48,16 @@ def process_newPosts(site_name, from_date, sepost_process_function, se_post_save
 
 		npage += 1
 
+def strip_encodings(raw_body):
+	"""The body of the SE Post needs to have some changes. First off, we want to tag the found biblical references found references. Second, we want to strip some characters"""
+
+	body = raw_body.replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8')
+
+	#Note: Yes, I could do a whole up HTML entity replace, but this meets my needs...
+	body = body.replace("&quot;", "\"").replace("&#39;", "\'")
+
+	return body
+
 def locate_references(se_post):
 
 	refparser_url = "http://api.biblia.com/v1/bible/scan/?"
@@ -98,13 +108,13 @@ def save_post_to_mysql(se_post, found_refs):
 
 	try:
 		post_id = se_post['post_id']
-		owner = se_post['owner']['display_name'].encode('utf-8')
 		post_type = se_post['post_type'].encode('utf-8')[0]
-		title = se_post['title'].replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8')
+		title = strip_encodings(se_post['title'])
 		link = se_post['link'].encode('utf-8')
 		score = se_post['score']
-		body = se_post['body'].replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8') 
-		#TODO: Get the tagged version rather than the placed, then inject it, along with some CSS styles to highlight the found references...
+
+		body = strip_encodings(se_post['body'])
+
 	except Exception, e:
 		logging.warning( "se_post not as expected.  received {0}:".format(se_post))
 		logging.exception( e )
@@ -112,6 +122,12 @@ def save_post_to_mysql(se_post, found_refs):
 		if con.open:
 			con.close()
 		return
+
+	try:
+		owner = se_post['owner']['display_name'].encode('utf-8')
+	except:
+		owner = "removed user account"
+
 
 	try:
 		logging.info( "Inserting Post # {0} ({1})".format(post_id, title))
