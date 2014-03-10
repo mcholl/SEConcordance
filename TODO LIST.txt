@@ -6,10 +6,8 @@ Locate_references:
 	- @bug Question: How do I keep the scores up to date?
 		I suppose I could write a second agent that would simply retrieve the current score (maybe score, up & down votes!) on each post, and each entry.   Currently, the activity on Christianity is that I can import a year's worth of data, and parse it, in under an hour.  Just retriving all the scores - especially since there would be no posting, then updating each record in the table, really wouldn't be that big of a deal...
 	- Consider using authetication credentials to just show the up/down split?
-
 Views:
 	- Add a /search/url that would let you search the body and title of posts within a specific canoncial range.
-	- Use the Stack Exchange Attribution too! @done(2014-03-08)
 Visualization:
 	- At some point, I want a graph that shows the number of times each book / chapter is referenced in an answer :)
 
@@ -23,6 +21,8 @@ Deployment:
 	- Publicize it / Sell it
 
 Archive:
+	 @done(2014-03-08) @project(Locate_references)
+	- Use the Stack Exchange Attribution too! @done(2014-03-08) @project(Views)
 	- Create a VM with @done(2014-03-08) @project(Deployment)
 		- mysql @done(2014-03-06)
 		- python @done(2014-03-06)

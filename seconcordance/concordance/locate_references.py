@@ -88,7 +88,14 @@ def save_post_to_mysql(se_post, found_refs):
 	con = connect_to_mysql()
 	try:
 		cur = con.cursor()
+	except:
+		logging.warning( "Unable to commit post {0} to database at {1}:".format(post_id, link))
+		logging.warning( sys.exc_info())
+		con.rollback()
+		con.close()		
+		return
 
+	try:
 		post_id = se_post['post_id']
 		owner = se_post['owner']['display_name'].encode('utf-8')
 		post_type = se_post['post_type'].encode('utf-8')[0]
@@ -101,10 +108,24 @@ def save_post_to_mysql(se_post, found_refs):
 		logging.info( "Inserting Post # {0} ({1})".format(post_id, title))
 		qry_Insert_Post = "INSERT INTO concordance_sepost (sepost_id, owner, type, title, link, score, body) VALUES (%s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE title=%s, body=%s"
 		cur.execute(qry_Insert_Post, (post_id, owner, post_type, title, link, score, body, title, body))
+	except:
+		logging.warning( "Unable to commit post {0} to database at {1} using {2}:".format(post_id, link, qry_Insert_Post))
+		logging.warning( sys.exc_info())
+		con.rollback()
+		con.close()		
+		return
 
+	try:
 		qry_Clear_Refs = "DELETE FROM concordance_reference WHERE sepost_id=%s"
 		cur.execute(qry_Clear_Refs, (post_id))
+	except:
+		logging.warning( "Unable to commit post {0} to database at {1} using {2}:".format(post_id, link, qry_Clear_Refs))
+		logging.warning( sys.exc_info())
+		con.rollback()
+		con.close()		
+		return
 
+	try:
 		for found in found_refs:
 			plain_ref = found['passage'].replace(u"\u2014", "-").replace(u"\u2013", "-").replace(u"\u2019", "'").encode('utf-8')
 
@@ -116,9 +137,12 @@ def save_post_to_mysql(se_post, found_refs):
 
 		con.commit()
 	except:
-		logging.warning( "Unable to commit to database:")
+		logging.warning( "Unable to commit post {0} to database at {1}:".format(post_id, link))
 		logging.warning( sys.exc_info())
 		con.rollback()
+		con.close()		
+		return
+
 	finally:
 		con.close()
 
