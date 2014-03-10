@@ -83,7 +83,7 @@
 						</SELECT>
 
 						<!-- Note: Calls /search?passage=entered_reference is handled in urls.py-->
-						<LABEL for="filter_range">Limit Results to </LABEL>
+						<LABEL for="filter_range">Show verses in range:</LABEL>
 						<INPUT id='filter_range' name='filter_range' type='text' placeholder='search' value='{% if filters.range %}{{filters.range}}{% endif %}' />
 						<INPUT type='submit' />
 
@@ -92,6 +92,11 @@
 						<INPUT type='hidden' id='score' name='score' value='{{filters.score}}' />
 						<INPUT type='hidden' id='site' name='site' value='{{filters.site}}' />
 						<INPUT type='hidden' id='per_page_count' name='per_page_count' value='{{filters.per_page_count}}' />
+
+						<div class='search'>
+							<LABEL for="terms">Show results containing the following terms in the body or title:</LABEL>
+							<INPUT id='terms' name='terms' type='text' placeholder='search' value='{% if filters.terms %}{{filters.terms}}{% endif %}' />
+						</div>
 
 						<div class="pagination">
 						    <span class="step-links">

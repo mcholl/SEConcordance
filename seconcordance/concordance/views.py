@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import django.shortcuts
 from django.http import Http404
+from django.db.models import Q
 
 from VerseReference import *
 import pprint
@@ -80,6 +81,12 @@ def generic_results(request, filter_method, filter_range):
 	if filter_site != "":
 		population = population.filter(sepost__se_link__contains=filter_site)
 
+	#Return references to posts containing search terms only...
+	filter_terms = request.GET.get('terms','')
+	if filter_terms != "":
+		population = population.filter(Q(sepost__posttitle__contains=filter_terms) | Q(sepost__body__contains=filter_terms))
+
+
 	per_page_count=request.GET.get('per_page_count', 25)
 
 	#Pass the results to the rendered template
@@ -89,6 +96,7 @@ def generic_results(request, filter_method, filter_range):
 			'range': filter_range,
 			'score': filter_score,
 			'site': filter_site,
+			'terms': filter_terms,
 			'per_page_count': per_page_count,
 		}
 	}

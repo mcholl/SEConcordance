@@ -3,7 +3,6 @@ SEConcordance To Do Items
 Locate_references:
 	- My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
 Views:
-	- Add a /search/url that would let you search the body and title of posts within a specific canoncial range.
 	- Highlight the found reference in some fashion (background-color: yellow?) or at least tag the found thing…
 	- It might be nice if the tags associated with the posts where hown where the score is.  They should also be filter keys...
 Visualization:
@@ -19,6 +18,7 @@ Deployment:
 	- Publicize it / Sell it
 
 Archive:
+	- Add a /search/url that would let you search the body and title of posts within a specific canoncial range. @done(2014-03-10) @project(Views)
 	- &quot; and &#39; need to be replaced.  (HTML Entities as a whole…) http://stackoverflow.com/questions/2087370/decode-html-entities-in-python-string @done(2014-03-10) @project(Locate_references)
 	
 	- @bug If the owner has deleted himself, owner display name doesn't come through. e.g.: http://hermeneutics.stackexchange.com/q/8527.  In these instances, just handle the owner name...  @done(2014-03-10) @project(Locate_references)
