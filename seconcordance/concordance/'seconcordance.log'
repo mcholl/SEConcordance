@@ -1,0 +1,501 @@
+INFO:root:christianity.stackexchange.com last checked on 2014-03-04
+INFO:root:Retrieving SE posts at http://api.stackexchange.com/posts?fromdate=2014-03-04&order=asc&sort=creation&filter=!BJyHsUt9WLl9dRFPUz(Uyr874YYvNH&site=christianity&page=1&pagesize=100
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.stackexchange.com
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26250 at http://christianity.stackexchange.com/a/26250
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26251 (Why did God not want man to have the knowledge of good and evil?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 2
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26252 at http://christianity.stackexchange.com/q/26252
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26253 at http://christianity.stackexchange.com/q/26253
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26254 at http://christianity.stackexchange.com/q/26254
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26255 at http://christianity.stackexchange.com/a/26255
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26256 (What is the Biblical basis for the belief that separation from God is in itself sin?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Jeremiah 2:13
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26257 (Why did God not want man to have the knowledge of good and evil?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 2:17
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Romans 5:12
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Romans 7:18
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Romans 7:20
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Ephesians 2:1
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26259 at http://christianity.stackexchange.com/q/26259
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26260 (What is the Biblical basis for the belief that separation from God is in itself sin?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: John 5:19
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: John 15:5
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Matthew 22:37-39
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Romans 8:39
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 1 Thessalonians 1:3
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 2 Thessalonians 3:5
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26261 at http://christianity.stackexchange.com/q/26261
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26262 at http://christianity.stackexchange.com/q/26262
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26264 (What is the Biblical basis for the belief that Jesus is Michael?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Hebrews 1:5
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 2:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Hebrews 1:5b
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 2 Samuel 7:14
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 1 Chronicles 17:13
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 2
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Hebrews 1:5a
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Job 38:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 2:8
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26266 (Did God trick Satan into causing the fall of man?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 3:11
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Romans 5:12
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Revelation 12:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 2:17
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26267 (What is the argument supporting that there is a break between the 69th and 70th week in the book of Daniel?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Daniel 9:25
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Daniel 9:26
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26268 (Why did Zechariah&#39;s neighbours make signs to him?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Mark 7:32
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Mark 7:37
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Mark 9:25
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Luke 1:63
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26269 at http://christianity.stackexchange.com/q/26269
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26270 (What is the argument supporting that there is a break between the 69th and 70th week in the book of Daniel?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Job 9:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Job 37:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Revelation 20:1-3
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Zechariah 12:10
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Revelation 1:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Jeremiah 50:4
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Jeremiah 50:5
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Jeremiah 50:17-20
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Jeremiah 31:33
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Jeremiah 31:34
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26275 at http://christianity.stackexchange.com/a/26275
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26276 (Is Christ just an alien from another planet?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 2 Thessalonians 2:2-12
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Revelation 4:11
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Colossians 1:14-18
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Revelation 4:11
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Colossians 1:14-18
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26277 at http://christianity.stackexchange.com/a/26277
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26278 at http://christianity.stackexchange.com/q/26278
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26279 at http://christianity.stackexchange.com/q/26279
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26281 (How can I understand the connection between laughing and sin and joy?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Luke 6:21
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Luke 6:25
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: James 4:9
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Ecclesiastes 7:6
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Proverbs 29:9
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Job 8:21
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Job 22:19
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 2:4
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 22:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 37:13
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 52:6
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26282 at http://christianity.stackexchange.com/q/26282
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26284 (How can I understand the connection between laughing and sin and joy?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Luke 6:25
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26285 (Is Cecil B. DeMille&#39;s narration of Moses in the desert based on the Bible?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Exodus 2
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26290 (Big T Truth and its&#39; apprehension)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 1 John 2
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26291 (What of all those who just don&#39;t know)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: John 14:6
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: James 2:10
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26292 at http://christianity.stackexchange.com/q/26292
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26293 at http://christianity.stackexchange.com/q/26293
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26294 at http://christianity.stackexchange.com/q/26294
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26297 at http://christianity.stackexchange.com/q/26297
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26298 at http://christianity.stackexchange.com/a/26298
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26299 (All my days are ordained before I was born?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 139
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26300 (Does God love unconditionally?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Isaiah 49:15
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26301 (What does Paul mean when he says that we are no longer under the law but under grace?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Romans 6:14
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Romans 6:15
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26304 (When are we forgiven ? Parable of the unforgiving debtor)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Matthew 18:23-35
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 103:12
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26302 (Have Christians ever followed Leviticus?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Acts 10
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26303 at http://christianity.stackexchange.com/a/26303
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26306 (In the parable of the sower, what exegetical reasons are there to interpret the third type of soil to be genuine Christians?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Ephesians 2:8
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: James 2:14-26
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: James 2:14-26
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26307 (When are we forgiven ? Parable of the unforgiving debtor)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Matthew 6:12
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Matthew 6:14
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Matthew 6:15
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Mark 11:25
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Mark 11:26
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Luke 11:4
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Luke 6:38
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26308 at http://christianity.stackexchange.com/q/26308
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26309 at http://christianity.stackexchange.com/q/26309
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26310 at http://christianity.stackexchange.com/a/26310
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26314 (What evidence is there to show that John Wesley and John Calvin did not believe that Jesus is Michael?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Jude 9
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Jude 9
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Jude 9
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26315 (Gen 6:2 why called the Sons of God?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 6:2
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26316 (Is there any tradition with regards to Zechariah&#39;s prayer in Luke?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Luke 2:25
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Luke 2:38
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Numbers 6:24-26
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26317 at http://christianity.stackexchange.com/q/26317
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26320 (How does Oneness pentecostalism interprete Matthew 3:17?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Matthew 3:16-17
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26323 (When was it established that there were 14,000 innocents martyred?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Matthew 2:16-18
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26324 at http://christianity.stackexchange.com/q/26324
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26326 (How did early &quot;street evangelization&quot; differ from the modern practice?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Matthew 3:1
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26327 (When is Isaiah 32 supposed to happen?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Isaiah 32:8
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Isaiah 32
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26328 (What is the significance of the burning bush?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 3:24
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 3:17-19
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 3:21
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 4:4
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Galatians 3:13-14
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Romans 12:11
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 2 Timothy 1:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Philippians 4:13
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Colossians 1:29
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 2 Corinthians 4:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Deuteronomy 33:16
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Hebrews 3:6
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26332 (What is the biblical basis for the prohibition of instruments in worship?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Ephesians 5:19
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26334 (If Adam and Eve were perfect, why did they choose to sin?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: John 17:3
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26335 at http://christianity.stackexchange.com/q/26335
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26336 at http://christianity.stackexchange.com/a/26336
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26338 (On what basis do translators translate echad in Daniel 10:13 to be one instead of first?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Daniel 10:13
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Daniel 10:13
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 1:5
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Daniel 10:13
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26339 at http://christianity.stackexchange.com/q/26339
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26340 at http://christianity.stackexchange.com/a/26340
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26341 at http://christianity.stackexchange.com/q/26341
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26342 (Was Jesus&#39; stab wound on the left side? How do we know?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: John 19:34
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: John 19:34
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26343 at http://christianity.stackexchange.com/a/26343
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26345 at http://christianity.stackexchange.com/q/26345
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26346 at http://christianity.stackexchange.com/q/26346
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26347 (According to Scripture, where is Hell?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 21:17
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Genesis 24:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26348 (According to Scripture, where is Hell?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Numbers 16:31
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Isaiah 5:14
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26349 (Can we visit loved ones in Hell?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Luke 16:19-31
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26350 at http://christianity.stackexchange.com/q/26350
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26351 (According to Scripture, where is Hell?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 16:10
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 49:15
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26353 at http://christianity.stackexchange.com/a/26353
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26355 (Will Angels teach us to sing?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Luke 2:13-14
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26357 at http://christianity.stackexchange.com/q/26357
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26358 at http://christianity.stackexchange.com/a/26358
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26363 (Does the priest have the power to forgive sins?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Matthew 10:8
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: John 1:29
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Ephesians 1:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26364 at http://christianity.stackexchange.com/a/26364
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26365 (In Protestant faith is one&#39;s old self dying on the cross with Jesus symbolic, or the actual assumption of a new Eternal life?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 2 Corinthians 5:17
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Romans 7:18
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26366 (In Moses&#39; time, would freeing a slave be harmful to the slave?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Exodus 21:26
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26367 (In Protestant faith is one&#39;s old self dying on the cross with Jesus symbolic, or the actual assumption of a new Eternal life?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Hebrews 7:27
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Hebrews 9:12
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 1 John 1:7
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 1 John 1:8
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 1 John 1:9
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26368 at http://christianity.stackexchange.com/q/26368
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26369 (In Protestant faith is one&#39;s old self dying on the cross with Jesus symbolic, or the actual assumption of a new Eternal life?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Romans 5
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26371 at http://christianity.stackexchange.com/a/26371
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26373 at http://christianity.stackexchange.com/q/26373
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26374 at http://christianity.stackexchange.com/a/26374
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26376 at http://christianity.stackexchange.com/a/26376
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26377 (What is the history of offertories?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Colossians 3:16
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Colossians 3:16
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26378 at http://christianity.stackexchange.com/q/26378
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26379 at http://christianity.stackexchange.com/a/26379
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26380 at http://christianity.stackexchange.com/a/26380
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26381 at http://christianity.stackexchange.com/a/26381
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26382 (Why was it necessary for some people to receive the Gift of the Holy Ghost by the laying on of hands and others just received it after believing?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Acts 1:8
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26384 at http://christianity.stackexchange.com/q/26384
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26385 at http://christianity.stackexchange.com/a/26385
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26386 (In Protestant faith is one&#39;s old self dying on the cross with Jesus symbolic, or the actual assumption of a new Eternal life?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: John 17:3
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Romans 7:18
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Matthew 18:21
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: James 5:13
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 26387 (Does 1st Corinthians chapter 15 say that we will have a permanent physical life?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 1 Corinthians 15:4
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Psalm 16:10
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 1 Corinthians 15:12
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #26388 at http://christianity.stackexchange.com/a/26388
+INFO:root:hermeneutics.stackexchange.com last checked on 2014-03-04
+INFO:root:Retrieving SE posts at http://api.stackexchange.com/posts?fromdate=2014-03-04&order=asc&sort=creation&filter=!BJyHsUt9WLl9dRFPUz(Uyr874YYvNH&site=hermeneutics&page=1&pagesize=100
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.stackexchange.com
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #8487 at http://hermeneutics.stackexchange.com/a/8487
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:No References located in post id #8488 at http://hermeneutics.stackexchange.com/q/8488
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:Inserting Post # 8489 (What is Paul referring to in 1 Timothy 4:14?)
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: Isaiah 2
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 1 Timothy 4:14
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 1 Timothy 4:14
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com
+INFO:root:  Reference Found: 1 Timothy 4:14
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): api.biblia.com

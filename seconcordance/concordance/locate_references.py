@@ -88,11 +88,12 @@ def save_post_to_mysql(se_post, found_refs):
 	con = connect_to_mysql()
 	try:
 		cur = con.cursor()
-	except:
+	except Exception, e:
 		logging.warning( "Unable to commit post {0} to database at {1}:".format(post_id, link))
-		logging.warning( sys.exc_info())
+		logging.exception( e )
 		con.rollback()
-		con.close()		
+		if con.open:
+			con.close()
 		return
 
 	try:
@@ -108,21 +109,23 @@ def save_post_to_mysql(se_post, found_refs):
 		logging.info( "Inserting Post # {0} ({1})".format(post_id, title))
 		qry_Insert_Post = "INSERT INTO concordance_sepost (sepost_id, owner, type, title, link, score, body) VALUES (%s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE title=%s, body=%s"
 		cur.execute(qry_Insert_Post, (post_id, owner, post_type, title, link, score, body, title, body))
-	except:
+	except Exception, e:
 		logging.warning( "Unable to commit post {0} to database at {1} using {2}:".format(post_id, link, qry_Insert_Post))
-		logging.warning( sys.exc_info())
+		logging.exception( e )
 		con.rollback()
-		con.close()		
+		if con.open:
+			con.close()
 		return
 
 	try:
 		qry_Clear_Refs = "DELETE FROM concordance_reference WHERE sepost_id=%s"
 		cur.execute(qry_Clear_Refs, (post_id))
-	except:
+	except Exception, e:
 		logging.warning( "Unable to commit post {0} to database at {1} using {2}:".format(post_id, link, qry_Clear_Refs))
-		logging.warning( sys.exc_info())
+		logging.exception( e )
 		con.rollback()
-		con.close()		
+		if con.open:
+			con.close()
 		return
 
 	try:
@@ -136,15 +139,14 @@ def save_post_to_mysql(se_post, found_refs):
 			cur.execute(qry_Insert_Ref, (post_id, refr.plain_ref, refr.book_num, refr.end_book_num, refr.start_chapter, refr.start_verse, refr.end_chapter, refr.end_verse, found['textIndex'], found['textLength']))
 
 		con.commit()
-	except:
+	except Exception, e:
 		logging.warning( "Unable to commit post {0} to database at {1}:".format(post_id, link))
-		logging.warning( sys.exc_info())
+		logging.exception( e )
 		con.rollback()
-		con.close()		
-		return
 
 	finally:
-		con.close()
+		if con.open:
+			con.close()
 
 def main():
 	for site_name in ['christianity', 'hermeneutics']:
