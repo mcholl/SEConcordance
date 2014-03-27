@@ -160,12 +160,11 @@
 											</a>
 										</h3>
 										<div class="excerpt">
-											<!--{{found_ref.preview_snippet|escape}}-->
-											{% if filters.terms %}
+											<!--{% if filters.terms %}-->
 												{% highlight_search_term found_ref.sepost.body filters.terms %}
-											{% elif filters.range %}
+											<!--{% elif filters.range %}
 												{% highlight_verse_reference found_ref %}
-											{% endif %}
+											{% endif %}-->
 										</div>
 									</div>
 
