@@ -1,5 +1,7 @@
 <HTML lang="en">
-	<HEAD>		
+	<HEAD>	
+
+		{% load highlighter %}	
 		<title>Stack Exchange Concordance</title>
 		<link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/christianity/all.css?v=d419fa438ebb" />
 		<STYLE type='text/css'>
@@ -28,6 +30,13 @@
 				width: 728px;
 				border-bottom: 1px solid #ccc;
 				border-top: 1px solid #ccc;
+			}
+
+			SPAN.search_term {
+				background-color: yellow;
+			}
+			SPAN.verse_reference {
+				background-color: gray;
 			}
 		</STYLE>
 
@@ -151,7 +160,12 @@
 											</a>
 										</h3>
 										<div class="excerpt">
-											{{found_ref.preview_snippet|escape}}
+											<!--{{found_ref.preview_snippet|escape}}-->
+											{% if filters.terms %}
+												{% highlight_search_term found_ref.sepost.body filters.terms %}
+											{% elif filters.range %}
+												{% highlight_verse_reference found_ref %}
+											{% endif %}
 										</div>
 									</div>
 

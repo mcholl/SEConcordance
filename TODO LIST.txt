@@ -1,9 +1,8 @@
 SEConcordance To Do Items
 
 Deployment:
-	- Schedule the import to run on a schedule
-
 Locate_references:
+	- Certain questions don't link correctly.  e.g. the Land of Nod question (4603) takes you to 4602.  Could this be a deleted question?
 Views:
 	- Highlight the found reference in some fashion (background-color: yellow?) or at least tag the found thing…
 	- It might be nice if the tags associated with the posts where shown where the score is.  They should also be filter keys…
@@ -18,6 +17,8 @@ Known Limitations:
 
 	
 Archive:
+	- Schedule the import to run on a schedule @done(2014-03-10) @project(Deployment)
+
 	- Do a full import from Jan 01 2011 @done(2014-03-10) @project(Deployment)
 	- Add a /search/url that would let you search the body and title of posts within a specific canoncial range. @done(2014-03-10) @project(Views)
 	- &quot; and &#39; need to be replaced.  (HTML Entities as a whole…) http://stackoverflow.com/questions/2087370/decode-html-entities-in-python-string @done(2014-03-10) @project(Locate_references)
