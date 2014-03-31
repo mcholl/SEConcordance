@@ -1,10 +1,33 @@
 <HTML lang="en">
+	{% load staticfiles %}
 	<HEAD>	
 
 		{% load highlighter %}	
 		<title>Stack Exchange Concordance</title>
 		<link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/christianity/all.css?v=d419fa438ebb" />
 		<STYLE type='text/css'>
+			body {
+				background: url('{% static 'concordance/red-leather.jpg' %}');
+				background-repeat: repeat;
+			}
+
+			div#qlist-wrapper, div#subheader {
+				background-color: white;
+				border:2px solid;
+				border-radius:15px;
+			}
+
+			div#header {
+				color: #FFCC00;
+				font-variant: small-caps;
+			}
+
+			div#header h1 {
+				position: absolute;
+				top: 155px;
+				left: 35%;
+			}
+
 			#content {
 				overflow: initial;
 			}
@@ -58,8 +81,13 @@
 	<BODY>
 		<DIV id='container'>
 			<DIV id='header'>
-				<h1>Stack Exchange Concordance <i>BETA</i></h1>
-				Please leave feedback on this meta question: (tbd).
+				<h1>Stack Exchange Concordance</h1>
+				<!--
+				<h2>
+					<i>BETA</i>
+					<p>Please leave feedback on this meta question: (tbd).
+				</h2>
+				-->
 			</DIV>
 
 			<DIV id='content'>
@@ -164,6 +192,8 @@
 												{% highlight_search_term found_ref.sepost.body filters.terms %}
 											{% elif filters.range %}
 												{% highlight_verse_reference found_ref %}
+											{% else %}
+												{% highlight_search_term found_ref.sepost.body "" %}
 											{% endif %}
 										</div>
 									</div>
