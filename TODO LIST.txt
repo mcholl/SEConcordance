@@ -1,19 +1,18 @@
-SEConcordance To Do Items
-
-Views:
-	- It might be nice if the tags associated with the posts were shown where the score is.  They should also be filter keys…
-	- There is a top border on .question and .answer that needs to be overriden
-	- Add a url that will let me view the last run date information for each site
-Locate_references:
-	- found passages are not highlighting at the correct position in most cases, because the index doesn't match up with the actual start position. … It's an encoding issue
-	- Certain questions don't link correctly.  e.g. the Land of Nod question (4603) takes you to 4602.  Could this be a deleted question?
-
-Known Limitations:
-	- No parsing of LDS books.  And, if the Biblia API ever goes away, I'd need to rewrite it... 
-	- My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
-
-Visualization:
-	- At some point, I want a graph that shows the number of times each book / chapter is referenced in an answer :)
+SEConcordance To Do Items:
+	Views:
+		- Why is the red leather not appearing on seconcordance.cloudapp.net?
+		- Tags associated with the posts nned to be shown where the score is.  They should also be filter keys…
+		- There is a top border on .question and .answer that needs to be overriden
+		- Add a url that will let me view the last run date information for each site
+	Locate_references:
+		- found passages are not highlighting at the correct position in most cases, because the index doesn't match up with the actual start position. … It's an encoding issue
+		- Pull in tags in addition to the body
+		- Certain questions don't link correctly.  e.g. the Land of Nod question (4603) takes you to 4602.  Could this be a deleted question?
+	Known Limitations:
+		- No parsing of LDS books.  And, if the Biblia API ever goes away, I'd need to rewrite it... 
+		- My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
+	Visualization:
+		- At some point, I want a graph that shows the number of times each book / chapter is referenced in an answer :)
 	
 Archive:
 	- If neither a verse range or filter term is given, no snippet appears.  One needs to appear. @done(2014-03-31) @project(Views)
