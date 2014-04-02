@@ -34,3 +34,13 @@ def get_ini_value(section, key_name):
     config = ConfigParser.ConfigParser()
     config.read(ini_file)
     return config.get(section, key_name)
+
+def report_last_runs():
+    config = ConfigParser.ConfigParser()
+    config.read(ini_file)
+    if 'last_run' not in config.sections():
+        return {'error': 'No [last_run] section defined'}
+
+    return config.items('last_run')
+
+

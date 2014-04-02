@@ -1,0 +1,64 @@
+{% extends "concordance/base.html" %}
+{% load highlighter %}	
+
+
+{% block title %}Stack Exchange Concordance{% endblock %}
+
+{% block results %}
+
+	{% if found_references_list %}
+
+		<TABLE>
+			{% for found_ref in found_references_list %}
+				<TR class="{% cycle 'row1' 'row2' %} {%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}">
+					{% autoescape off %}
+					<TD class='reference'>
+						<strong>
+							{{found_ref.reference}}
+						</strong>
+						
+						<div class="started">
+							{% if found_ref.sepost.qa == "q" %}question from {% else %}answer by{% endif %} 
+							{{found_ref.sepost.owner}}
+							on
+							{{found_ref.sepost.sitename}}
+						</div>
+						<br />
+
+						<span class='vote-count-pass'>
+							{%if found_ref.sepost.score > 0 %}+{% endif %}{{found_ref.sepost.score}}
+						</span>
+
+						
+					</TD>
+
+					<TD class='title'>
+						<div class="summary">
+							<h3>
+								<a class='question-hyperlink tooltip' onhover='popup(this)' href="{{found_ref.sepost.se_link}}">
+									{% highlight_search_term found_ref.sepost.posttitle filters.terms %}
+								</a>
+							</h3>
+							<div class="excerpt">
+								{% if filters.terms %}
+									{% highlight_search_term found_ref.sepost.body filters.terms %}
+								{% elif filters.range %}
+									{% highlight_verse_reference found_ref %}
+								{% else %}
+									{% highlight_search_term found_ref.sepost.body "" %}
+								{% endif %}
+							</div>
+						</div>
+
+					</TD>
+					{% endautoescape %}
+
+				</TR>
+
+			{% endfor %}
+		</TABLE>
+	{% else %}
+		<p>The are no references in the concordance for the specified range.</p>
+	{% endif %}
+
+{% endblock %}

@@ -1,0 +1,133 @@
+SEConcordance To Do Items:
+	Views:
+		- Tags associated with the posts need to be shown where the score was.  They should also be filter keys, and be included in search results…
+
+	Locate_references:
+		- use an access token
+		- found passages are not highlighting at the correct position in most cases, because the index doesn't match up with the actual start position. … It's an encoding issue
+		- Pull in tags in addition to the body
+		- Certain questions don't link correctly.  e.g. the Land of Nod question (4603) takes you to 4602.  Could this be a deleted question?
+
+	Known Limitations:
+		- No parsing of LDS books.  And, if the Biblia API ever goes away, I'd need to rewrite it... 
+		- My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
+		
+	Ancilliaries:
+		- Add a Readme.md
+		- Link to a meta question to introduce what it does
+		- Have a place to record bugs
+		- At some point, I want a graph that shows the number of times each book / chapter is referenced in an answer :)
+			
+	Exposure for Logos:
+		- The results of any given GET need to be available as HTML (default) or JSON with format=json
+	
+Archive:
+	- Why is the red leather not appearing on seconcordance.cloudapp.net? @done(2014-04-02) @project(SEConcordance To Do Items / Views)
+
+	- Highlighting found references (in grey) needs to be escaped.  @done(2014-03-31) @project(Views)
+	- If neither a verse range or filter term is given, no snippet appears.  One needs to appear. @done(2014-03-31) @project(Views)
+	- Change out the branding, so I can bring in MyYodea: Use red leather background, with gold letter, white center @done(2014-03-31) @project(Views)
+	- Search terms found in titles need to be highlighted... @done(2014-03-27) @project(Views)
+	- Question: Should I also be parsing MiYodeya in addition to herm & c.se? @done(2014-03-27) @project(Known Limitations)
+		I can ask Shog or Monica Cellio, but I think the answer is no - there is much more midrash and less Torah.
+		Actually, the answer is a qualified yes - but I need to remove the branding first.
+	- Highlight the found reference in some fashion (background-color: yellow?) or at least tag the found thing… @done(2014-03-27) @project(Views)
+
+	- Do a full import from Jan 01 2011 @done(2014-03-10) @project(Deployment)
+	- Schedule the import to run on a schedule @done(2014-03-10) @project(Deployment)
+	- Consider using authetication credentials to just show the up/down split? @done(2014-03-10) @project(Locate_references)
+	- Add a /search/url that would let you search the body and title of posts within a specific canoncial range. @done(2014-03-10) @project(Views)
+	- @bug Question: How do I keep the scores up to date?  @done(2014-03-10) @project(Locate_references)
+		I suppose I could write a second agent that would simply retrieve the current score (maybe score, up & down votes!) on each post, and each entry.   Currently, the activity on Christianity is that I can import a year's worth of data, and parse it, in under an hour.  Just retriving all the scores - especially since there would be no posting, then updating each record in the table, really wouldn't be that big of a deal... Alteratively, I could just hide the scores, and only use the score as a filter… 
+	- &quot; and &#39; need to be replaced.  (HTML Entities as a whole…) http://stackoverflow.com/questions/2087370/decode-html-entities-in-python-string @done(2014-03-10) @project(Locate_references)
+	
+	- @bug If the owner has deleted himself, owner display name doesn't come through. e.g.: http://hermeneutics.stackexchange.com/q/8527.  In these instances, just handle the owner name...  @done(2014-03-10) @project(Locate_references)
+	- @bug Import failed when I triggered the try: except. @done(2014-03-09) @project(Locate_references)
+	 @done(2014-03-08) @project(Locate_references)
+	- Use the Stack Exchange Attribution too! @done(2014-03-08) @project(Views)
+	- Create a VM with @done(2014-03-08) @project(Deployment)
+	 @done(2014-03-08) @project(Locate_references)
+		- dropbox @done(2014-03-08)
+		- apache @done(2014-03-08)
+	- Deploy the application @done(2014-03-06) @project(Deployment)
+		- python @done(2014-03-06)
+		- pip @done(2014-03-06)
+		- mysql @done(2014-03-06)
+		- git @done(2014-03-06)
+		- django (1.6.1) @done(2014-03-06)
+	- Why is the image missing on the Biblia shoutout? @done(2014-03-04)
+	- Question: Can I do the search update in a more Ajaxy fashion?  (Do I want to?) @done(2014-03-04)
+	- Persist veiwing prefs across Next / Previous etc… (use INPUT type='hidden') @done(2014-03-04) @project(Views)
+	- Maybe identify whether it is C.SE or Herm? @done(2014-03-04)
+	- Make the Score more visible, like the votes on the main page of C.SE. @done(2014-03-04)
+	- Log errors in a separate log file!  Ideally, I'd actually email that log to myself at the end, so that I see the errors! @done(2014-03-04)
+	- It would be a nice touch if ref.ly could tag whole chapters (e.g. Genesis 1:1 works, but Genesis 1 does not) @done(2014-03-04)
+	- I still have URLs, which after encoding, are still > 2000, and generate a 404.  I really need to get that right @done(2014-03-04)
+	- Highlight the selected reference and show a snippet when you rollover the text. Note, the snippets are currently on the page, but I have them hidden for readibility. @done(2014-03-04)
+							<span class='classic'>{{found_ref.preview_snippet}}</span>
+						Actually, I like having the preview like the main does.  So, no need for hover!
+	- Have a mechanism for altering the filters  @done(2014-03-04) @project(Views)
+	- Handle encoding better.  (fancy quotes) @done(2014-03-04)
+	- Handle a bogus search filter criteria @done(2014-03-04)
+		I've gotten it to send out a 404 if you pass bogus references.  Probably I should have a friendly page that says "That isn't a book range I understand"
+	@done Db.sql: @project(@done Db.sql)
+	- Get rid of &quot; (") and &#39; (') @done(2014-03-04)
+	- Consider saving the current state of the filters in a cookie, and restoring them @done(2014-03-04) @project(Views)
+		Answer: No.  It's a lot of work to write, and not really something the user especially expects...	
+	- Consider placing the Div Header outside of the actual grahical space, but above the questions... @done(2014-03-04) @project(Views)
+	- Consider hiding the Author / Score information to the rollover, along with the snippet @done(2014-03-04)
+	- Consider duplicating the page buttons at top and bottom of the screen @done(2014-03-04) @project(Views)
+	- Consider adding a thing to let you choose books by clicking wit the mouse rather than typing @done(2014-03-04)
+	- Be able to hide questions or answers @done(2014-03-04)
+		{%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}
+		Note: Actually, this is where I'd want a Manager - for .scored.positive, .scored.positiveorzero, .questions, .answers… Thta way, pagination works correctly :)
+	- Allow the user to restricting the list of displayed items to 30, 50, or 100. @done(2014-03-04)
+	- @bug Why is the line missing between questions sometimes? @done(2014-03-04) @project(Views)
+		Interesting - it is a border-bottom on all .answer, but not on .question… Why? Just the way the style sheet was done.  I'm overrideing for my needs.
+	- @bug Why doesn't per_page_count set correctly? It keeps sticking at 50 - even though the url changes correctly! @done(2014-03-04) @project(Views)
+	- @bug Why am I sometimes failing to start a new <TR> on certain questions? @done(2014-03-04) @project(Views)
+		Hypothesis: What if I'm getting a set of found_refs - an append vs. a join or whatever...
+		Nope: The answer had to do with autoescape.  With autoescape off, if the snippet broke while, say, an open tag was being shown, it would throw off the rest of the row.  For now, I can just do autoescaping of the title, owner, and references - but I wonder if I need to do a more intelligent parsing of the snippet…  In some ways, stripping out the tags might actually be a good idea...
+	- @bug Some bodies have \' in them.  I should check my escaping sequences... @done(2014-03-04) @project(Locate_references)
+	
+	- Make the Admin Interface usable by having the VerseReference and SEPost objects display meaningful information @done(2014-03-04)
+	
+	- Be able to hide negatively scoring answers @done(2014-03-04)
+		- button to hide / unhide settings (jqueryui) @done(2014-03-04)
+		- Set the initial value of the dropdowns based on what is selected @done(2014-03-04)
+		- <SELECT> to set the type='hiddens', then do a submit @done(2014-03-04)
+	- Test MultiBook filter ranges after  new import @done(2014-03-03)
+	- Reimport, because I've changed books and added encoding!! @done(2014-03-03)
+	- Question: Does Biblia parse out LDS books? @done(2014-03-03) Nope!
+	- Only the 66 books of the Protestant canon are recognized by the Biblia parser.  I'd need to get a lot more sophisticated before I can get Deuterocanonical or LDS scriptures recorginzed. @done(2014-03-03)
+	@done - add nChunkStart to the TextIndex start when scanning text for references. Otherwise, the index locations are off.
+	@done - Get my personal credentials out of Db.sql (this on github after all!)
+	@done - I had the name of revelation wrong & every index needed to be bumped up by 1 - so I need to reimport :)
+	@done - Verify the em dashes are being parsed correctly.  Also, in the database, change those to a regular dash.
+	@done Make a webpage that lists posts by found references and links you to the post in SE
+		<a href="{{found_ref.sepost.se_link}}">{{found_ref.sepost.title}}</a>  in template
+	- I have the main search functionality has been implemented, but right now, I can't search beyond a single book - because my BibleReference object only has start book but no end book.  I need to expand that and the raw sql in the view in order to allow for a range of say Matthew - John (e.g. "Gospels")  Additionally, I should consider adding some keyword search ranges, as well as a graphical verse picker for this purpose... @done(2014-03-03) 
+	
+	- Implement paging,  @done(2014-03-03)
+- There is a top border on .question and .answer that needs to be overriden @done(14-04-02) @project(SEConcordance To Do Items / Views)
+- Extract the base elements (css, etc..) into a template @done(14-04-02) @project(SEConcordance To Do Items / Views)
+- Extract the Header and Menu to separate files @done(14-04-02) @project(SEConcordance To Do Items / Views)
+- Add a url that will let me view the last run date information for each site and log @done(14-04-02) @project(SEConcordance To Do Items / Ancilliaries)
+	
+	
+		SELECT * FROM concordance_reference WHERE ref_book_num=%s AND ref_endchapter_num >= %s AND ref_endverse_num >= %s AND ref_startchapter_num <= %s AND ref_startverse_num <= %s
+	@done - Ideally, when I insert a reference into FoundRef, it should be unique for each sepost_id / reference combination.  Look into INSERT OR UPDATE for a fix. (Netter solution - I do a DELETE before insert, thus getting rid of the old references!)
+	@done - Handle duplicate post
+	@done - Note: My search filter is going to be wrong if I do something like Matthew 1 - 20.  Verses in Chapter 20 will be forgotten, because 20:1 > 20:0.  Basically I need to add a thing that says 0 = 1000
+	@done Be able to specify a range of verses to display
+	@done Add C.SE style sheets
+	@done When it comes time to do a full-up import of hermeneutics and christianity, I should put a delay in there of 1 second per post.  I only get 5000 calls per hour, so a little bit of throttling is in order.
+	@done - Have a search button that actually calls search
+	@done - Incorporate the Score metric (and consider - up/downvote split instead of raw score?)
+	@done - Tag the actual reference to biblia.
+	@done - Be sure to credit biblia.com (see their website)
+	@done - Fix the widths afforded to references and who answred
+	@done - Note: I may want to consider using the /?tag biblia api to add reference tags to all answers, then looking for the <cites>  That way, I get hypertext links everywhere.
+
+
+	@done - Interestingly, Biblia will parse out Apocraphyal books :)  I just need to add them to my array.

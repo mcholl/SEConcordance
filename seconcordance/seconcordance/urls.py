@@ -15,6 +15,8 @@ urlpatterns = patterns('',
     url(r'^answers/(?P<filter_range>.+)$', views.answers, name='answers'),
     url(r'^questions/$', views.get_questions, name='get_questions'),
     url(r'^questions/(?P<filter_range>.+)$', views.questions, name='questions'),
+
+    url(r'^showlogs/$', views.show_logs, name='showlogs'),
 )
 
 

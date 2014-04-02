@@ -1,0 +1,221 @@
+<HTML lang="en">
+	{% load staticfiles %}
+	<HEAD>	
+
+		<title>{% block title %}Stack Exchange Concordance{% endblock %}</title>
+		<link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/christianity/all.css?v=d419fa438ebb" />
+		<STYLE type='text/css'>
+			body {
+				background: url('{% static 'concordance/red-leather.jpg' %}');
+				background-repeat: repeat;
+			}
+
+			div#qlist-wrapper, div#subheader, div#footer {
+				background-color: white;
+				border:2px solid;
+				border-radius:15px;
+			}
+
+			div#header {
+				color: #FFCC00;
+				font-variant: small-caps;
+			}
+
+			div#header h1 {
+				position: absolute;
+				top: 155px;
+				left: 35%;
+			}
+
+			div#footer .attribution {
+				display: block;
+				text-align: left;
+				padding-bottom: 20px;
+			}
+
+			#content {
+				overflow: initial;
+			}
+
+			td { 
+				padding: 5px;
+			}
+
+			td.reference { 
+				width: 20%;
+				vertical-align: top;
+			}
+			td.title {width: 80%;}
+
+			td.reference strong {font-size: large;}
+			span.vote-count-pass {display: none}
+
+			INPUT#page { width: 30px;}
+
+			.question, .answer {
+				padding-bottom: 20px;
+				padding-top: 20px;
+				width: 728px;
+				border-bottom: 1px solid #ccc;
+				border-top: 1px solid #ccc;
+			}
+
+			.queston:first-of-type, .answer:first-of-type {
+				border-top: 0px;
+			}
+			.queston:last-of-type, .answer:last-of-type {
+				border-bottom: 0px;
+			}
+
+			SPAN.search_term {
+				background-color: yellow;
+			}
+			SPAN.verse_reference {
+				background-color: gray;
+			}
+		</STYLE>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" />
+		<script>
+			var refTagger = {
+				settings: {
+					bibleVersion: "ESV"
+				}
+			};
+			(function(d, t) {
+				var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+				g.src = "//api.reftagger.com/v2/RefTagger.js";
+				s.parentNode.insertBefore(g, s);
+			}(document, "script"));
+		</script>
+	</HEAD>
+
+	<BODY>
+		<DIV id='container'>
+			<DIV id='header'>
+				{% block header %}
+				<h1>Stack Exchange Concordance</h1>
+				<!--
+				<h2>
+					<i>BETA</i>
+					<p>Please leave feedback on this meta question: (tbd).
+				</h2>
+				-->
+				{% endblock %}
+			</DIV>
+
+			<DIV id='content'>
+				<DIV id='subheader'>
+					{% block menu %}
+					<FORM id='settings' method='GET' action='/passages/'>
+						<SELECT id='qa' onChange='window.location.href=$("#qa :selected").val()+"?"+window.location.href.split("?")[1]'>
+							<OPTION value='/passages/'>Show Q&A</OPTION>
+							<OPTION value='/answers/'>Only Answers</OPTION>
+							<OPTION value='/questions/'>Only Questions</OPTION>
+						</SELECT>
+
+						<SELECT id='select_site' onChange="$('#site').val($('#select_site :selected').val());submit()">
+							<OPTION value=''>All Sites</OPTION>
+							<OPTION value='christianity' {% if filters.site == "christianity" %}selected{% endif %} >Christianity</OPTION>
+							<OPTION value='hermenutics'  {% if filters.site == "hermeneutics" %}selected{% endif %} >Hermeneutics</OPTION>
+						</SELECT>
+
+						<SELECT id='select_score'  onChange="$('#score').val($('#select_score :selected').val());submit()">
+							<OPTION value=''>All responses regardless of score</OPTION>
+							<OPTION value='positive'  {% if "p" in filters.score %}selected{% endif %} >Show upvoted posts only (1 or more)</OPTION>
+							<OPTION value='zero_or_more' {% if "z" in filters.score  %}selected{% endif %}  >Show posts with score of 0 or more</OPTION>
+							<OPTION value='negative' {% if "n" in filters.score %}selected{% endif %}  >Show downvoted posts only (less than 0)</OPTION>
+						</SELECT>
+
+						<SELECT id='select_ppc' onChange="$('#per_page_count').val($('#select_ppc :selected').val());submit()">
+							<OPTION value='10' {% if filters.per_page_count == '10' %} selected {% endif %}>10 per page</OPTION>
+							<OPTION value='25' {% if filters.per_page_count == '25' %} selected {% endif %}>25 per page</OPTION>
+							<OPTION value='50' {% if filters.per_page_count == '50' %} selected {% endif %}>50 per page</OPTION>
+							<OPTION value='100' {% if filters.per_page_count == '100' %} selected {% endif %}>100 per page</OPTION>
+						</SELECT>
+
+						<!-- Note: Calls /search?passage=entered_reference is handled in urls.py-->
+						<LABEL for="filter_range">Show verses in range:</LABEL>
+						<INPUT id='filter_range' name='filter_range' type='text' placeholder='search' value='{% if filters.range %}{{filters.range}}{% endif %}' />
+						<INPUT type='submit' />
+
+						<!--{{filters}}-->
+
+						<INPUT type='hidden' id='score' name='score' value='{{filters.score}}' />
+						<INPUT type='hidden' id='site' name='site' value='{{filters.site}}' />
+						<INPUT type='hidden' id='per_page_count' name='per_page_count' value='{{filters.per_page_count}}' />
+
+						<div class='search'>
+							<LABEL for="terms">Show results containing the following terms in the body or title:</LABEL>
+							<INPUT id='terms' name='terms' type='text' placeholder='search' value='{% if filters.terms %}{{filters.terms}}{% endif %}' />
+						</div>
+
+						<div class="pagination">
+						    <span class="step-links">
+						        {% if found_references_list.has_previous %}
+						            <a href="?{% if filters.range %}filter_range={{filters.range}}&{% endif %}{% if filters.score %}score={{filters.score}}&{% endif %}{% if filters.site %}site={{filters.site}}&{% endif %}{% if filters.per_page_count %}per_page_count={{filters.per_page_count}}&{% endif %}page={{ found_references_list.previous_page_number }}">previous</a>
+						        {% endif %}
+
+						        <span class="current">
+						            Page <INPUT type='text' id='page' name='page' onBlur='submit()' value='{{ found_references_list.number }}' /> of {{ found_references_list.paginator.num_pages }}
+						        </span>
+
+						        {% if found_references_list.has_next %}
+						            <a href="?{% if filters.range %}filter_range={{filters.range}}&{% endif %}{% if filters.score %}score={{filters.score}}&{% endif %}{% if filters.site %}site={{filters.site}}&{% endif %}{% if filters.per_page_count %}per_page_count={{filters.per_page_count}}&{% endif %}page={{ found_references_list.next_page_number }}">next</a>
+						        {% endif %}
+						    </span>
+						</div>
+					</FORM>
+					{% endblock %}
+				</DIV>
+
+				<DIV id='qlist-wrapper'>
+				{% block results %}
+
+				{% endblock %}
+			</DIV>
+
+			<div class="pagination">
+			    <span class="step-links">
+			        {% if found_references_list.has_previous %}
+			            <a href="?{% if filters.range %}filter_range={{filters.range}}&{% endif %}{% if filters.score %}score={{filters.score}}&{% endif %}{% if filters.site %}site={{filters.site}}&{% endif %}{% if filters.per_page_count %}per_page_count={{filters.per_page_count}}&{% endif %}page={{ found_references_list.previous_page_number }}">previous</a>
+			        {% endif %}
+
+			        <span class="current">
+			            Page {{ found_references_list.number }} of {{ found_references_list.paginator.num_pages }}
+			        </span>
+
+			        {% if found_references_list.has_next %}
+			            <a href="?{% if filters.range %}filter_range={{filters.range}}&{% endif %}{% if filters.score %}score={{filters.score}}&{% endif %}{% if filters.site %}site={{filters.site}}&{% endif %}{% if filters.per_page_count %}per_page_count={{filters.per_page_count}}&{% endif %}page={{ found_references_list.next_page_number }}">next</a>
+			        {% endif %}
+			    </span>
+			</div>
+
+			<DIV id='footer' class='categories'>
+				<DIV class='attribution'>
+					The Stack Exchange Concordance is a canonical order listing of references to biblical texts found within questions and answers to answers posted on the various religious stack exchanges.  
+					<ul>
+						<li>For more information, check out the <a href="/">'Introducing SE Concordance' page on meta</a>.</li>
+						<li>To see how recently the data was parsed, check out the <a href='/showlogs/'>diagnostics</a> page.</li>
+						<li>To report a bug, email me at: <a href='mailto: is@affablegeek.com'>is@affablegeek.com</a>.  As this site is still in beta, you can safely assume, there are a lot of them.</li>
+						<li>To see the source code, or see what features I'm planning, check out the project on <a href='https://github.com/mcholl/SEConcordance'>GitHub</a>
+				</DIV>
+
+				<DIV class='attribution'>
+					<a href="http://biblia.com/"><img src="http://api.biblia.com/docs/media/PoweredByBiblia.png" alt="Powered by Biblia" /></a>
+					This site uses the <a href="http://biblia.com/">Biblia</a> web services from <a href="http://www.logos.com/">Logos Bible Software</a>.
+				</DIV>
+
+				<DIV class='attribution'> 
+					<a href='http://http://blog.stackoverflow.com/2009/06/attribution-required/'>All content is licensed to StackExchange, under the Creative Commons-SA license.</a> <br />The only value add in this site is the organization by verse reference and search functionality.
+				</DIV>
+
+				<DIV class='attribution'>
+					<p>Developed by:</p>
+					<a title="&lt;img src=&quot;http://stackexchange.com/users/flair/45534.png&quot; width=&quot;208&quot; height=&quot;58&quot; alt=&quot;profile for Affable Geek on Stack Exchange, a network of free, community-driven Q&amp;A sites&quot; title=&quot;profile for Affable Geek on Stack Exchange, a network of free, community-driven Q&amp;A sites&quot; /&gt;" href="http://stackexchange.com/users/45534/affable-geek"><img src="http://stackexchange.com/users/flair/45534.png" width="208" height="58" alt="profile for Affable Geek on Stack Exchange, a network of free, community-driven Q&#038;A sites" title="profile for Affable Geek on Stack Exchange, a network of free, community-driven Q&#038;A sites" /></a>
+				</DIV>
+			</DIV>
+
+		</DIV>
+	</BODY>
+</HTML>

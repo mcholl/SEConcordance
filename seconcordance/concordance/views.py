@@ -8,6 +8,8 @@ from django.db.models import Q
 
 from VerseReference import *
 import pprint
+from readini import *
+import json
 
 from concordance.models import *
 
@@ -100,5 +102,13 @@ def generic_results(request, filter_method, filter_range):
 			'per_page_count': per_page_count,
 		}
 	}
-	return render(request, 'concordance/index.html', context) 
+	return render(request, 'concordance/base_results.html', context) 
+
+def show_logs(request):
+	#Reads the Last Run Dates and reports them
+	lastruns = report_last_runs()
+	context = {
+		'sites_list': lastruns,
+	}
+	return render(request, 'concordance/base_diagnostics.html', context) 
 

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block results %}
+	<TABLE>
+		<TR>
+			<TD>Site</TD>
+			<TD>Last Read at </TD>
+		</TR>
+
+		{% for site_name, last_run in sites_list %}
+		<TR>
+			<TD>http://{{ site_name }}.stackexchange.com</TD>								
+			<TD>{{ last_run }}</TD>
+		</TR>
+		{% endfor %}
+	</TABLE>
+{% endblock %}
