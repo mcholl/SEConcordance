@@ -2,3 +2,15 @@
 *.ini
 
 seconcordance/logs/seconcordance.log
+
+seconcordance/concordance/ignore/check_indexes.py
+
+seconcordance/concordance/ignore/test.py
+
+seconcordance/concordance/ignore/test_report.py
+
+seconcordance/concordance/ignore/test_se_api.py
+
+seconcordance/concordance/ignore/tests.py
+
+seconcordance/concordance/ignore/testview.py
