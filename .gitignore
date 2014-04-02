@@ -14,3 +14,9 @@ seconcordance/concordance/ignore/test_se_api.py
 seconcordance/concordance/ignore/tests.py
 
 seconcordance/concordance/ignore/testview.py
+
+ignore/db.sql
+
+ignore/notes.txt
+
+ignore/test.py

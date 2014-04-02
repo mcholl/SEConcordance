@@ -3,7 +3,8 @@ SEConcordance To Do Items:
 		- Tags associated with the posts need to be shown where the score was.  They should also be filter keys, and be included in search results…
 
 	Locate_references:
-		- use an access token
+		- Why isn't crontab reliably actually running locate refs?
+		- use an access token for SE calls
 		- found passages are not highlighting at the correct position in most cases, because the index doesn't match up with the actual start position. … It's an encoding issue
 		- Pull in tags in addition to the body
 		- Certain questions don't link correctly.  e.g. the Land of Nod question (4603) takes you to 4602.  Could this be a deleted question?
@@ -13,15 +14,16 @@ SEConcordance To Do Items:
 		- My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
 		
 	Ancilliaries:
-		- Add a Readme.md
 		- Link to a meta question to introduce what it does
 		- Have a place to record bugs
 		- At some point, I want a graph that shows the number of times each book / chapter is referenced in an answer :)
-			
+
 	Exposure for Logos:
 		- The results of any given GET need to be available as HTML (default) or JSON with format=json
+			Note, if I'm smart, what I'd do is just emit results.html using results.json!
 	
 Archive:
+- Add a Readme.md @done(14-04-02) @project(SEConcordance To Do Items / Known Limitations)
 	- Why is the red leather not appearing on seconcordance.cloudapp.net? @done(2014-04-02) @project(SEConcordance To Do Items / Views)
 
 	- Highlighting found references (in grey) needs to be escaped.  @done(2014-03-31) @project(Views)
