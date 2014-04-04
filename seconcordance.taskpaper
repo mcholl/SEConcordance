@@ -1,13 +1,23 @@
 SEConcordance To Do Items:
 	Views:
 		- Tags associated with the posts need to be shown where the score was.  They should also be filter keys, and be included in search results…
+		- Consider showing the Score, Is Accepted, Is Closed...
+		- Use Markdown.py to display the markdown'ed body in the template...
 
 	Locate_references:
+		- Test the new updatedb
 		- Why isn't crontab reliably actually running locate refs?
-		- use an access token for SE calls
-		- found passages are not highlighting at the correct position in most cases, because the index doesn't match up with the actual start position. … It's an encoding issue
-		- Pull in tags in addition to the body
-		- Certain questions don't link correctly.  e.g. the Land of Nod question (4603) takes you to 4602.  Could this be a deleted question?
+		- Pretty sure I have a memory leak - verify I'm closing all database connections on write
+
+		- Why this 404 on biblia Parsing?
+			...processing question 26908
+			Status Code 404: Failed to retrieve valid parsing info at http://api.biblia.com/v1/bible/scan/?text=&key=ea842c369c1e41ac8c433e088f3dee79
+			     returned text is: =><=
+			Status Code 404: Failed to retrieve valid parsing info at http://api.biblia.com/v1/bible/scan/?text=&key=ea842c369c1e41ac8c433e088f3dee79
+			     returned text is: =><=
+			Status Code 404: Failed to retrieve valid parsing info at http://api.biblia.com/v1/bible/scan/?text=&key=ea842c369c1e41ac8c433e088f3dee79
+			     returned text is: =><=
+
 
 	Known Limitations:
 		- No parsing of LDS books.  And, if the Biblia API ever goes away, I'd need to rewrite it... 
@@ -23,7 +33,6 @@ SEConcordance To Do Items:
 			Note, if I'm smart, what I'd do is just emit results.html using results.json!
 	
 Archive:
-- Add a Readme.md @done(14-04-02) @project(SEConcordance To Do Items / Known Limitations)
 	- Why is the red leather not appearing on seconcordance.cloudapp.net? @done(2014-04-02) @project(SEConcordance To Do Items / Views)
 
 	- Highlighting found references (in grey) needs to be escaped.  @done(2014-03-31) @project(Views)
@@ -48,8 +57,7 @@ Archive:
 	 @done(2014-03-08) @project(Locate_references)
 	- Use the Stack Exchange Attribution too! @done(2014-03-08) @project(Views)
 	- Create a VM with @done(2014-03-08) @project(Deployment)
-	 @done(2014-03-08) @project(Locate_references)
-		- dropbox @done(2014-03-08)
+			- dropbox @done(2014-03-08)
 		- apache @done(2014-03-08)
 	- Deploy the application @done(2014-03-06) @project(Deployment)
 		- python @done(2014-03-06)
@@ -111,14 +119,42 @@ Archive:
 	- I have the main search functionality has been implemented, but right now, I can't search beyond a single book - because my BibleReference object only has start book but no end book.  I need to expand that and the raw sql in the view in order to allow for a range of say Matthew - John (e.g. "Gospels")  Additionally, I should consider adding some keyword search ranges, as well as a graphical verse picker for this purpose... @done(2014-03-03) 
 	
 	- Implement paging,  @done(2014-03-03)
+	- use an access token for SE calls @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+		http://stackapps.com/apps/oauth/view/2842
+		Basically, I now just need to add the key=rIKmb7)KLgtLPKo5*jubZw(( and I get 10000 per day :)
+	- save @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- parse @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- found passages are not highlighting at the correct position in most cases, because the index doesn't match up with the actual start position. … It's an encoding issue @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Why is the owner not getting set? @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Why is the body of each answer equal to the body of the initial question? @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- While I'm in there, I'm noticing a few other details: @done(14-04-03) @project(SEConcordance To Do Items / Locate_references / Rewrite as a class)
+	- Whether or the question has been closed @done(14-04-03) @project(SEConcordance To Do Items / Locate_references / Rewrite as a class)
+	- Whether or not the question has been answered. @done(14-04-03) @project(SEConcordance To Do Items / Locate_references / Rewrite as a class)
+	- TODO: Add <SPAN class='verse_reference' reference='Malachi 1:2-5'>Mal 1:2-5</SPAN> tags to found references in body @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Rewrite as a class: @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Pull in tags in addition to the body @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+		So, here's the deal - only questions have tags, but I'm thinking answers to those same questions should be "tagged" the same way.  As such, the logic for processing each post would need to be something like this -
+		Get the post
+		If it is a question, 
+		requery the api for particular question, and retrieve the tags
+		else (answer)
+		find the question it related to
+		retrieve the details there...  (Question: Do I just want this as a separate table, so as to minimize data?)
+	- Psalm 151, Susanna, and 4 Maccabees need a new canonical order @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Logging: @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Log to Screen and file: http://stackoverflow.com/questions/9321741/printing-to-screen-and-writing-to-a-file-at-the-same-time @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Locate_References should look at seconcord.ini [Last_run] to get the list of sites.  That way, I don't have to modify the script if the list of sites expands... @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Get importer class to match locate_references functionality @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Expand the Model to accomidate tags, is_answered, is_closed, closed_reason, base_question_id @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Conciously consider Info, Debug, Warn, and Exception this time... @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Certain questions don't link correctly.  e.g. the Land of Nod question (4603) takes you to 4602.  Could this be a deleted question? @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- BUG: Error saving the data, because there is no default value for owner... (Probably that's true of anything less than a full fieldset) @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+	- Add these new fields (tags, etc...) to importer write @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
 - There is a top border on .question and .answer that needs to be overriden @done(14-04-02) @project(SEConcordance To Do Items / Views)
 - Extract the base elements (css, etc..) into a template @done(14-04-02) @project(SEConcordance To Do Items / Views)
 - Extract the Header and Menu to separate files @done(14-04-02) @project(SEConcordance To Do Items / Views)
 - Add a url that will let me view the last run date information for each site and log @done(14-04-02) @project(SEConcordance To Do Items / Ancilliaries)
-	
-	
-		SELECT * FROM concordance_reference WHERE ref_book_num=%s AND ref_endchapter_num >= %s AND ref_endverse_num >= %s AND ref_startchapter_num <= %s AND ref_startverse_num <= %s
-	@done - Ideally, when I insert a reference into FoundRef, it should be unique for each sepost_id / reference combination.  Look into INSERT OR UPDATE for a fix. (Netter solution - I do a DELETE before insert, thus getting rid of the old references!)
+- Add a Readme.md @done(14-04-02) @project(SEConcordance To Do Items / Known Limitations)
 	@done - Handle duplicate post
 	@done - Note: My search filter is going to be wrong if I do something like Matthew 1 - 20.  Verses in Chapter 20 will be forgotten, because 20:1 > 20:0.  Basically I need to add a thing that says 0 = 1000
 	@done Be able to specify a range of verses to display
@@ -130,6 +166,3 @@ Archive:
 	@done - Be sure to credit biblia.com (see their website)
 	@done - Fix the widths afforded to references and who answred
 	@done - Note: I may want to consider using the /?tag biblia api to add reference tags to all answers, then looking for the <cites>  That way, I get hypertext links everywhere.
-
-
-	@done - Interestingly, Biblia will parse out Apocraphyal books :)  I just need to add them to my array.

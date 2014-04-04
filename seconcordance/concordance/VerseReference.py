@@ -1,6 +1,5 @@
 import requests
 import json
-import readini
 
 class BibleReference:
 	"""Class that allows references to be sorted, compared, etc..."""
@@ -15,12 +14,13 @@ class BibleReference:
 	end_chapter = 0
 	end_verse = 0
 
-	biblia_apikey = readini.get_ini_value('keys', 'biblia_apikey')
+	biblia_apikey = "" #readini.get_ini_value('keys', 'biblia_apikey') to set
 
 	def __init__(self):
 		pass
 
-	def __init__(self, verse_reference):
+	def __init__(self, verse_reference, api_key):
+		self.biblia_apikey = api_key
 		self.plain_ref = verse_reference
 		self.parse()
 
@@ -37,7 +37,7 @@ class BibleReference:
 			foundref = json.loads(refparse.text)
 		else:
 			print refparse.status_code
-			raise Exception("Error parsing reference:"+refparse.status_code+" on "+refparser_url)
+			raise Exception("Error parsing reference: {0} on {1}".format(refparse.status_code,refparse.url))
 
 		try:
 			parts = foundref['passages'][0]['parts']
@@ -114,6 +114,10 @@ class BibleReference:
 			"2 Esdras",
 			"3 Esdras",
 			"4 Esdras",
+			"3 Maccabees",
+			"4 Maccabees",
+			"Susanna",
+			"Psalm 151",
 			"Manasses",
 			"Matthew",
 			"Mark",
