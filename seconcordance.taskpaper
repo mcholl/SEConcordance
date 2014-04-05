@@ -1,13 +1,24 @@
 SEConcordance To Do Items:
 	Views:
-		- Tags associated with the posts need to be shown where the score was.  They should also be filter keys, and be included in search results…
-		- Consider showing the Score, Is Accepted, Is Closed...
-		- Use Markdown.py to display the markdown'ed body in the template...
+			
+		- Show Is Accepted Answer with a green checkmark in the score box
+		- Show Is Closed with [On Hold] in the score box
+		- Tags should also be filter keys, and be included in search results…
+		- Tags associated with the posts need to be shown where the score was.  
+		- Consider showing the Score
+
+		- Q 26904 caused an unbalanced tag to appear
+
+	Deployment:
+		- DROP DATABASE seconcordance and recreate as follows-
+			CREATE DATABASE <dbname> CHARACTER SET utf8;
+		- Reimport everything since Jan 01 2011 
 
 	Locate_references:
-		- Test the new updatedb
+		- Am I actually retrieving tags, is_closed, etc...
 		- Why isn't crontab reliably actually running locate refs?
 		- Pretty sure I have a memory leak - verify I'm closing all database connections on write
+		- Verify that /questions really will return a result, even if the question precedes the from_date, but new answers were added since.
 
 		- Why this 404 on biblia Parsing?
 			...processing question 26908
@@ -17,6 +28,11 @@ SEConcordance To Do Items:
 			     returned text is: =><=
 			Status Code 404: Failed to retrieve valid parsing info at http://api.biblia.com/v1/bible/scan/?text=&key=ea842c369c1e41ac8c433e088f3dee79
 			     returned text is: =><=
+
+
+
+ Deployment:
+		- Do a full import from Jan 01 2011 
 
 
 	Known Limitations:
@@ -44,7 +60,6 @@ Archive:
 		Actually, the answer is a qualified yes - but I need to remove the branding first.
 	- Highlight the found reference in some fashion (background-color: yellow?) or at least tag the found thing… @done(2014-03-27) @project(Views)
 
-	- Do a full import from Jan 01 2011 @done(2014-03-10) @project(Deployment)
 	- Schedule the import to run on a schedule @done(2014-03-10) @project(Deployment)
 	- Consider using authetication credentials to just show the up/down split? @done(2014-03-10) @project(Locate_references)
 	- Add a /search/url that would let you search the body and title of posts within a specific canoncial range. @done(2014-03-10) @project(Views)
@@ -57,8 +72,11 @@ Archive:
 	 @done(2014-03-08) @project(Locate_references)
 	- Use the Stack Exchange Attribution too! @done(2014-03-08) @project(Views)
 	- Create a VM with @done(2014-03-08) @project(Deployment)
-			- dropbox @done(2014-03-08)
+	 @done(2014-03-08) @project(Locate_references)
+	 @done(2014-03-08) @project(Locate_references)
+	 @done(2014-03-08) @project(Locate_references)
 		- apache @done(2014-03-08)
+			- dropbox @done(2014-03-08)
 	- Deploy the application @done(2014-03-06) @project(Deployment)
 		- python @done(2014-03-06)
 		- pip @done(2014-03-06)
@@ -119,6 +137,30 @@ Archive:
 	- I have the main search functionality has been implemented, but right now, I can't search beyond a single book - because my BibleReference object only has start book but no end book.  I need to expand that and the raw sql in the view in order to allow for a range of say Matthew - John (e.g. "Gospels")  Additionally, I should consider adding some keyword search ranges, as well as a graphical verse picker for this purpose... @done(2014-03-03) 
 	
 	- Implement paging,  @done(2014-03-03)
+	- Verify that snippets aren't leaving open SPAN tags @done(14-04-04) @project(SEConcordance To Do Items / Views)
+	- Use Markdown.py to display the markdown'ed body in the template... @cancel @done(14-04-04) @project(SEConcordance To Do Items / Views)
+	- Test the new updatedb @done(14-04-04) @project(SEConcordance To Do Items / Locate_references)
+	- In the absence of any search term, the concordance reference that is highlighted needs to be the one that is being shown. @done(14-04-04) @project(SEConcordance To Do Items / Views)
+	- Encoding error in writing body: @done(14-04-04) @project(SEConcordance To Do Items / Locate_references)
+		root        : WARNING  Unable to commit post 26998 to database at http://christianity.stackexchange.com/questions/26908/how-does-the-filioque-affect-reformed-protestant-theology/26998#26998 using SQL statement
+		UPDATE concordance_sepost SET body=%s WHERE sepost_id=%s
+		root        : ERROR    'latin-1' codec can't encode character u'\u2019' in position 2411: ordinal not in range(256)
+		Traceback (most recent call last)
+		File "/Users/mhollinger/Dropbox/Code/SEConcordance/seconcordance/importer/post_importer.py", line 373, in save_postrecord
+		cur.execute(qry, (self.body, self.post_id))
+		File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 183, in execute
+		query = query % db.literal(args)
+		File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 264, in literal
+		return self.escape(o, self.encoders)
+		File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 202, in unicode_literal
+		return db.literal(u.encode(unicode_literal.charset))
+		UnicodeEncodeError: 'latin-1' codec can't encode character u'\u2019' in position 2411: ordinal not in range(256)
+
+
+			Reading more into this, I realized that when I created the database, I had just said CREATE DATABASE seconcordance.  I should have done this -
+				CREATE DATABASE <dbname> CHARACTER SET utf8;
+
+			So, I'm dropping everything and starting again :)
 	- use an access token for SE calls @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
 		http://stackapps.com/apps/oauth/view/2842
 		Basically, I now just need to add the key=rIKmb7)KLgtLPKo5*jubZw(( and I get 10000 per day :)

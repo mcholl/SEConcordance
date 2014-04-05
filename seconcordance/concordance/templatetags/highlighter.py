@@ -1,6 +1,7 @@
 from django import template
 import re
 import json
+from balance_tags import TagBalancer
 
 register = template.Library()
 
@@ -33,8 +34,12 @@ def get_snippet(base_text, nStartPos, nLength):
 	if (nStartPos > 0):
 		return base_text[max(0, nStartPos - (nLength/2)):nStartPos + (nLength/2)]
 
-	return base_text[0:nLength]
+	snippet = base_text[0:nLength]
+	tb = TagBalancer(snippet)
+	snippet = tb.correct_snippet()
 
-	#TODO: I could apply some intelligence to the snippet to look for unbalanced tags
+	return snippet
+	
+
 
 

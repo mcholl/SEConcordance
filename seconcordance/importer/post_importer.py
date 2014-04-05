@@ -64,7 +64,15 @@ class Importer:
 		db_password = self.ini.get_ini_value('database', 'password')
 		db_name = self.ini.get_ini_value('database', 'database')
 
-		return mysql.connect(db_server, db_user, db_password, db_name)
+		db = mysql.connect(db_server, db_user, db_password, db_name)
+		db.set_character_set('utf8')
+
+		dbc = db.cursor()
+		dbc.execute('SET NAMES utf8;') 
+		dbc.execute('SET CHARACTER SET utf8;')
+		dbc.execute('SET character_set_connection=utf8;')
+
+		return db
 
 	def get_question_by_id(self, sitename, id):
 		"""For debug purposes, this function gets a question by its id and saves it"""
@@ -119,8 +127,7 @@ class Importer:
 						logging.debug("...processing question {0}".format(post['question_id']))
 
 						q = self.process_post(post)
-
-						q.display_state()
+						# q.display_state()
 						for ans in q.answers:
 							ans.display_state()
 
@@ -278,7 +285,6 @@ class Importer:
 					sepost_object.found_refs.append( foundref )
 			else:
 				msg = "Status Code {0}: Failed to retrieve valid parsing info at {1}\n     returned text is: =>{2}<=".format(refparse.status_code, refparse.url, refparse.text)
-				print msg
 				logging.exception(msg)
 
 			nchunk_start += (nchunk_size-50)
@@ -376,10 +382,10 @@ class SE_PostItem:
 			cur.execute(qry, (self.score, self.post_id))
 			qry = "UPDATE concordance_sepost SET owner=%s WHERE sepost_id=%s"
 			cur.execute(qry, (self.owner, self.post_id))
-			qry = "UPDATE concordance_sepost SET is_closed=%s WHERE sepost_id=%s"
-			cur.execute(qry, (self.owner, self.is_closed))
 			qry = "UPDATE concordance_sepost SET closed_reason=%s WHERE sepost_id=%s"
 			cur.execute(qry, (self.owner, self.close_reason))
+			qry = "UPDATE concordance_sepost SET is_closed=%s WHERE sepost_id=%s"
+			cur.execute(qry, (self.owner, self.is_closed))
 			qry = "UPDATE concordance_sepost SET is_answered=%s WHERE sepost_id=%s"
 			cur.execute(qry, (self.owner, self.is_answered))
 
@@ -429,10 +435,10 @@ class SE_PostItem:
 		print "post_id = {0}".format(self.post_id)
 
 		if self.post_type == 'q':
-			print "QUESTION: {0}".format(self.title)
+			print "QUESTION: {0}".format(self.title.encode('utf-8', errors='ignore'))
 		else:
 			print "ANSWER"
-			print "on {0}".format(self.title)
+			print "on {0}".format(self.title.encode('utf-8', errors='ignore'))
 
 		print "Link = {0}".format(self.link)
 		print "=========="
@@ -443,7 +449,7 @@ class SE_PostItem:
 		print self.body.encode('utf-8', errors='ignore')
 
 		print "Score = {0}".format(self.score)
-		print "Owner = {0}".format(self.owner)
+		print "Owner = {0}".format(self.owner.encode('utf-8', errors='ignore'))
 		print "is_closed = {0}".format(self.is_closed)
 		print "close_reason = {0}".format(self.close_reason)
 		print "Link = {0}".format(self.is_answered)

@@ -8,7 +8,6 @@ from django.db.models import Q
 
 from VerseReference import *
 import pprint
-from readini import *
 import json
 
 from concordance.models import *

@@ -11,7 +11,7 @@
 		<TABLE>
 			{% for found_ref in found_references_list %}
 				<TR class="{% cycle 'row1' 'row2' %} {%if found_ref.sepost.score > 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}">
-					{% autoescape off %}
+
 					<TD class='reference'>
 						<strong>
 							{{found_ref.reference}}
@@ -26,7 +26,19 @@
 						<br />
 
 						<span class='vote-count-pass'>
-							{%if found_ref.sepost.score > 0 %}+{% endif %}{{found_ref.sepost.score}}
+							Score: {%if found_ref.sepost.score > 0 %}+{% endif %}{{found_ref.sepost.score}}
+						</span>
+
+						{% if found_ref.sepost.is_closed %}
+							<span class='closed'>
+								{{ found_ref.sepost.closed_reason }}
+							</span>
+						{% endif %}
+
+						<span class='tags'>
+							{% for tag_name in found_ref.sepost.setag %}
+								{{ tag_name }}
+							{% endfor %}
 						</span>
 
 						
@@ -45,13 +57,12 @@
 								{% elif filters.range %}
 									{% highlight_verse_reference found_ref %}
 								{% else %}
-									{% highlight_search_term found_ref.sepost.body "" %}
+									{% highlight_search_term found_ref.sepost.body found_ref.reference %}
 								{% endif %}
 							</div>
 						</div>
 
 					</TD>
-					{% endautoescape %}
 
 				</TR>
 
