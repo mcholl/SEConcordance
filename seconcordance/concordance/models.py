@@ -31,6 +31,8 @@ class SEPost(models.Model):
 
 		return "unknown"
 
+	
+
 class SETag(models.Model):
 	id = models.AutoField(primary_key=True, db_column="reference_id")
 	sepost = models.ForeignKey(SEPost)

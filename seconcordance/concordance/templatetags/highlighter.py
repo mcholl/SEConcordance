@@ -22,7 +22,15 @@ def highlight_search_term(base_text, search_term):
 
 @register.simple_tag
 def highlight_verse_reference(found_ref):
-	base_text = found_ref.sepost.body[:found_ref.start_index]+"<SPAN class='verse_reference'>"+found_ref.sepost.body[found_ref.start_index:found_ref.start_index+found_ref.length]+"</SPAN>"+found_ref.sepost.body[found_ref.start_index+found_ref.length]
+	#base_text = found_ref.sepost.body[:found_ref.start_index]+"<SPAN class='verse_reference'>"+found_ref.sepost.body[found_ref.start_index:found_ref.start_index+found_ref.length]+"</SPAN>"+found_ref.sepost.body[found_ref.start_index+found_ref.length]
+	base_text = found_ref.sepost.body[:found_ref.start_index]+found_ref.sepost.body[found_ref.start_index:found_ref.start_index+found_ref.length]+found_ref.sepost.body[found_ref.start_index+found_ref.length]
+	return get_snippet(base_text, found_ref.start_index, 300)
+
+@register.simple_tag
+def snippet(found_ref):
+	#base_text = "~~~"+found_ref.sepost.body[found_ref.start_index - 150 : found_ref.start_index + 150]+"~~~"
+	#base_text = "Hello, World!!! This is {0}".format(found_ref.reference)
+	base_text = found_ref.sepost.body
 	return get_snippet(base_text, found_ref.start_index, 300)
 
 

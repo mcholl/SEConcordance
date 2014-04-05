@@ -3,11 +3,9 @@ SEConcordance To Do Items:
 			
 		- Show Is Accepted Answer with a green checkmark in the score box
 		- Show Is Closed with [On Hold] in the score box
-		- Tags should also be filter keys, and be included in search results…
-		- Tags associated with the posts need to be shown where the score was.  
-		- Consider showing the Score
+		- Tags should also be filter keys, and be included in search results… (e.g. What things appear in the Gospels tagged 'Catholicism'?)
 
-		- Q 26904 caused an unbalanced tag to appear
+		- Q 26904 caused an unbalanced tag to appear still --- the quote may be throwing it off...
 
 	Deployment:
 		- DROP DATABASE seconcordance and recreate as follows-
@@ -15,9 +13,9 @@ SEConcordance To Do Items:
 		- Reimport everything since Jan 01 2011 
 
 	Locate_references:
-		- Am I actually retrieving tags, is_closed, etc...
+		- Am I actually retrieving is_accepted, is_closed, closed_reason
 		- Why isn't crontab reliably actually running locate refs?
-		- Pretty sure I have a memory leak - verify I'm closing all database connections on write
+		- Pretty sure I have a memory leak - verify I'm closing all database connections on write @done(14-04-04)
 		- Verify that /questions really will return a result, even if the question precedes the from_date, but new answers were added since.
 
 		- Why this 404 on biblia Parsing?
@@ -28,7 +26,6 @@ SEConcordance To Do Items:
 			     returned text is: =><=
 			Status Code 404: Failed to retrieve valid parsing info at http://api.biblia.com/v1/bible/scan/?text=&key=ea842c369c1e41ac8c433e088f3dee79
 			     returned text is: =><=
-
 
 
  Deployment:
@@ -72,6 +69,13 @@ Archive:
 	 @done(2014-03-08) @project(Locate_references)
 	- Use the Stack Exchange Attribution too! @done(2014-03-08) @project(Views)
 	- Create a VM with @done(2014-03-08) @project(Deployment)
+	 @done(2014-03-08) @project(Locate_references)
+	 @done(2014-03-08) @project(Locate_references)
+	 @done(2014-03-08) @project(Locate_references)
+	 @done(2014-03-08) @project(Locate_references)
+	 @done(2014-03-08) @project(Locate_references)
+	 @done(2014-03-08) @project(Locate_references)
+	 @done(2014-03-08) @project(Locate_references)
 	 @done(2014-03-08) @project(Locate_references)
 	 @done(2014-03-08) @project(Locate_references)
 	 @done(2014-03-08) @project(Locate_references)
@@ -140,6 +144,7 @@ Archive:
 	- Verify that snippets aren't leaving open SPAN tags @done(14-04-04) @project(SEConcordance To Do Items / Views)
 	- Use Markdown.py to display the markdown'ed body in the template... @cancel @done(14-04-04) @project(SEConcordance To Do Items / Views)
 	- Test the new updatedb @done(14-04-04) @project(SEConcordance To Do Items / Locate_references)
+	- Tags associated with the posts need to be shown where the score was. @done(14-04-04) @project(SEConcordance To Do Items / Views)
 	- In the absence of any search term, the concordance reference that is highlighted needs to be the one that is being shown. @done(14-04-04) @project(SEConcordance To Do Items / Views)
 	- Encoding error in writing body: @done(14-04-04) @project(SEConcordance To Do Items / Locate_references)
 		root        : WARNING  Unable to commit post 26998 to database at http://christianity.stackexchange.com/questions/26908/how-does-the-filioque-affect-reformed-protestant-theology/26998#26998 using SQL statement
@@ -155,12 +160,7 @@ Archive:
 		File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 202, in unicode_literal
 		return db.literal(u.encode(unicode_literal.charset))
 		UnicodeEncodeError: 'latin-1' codec can't encode character u'\u2019' in position 2411: ordinal not in range(256)
-
-
-			Reading more into this, I realized that when I created the database, I had just said CREATE DATABASE seconcordance.  I should have done this -
-				CREATE DATABASE <dbname> CHARACTER SET utf8;
-
-			So, I'm dropping everything and starting again :)
+	- Consider showing the Score @done(14-04-04) @project(SEConcordance To Do Items / Views)
 	- use an access token for SE calls @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
 		http://stackapps.com/apps/oauth/view/2842
 		Basically, I now just need to add the key=rIKmb7)KLgtLPKo5*jubZw(( and I get 10000 per day :)
@@ -208,3 +208,4 @@ Archive:
 	@done - Be sure to credit biblia.com (see their website)
 	@done - Fix the widths afforded to references and who answred
 	@done - Note: I may want to consider using the /?tag biblia api to add reference tags to all answers, then looking for the <cites>  That way, I get hypertext links everywhere.
+

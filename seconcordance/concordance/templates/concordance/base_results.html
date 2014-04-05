@@ -25,21 +25,21 @@
 						</div>
 						<br />
 
-						<span class='vote-count-pass'>
+						<div class='vote-count-pass'>
 							Score: {%if found_ref.sepost.score > 0 %}+{% endif %}{{found_ref.sepost.score}}
-						</span>
+						</div>
 
 						{% if found_ref.sepost.is_closed %}
-							<span class='closed'>
+							<div class='closed'>
 								{{ found_ref.sepost.closed_reason }}
-							</span>
+							</div>
 						{% endif %}
 
-						<span class='tags'>
-							{% for tag_name in found_ref.sepost.setag %}
-								{{ tag_name }}
+						<div class='tags'>
+							{% for tag_name in found_ref.sepost.setag_set.all %}
+								<a href="" class="post-tag">{{ tag_name.tag }}</a>
 							{% endfor %}
-						</span>
+						</div>
 
 						
 					</TD>
@@ -57,7 +57,7 @@
 								{% elif filters.range %}
 									{% highlight_verse_reference found_ref %}
 								{% else %}
-									{% highlight_search_term found_ref.sepost.body found_ref.reference %}
+									{% snippet found_ref %}
 								{% endif %}
 							</div>
 						</div>
