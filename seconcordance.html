@@ -1,0 +1,330 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+body{
+  color:#444;
+  font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman',
+              "Hiragino Sans GB", "STXihei", "微软雅黑", serif;
+  font-size:12px;
+  line-height:1.5em;
+  background:#fefefe;
+  width: 45em;
+  margin: 10px auto;
+  padding: 1em;
+  outline: 1300px solid #FAFAFA;
+}
+
+a{ color: #0645ad; text-decoration:none;}
+a:visited{ color: #0b0080; }
+a:hover{ color: #06e; }
+a:active{ color:#faa700; }
+a:focus{ outline: thin dotted; }
+a:hover, a:active{ outline: 0; }
+
+span.backtick {
+  border:1px solid #EAEAEA;
+  border-radius:3px;
+  background:#F8F8F8;
+  padding:0 3px 0 3px;
+}
+
+::-moz-selection{background:rgba(255,255,0,0.3);color:#000}
+::selection{background:rgba(255,255,0,0.3);color:#000}
+
+a::-moz-selection{background:rgba(255,255,0,0.3);color:#0645ad}
+a::selection{background:rgba(255,255,0,0.3);color:#0645ad}
+
+p{
+margin:1em 0;
+}
+
+img{
+max-width:100%;
+}
+
+h1,h2,h3,h4,h5,h6{
+font-weight:normal;
+color:#111;
+line-height:1em;
+}
+h4,h5,h6{ font-weight: bold; }
+h1{ font-size:2.5em; }
+h2{ font-size:2em; border-bottom:1px solid silver; padding-bottom: 5px; }
+h3{ font-size:1.5em; }
+h4{ font-size:1.2em; }
+h5{ font-size:1em; }
+h6{ font-size:0.9em; }
+
+blockquote{
+color:#666666;
+margin:0;
+padding-left: 3em;
+border-left: 0.5em #EEE solid;
+}
+hr { display: block; height: 2px; border: 0; border-top: 1px solid #aaa;border-bottom: 1px solid #eee; margin: 1em 0; padding: 0; }
+
+
+pre , code, kbd, samp { 
+  color: #000; 
+  font-family: monospace; 
+  font-size: 0.88em; 
+  border-radius:3px;
+  background-color: #F8F8F8;
+  border: 1px solid #CCC; 
+}
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 5px 12px;}
+pre code { border: 0px !important; padding: 0;}
+code { padding: 0 3px 0 3px; }
+
+b, strong { font-weight: bold; }
+
+dfn { font-style: italic; }
+
+ins { background: #ff9; color: #000; text-decoration: none; }
+
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+ul, ol { margin: 1em 0; padding: 0 0 0 2em; }
+li p:last-child { margin:0 }
+dd { margin: 0 0 0 2em; }
+
+img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+td { vertical-align: top; }
+
+@media only screen and (min-width: 480px) {
+body{font-size:14px;}
+}
+
+@media only screen and (min-width: 768px) {
+body{font-size:16px;}
+}
+
+@media print {
+  * { background: transparent !important; color: black !important; filter:none !important; -ms-filter: none !important; }
+  body{font-size:12pt; max-width:100%; outline:none;}
+  a, a:visited { text-decoration: underline; }
+  hr { height: 1px; border:0; border-bottom:1px solid black; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; padding-right: 1em; page-break-inside: avoid; }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page :left { margin: 15mm 20mm 15mm 10mm; }
+  @page :right { margin: 15mm 10mm 15mm 20mm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+</style><title>seconcordance</title></head><body><p>SEConcordance To Do Items:
+    Views:</p>
+<pre><code>    - Show Is Accepted Answer with a green checkmark in the score box
+    - Show Is Closed with [On Hold] in the score box
+    - Tags should also be filter keys, and be included in search results… (e.g. What things appear in the Gospels tagged 'Catholicism'?)
+
+    - Q 26904 caused an unbalanced tag to appear still --- the quote may be throwing it off...
+
+Deployment:
+    - DROP DATABASE seconcordance and recreate as follows-
+        CREATE DATABASE &lt;dbname&gt; CHARACTER SET utf8;
+    - Reimport everything since Jan 01 2011
+
+Locate_references:
+    - Am I actually retrieving is_accepted, is_closed, closed_reason
+    - Why isn't crontab reliably actually running locate refs?
+    - Pretty sure I have a memory leak - verify I'm closing all database connections on write @done(14-04-04)
+    - Verify that /questions really will return a result, even if the question precedes the from_date, but new answers were added since.
+
+    - Why this 404 on biblia Parsing?
+        ...processing question 26908
+        Status Code 404: Failed to retrieve valid parsing info at http://api.biblia.com/v1/bible/scan/?text=&amp;key=ea842c369c1e41ac8c433e088f3dee79
+             returned text is: =&gt;&lt;=
+        Status Code 404: Failed to retrieve valid parsing info at http://api.biblia.com/v1/bible/scan/?text=&amp;key=ea842c369c1e41ac8c433e088f3dee79
+             returned text is: =&gt;&lt;=
+        Status Code 404: Failed to retrieve valid parsing info at http://api.biblia.com/v1/bible/scan/?text=&amp;key=ea842c369c1e41ac8c433e088f3dee79
+             returned text is: =&gt;&lt;=
+</code></pre>
+<p>Deployment:
+        - Do a full import from Jan 01 2011 </p>
+<pre><code>Known Limitations:
+    - No parsing of LDS books.  And, if the Biblia API ever goes away, I'd need to rewrite it... 
+    - My encoding doesn't handle Greek and Hebrew characters.  Should be fixed!
+
+Ancilliaries:
+    - Link to a meta question to introduce what it does
+    - Have a place to record bugs
+    - At some point, I want a graph that shows the number of times each book / chapter is referenced in an answer :)
+
+Exposure for Logos:
+    - The results of any given GET need to be available as HTML (default) or JSON with format=json
+        Note, if I'm smart, what I'd do is just emit results.html using results.json!
+</code></pre>
+<p>Archive:
+    - Why is the red leather not appearing on seconcordance.cloudapp.net? @done(2014-04-02) @project(SEConcordance To Do Items / Views)</p>
+<pre><code>- Highlighting found references (in grey) needs to be escaped.  @done(2014-03-31) @project(Views)
+- If neither a verse range or filter term is given, no snippet appears.  One needs to appear. @done(2014-03-31) @project(Views)
+- Change out the branding, so I can bring in MyYodea: Use red leather background, with gold letter, white center @done(2014-03-31) @project(Views)
+- Search terms found in titles need to be highlighted... @done(2014-03-27) @project(Views)
+- Question: Should I also be parsing MiYodeya in addition to herm &amp; c.se? @done(2014-03-27) @project(Known Limitations)
+    I can ask Shog or Monica Cellio, but I think the answer is no - there is much more midrash and less Torah.
+    Actually, the answer is a qualified yes - but I need to remove the branding first.
+- Highlight the found reference in some fashion (background-color: yellow?) or at least tag the found thing… @done(2014-03-27) @project(Views)
+
+- Schedule the import to run on a schedule @done(2014-03-10) @project(Deployment)
+- Consider using authetication credentials to just show the up/down split? @done(2014-03-10) @project(Locate_references)
+- Add a /search/url that would let you search the body and title of posts within a specific canoncial range. @done(2014-03-10) @project(Views)
+- @bug Question: How do I keep the scores up to date?  @done(2014-03-10) @project(Locate_references)
+    I suppose I could write a second agent that would simply retrieve the current score (maybe score, up &amp; down votes!) on each post, and each entry.   Currently, the activity on Christianity is that I can import a year's worth of data, and parse it, in under an hour.  Just retriving all the scores - especially since there would be no posting, then updating each record in the table, really wouldn't be that big of a deal... Alteratively, I could just hide the scores, and only use the score as a filter… 
+- &amp;quot; and &amp;#39; need to be replaced.  (HTML Entities as a whole…) http://stackoverflow.com/questions/2087370/decode-html-entities-in-python-string @done(2014-03-10) @project(Locate_references)
+
+- @bug If the owner has deleted himself, owner display name doesn't come through. e.g.: http://hermeneutics.stackexchange.com/q/8527.  In these instances, just handle the owner name...  @done(2014-03-10) @project(Locate_references)
+- @bug Import failed when I triggered the try: except. @done(2014-03-09) @project(Locate_references)
+ @done(2014-03-08) @project(Locate_references)
+- Use the Stack Exchange Attribution too! @done(2014-03-08) @project(Views)
+- Create a VM with @done(2014-03-08) @project(Deployment)
+ @done(2014-03-08) @project(Locate_references)
+ @done(2014-03-08) @project(Locate_references)
+ @done(2014-03-08) @project(Locate_references)
+ @done(2014-03-08) @project(Locate_references)
+ @done(2014-03-08) @project(Locate_references)
+ @done(2014-03-08) @project(Locate_references)
+ @done(2014-03-08) @project(Locate_references)
+ @done(2014-03-08) @project(Locate_references)
+ @done(2014-03-08) @project(Locate_references)
+ @done(2014-03-08) @project(Locate_references)
+    - apache @done(2014-03-08)
+        - dropbox @done(2014-03-08)
+- Deploy the application @done(2014-03-06) @project(Deployment)
+    - python @done(2014-03-06)
+    - pip @done(2014-03-06)
+    - mysql @done(2014-03-06)
+    - git @done(2014-03-06)
+    - django (1.6.1) @done(2014-03-06)
+- Why is the image missing on the Biblia shoutout? @done(2014-03-04)
+- Question: Can I do the search update in a more Ajaxy fashion?  (Do I want to?) @done(2014-03-04)
+- Persist veiwing prefs across Next / Previous etc… (use INPUT type='hidden') @done(2014-03-04) @project(Views)
+- Maybe identify whether it is C.SE or Herm? @done(2014-03-04)
+- Make the Score more visible, like the votes on the main page of C.SE. @done(2014-03-04)
+- Log errors in a separate log file!  Ideally, I'd actually email that log to myself at the end, so that I see the errors! @done(2014-03-04)
+- It would be a nice touch if ref.ly could tag whole chapters (e.g. Genesis 1:1 works, but Genesis 1 does not) @done(2014-03-04)
+- I still have URLs, which after encoding, are still &gt; 2000, and generate a 404.  I really need to get that right @done(2014-03-04)
+- Highlight the selected reference and show a snippet when you rollover the text. Note, the snippets are currently on the page, but I have them hidden for readibility. @done(2014-03-04)
+                        &lt;span class='classic'&gt;{{found_ref.preview_snippet}}&lt;/span&gt;
+                    Actually, I like having the preview like the main does.  So, no need for hover!
+- Have a mechanism for altering the filters  @done(2014-03-04) @project(Views)
+- Handle encoding better.  (fancy quotes) @done(2014-03-04)
+- Handle a bogus search filter criteria @done(2014-03-04)
+    I've gotten it to send out a 404 if you pass bogus references.  Probably I should have a friendly page that says "That isn't a book range I understand"
+@done Db.sql: @project(@done Db.sql)
+- Get rid of &amp;quot; (") and &amp;#39; (') @done(2014-03-04)
+- Consider saving the current state of the filters in a cookie, and restoring them @done(2014-03-04) @project(Views)
+    Answer: No.  It's a lot of work to write, and not really something the user especially expects...   
+- Consider placing the Div Header outside of the actual grahical space, but above the questions... @done(2014-03-04) @project(Views)
+- Consider hiding the Author / Score information to the rollover, along with the snippet @done(2014-03-04)
+- Consider duplicating the page buttons at top and bottom of the screen @done(2014-03-04) @project(Views)
+- Consider adding a thing to let you choose books by clicking wit the mouse rather than typing @done(2014-03-04)
+- Be able to hide questions or answers @done(2014-03-04)
+    {%if found_ref.sepost.score &gt; 0 %}positive{% elif found_ref.sepost.score == 0 %}zero{% else %}negative{% endif %} {%if found_ref.sepost.qa == 'q' %}question{% else %}answer{% endif %}
+    Note: Actually, this is where I'd want a Manager - for .scored.positive, .scored.positiveorzero, .questions, .answers… Thta way, pagination works correctly :)
+- Allow the user to restricting the list of displayed items to 30, 50, or 100. @done(2014-03-04)
+- @bug Why is the line missing between questions sometimes? @done(2014-03-04) @project(Views)
+    Interesting - it is a border-bottom on all .answer, but not on .question… Why? Just the way the style sheet was done.  I'm overrideing for my needs.
+- @bug Why doesn't per_page_count set correctly? It keeps sticking at 50 - even though the url changes correctly! @done(2014-03-04) @project(Views)
+- @bug Why am I sometimes failing to start a new &lt;TR&gt; on certain questions? @done(2014-03-04) @project(Views)
+    Hypothesis: What if I'm getting a set of found_refs - an append vs. a join or whatever...
+    Nope: The answer had to do with autoescape.  With autoescape off, if the snippet broke while, say, an open tag was being shown, it would throw off the rest of the row.  For now, I can just do autoescaping of the title, owner, and references - but I wonder if I need to do a more intelligent parsing of the snippet…  In some ways, stripping out the tags might actually be a good idea...
+- @bug Some bodies have \' in them.  I should check my escaping sequences... @done(2014-03-04) @project(Locate_references)
+
+- Make the Admin Interface usable by having the VerseReference and SEPost objects display meaningful information @done(2014-03-04)
+
+- Be able to hide negatively scoring answers @done(2014-03-04)
+    - button to hide / unhide settings (jqueryui) @done(2014-03-04)
+    - Set the initial value of the dropdowns based on what is selected @done(2014-03-04)
+    - &lt;SELECT&gt; to set the type='hiddens', then do a submit @done(2014-03-04)
+- Test MultiBook filter ranges after  new import @done(2014-03-03)
+- Reimport, because I've changed books and added encoding!! @done(2014-03-03)
+- Question: Does Biblia parse out LDS books? @done(2014-03-03) Nope!
+- Only the 66 books of the Protestant canon are recognized by the Biblia parser.  I'd need to get a lot more sophisticated before I can get Deuterocanonical or LDS scriptures recorginzed. @done(2014-03-03)
+@done - add nChunkStart to the TextIndex start when scanning text for references. Otherwise, the index locations are off.
+@done - Get my personal credentials out of Db.sql (this on github after all!)
+@done - I had the name of revelation wrong &amp; every index needed to be bumped up by 1 - so I need to reimport :)
+@done - Verify the em dashes are being parsed correctly.  Also, in the database, change those to a regular dash.
+@done Make a webpage that lists posts by found references and links you to the post in SE
+    &lt;a href="{{found_ref.sepost.se_link}}"&gt;{{found_ref.sepost.title}}&lt;/a&gt;  in template
+- I have the main search functionality has been implemented, but right now, I can't search beyond a single book - because my BibleReference object only has start book but no end book.  I need to expand that and the raw sql in the view in order to allow for a range of say Matthew - John (e.g. "Gospels")  Additionally, I should consider adding some keyword search ranges, as well as a graphical verse picker for this purpose... @done(2014-03-03)
+
+- Implement paging,  @done(2014-03-03)
+- Verify that snippets aren't leaving open SPAN tags @done(14-04-04) @project(SEConcordance To Do Items / Views)
+- Use Markdown.py to display the markdown'ed body in the template... @cancel @done(14-04-04) @project(SEConcordance To Do Items / Views)
+- Test the new updatedb @done(14-04-04) @project(SEConcordance To Do Items / Locate_references)
+- Tags associated with the posts need to be shown where the score was. @done(14-04-04) @project(SEConcordance To Do Items / Views)
+- In the absence of any search term, the concordance reference that is highlighted needs to be the one that is being shown. @done(14-04-04) @project(SEConcordance To Do Items / Views)
+- Encoding error in writing body: @done(14-04-04) @project(SEConcordance To Do Items / Locate_references)
+    root        : WARNING  Unable to commit post 26998 to database at http://christianity.stackexchange.com/questions/26908/how-does-the-filioque-affect-reformed-protestant-theology/26998#26998 using SQL statement
+    UPDATE concordance_sepost SET body=%s WHERE sepost_id=%s
+    root        : ERROR    'latin-1' codec can't encode character u'\u2019' in position 2411: ordinal not in range(256)
+    Traceback (most recent call last)
+    File "/Users/mhollinger/Dropbox/Code/SEConcordance/seconcordance/importer/post_importer.py", line 373, in save_postrecord
+    cur.execute(qry, (self.body, self.post_id))
+    File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/MySQLdb/cursors.py", line 183, in execute
+    query = query % db.literal(args)
+    File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 264, in literal
+    return self.escape(o, self.encoders)
+    File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 202, in unicode_literal
+    return db.literal(u.encode(unicode_literal.charset))
+    UnicodeEncodeError: 'latin-1' codec can't encode character u'\u2019' in position 2411: ordinal not in range(256)
+- Consider showing the Score @done(14-04-04) @project(SEConcordance To Do Items / Views)
+- use an access token for SE calls @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+    http://stackapps.com/apps/oauth/view/2842
+    Basically, I now just need to add the key=rIKmb7)KLgtLPKo5*jubZw(( and I get 10000 per day :)
+- save @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- parse @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- found passages are not highlighting at the correct position in most cases, because the index doesn't match up with the actual start position. … It's an encoding issue @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Why is the owner not getting set? @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Why is the body of each answer equal to the body of the initial question? @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- While I'm in there, I'm noticing a few other details: @done(14-04-03) @project(SEConcordance To Do Items / Locate_references / Rewrite as a class)
+- Whether or the question has been closed @done(14-04-03) @project(SEConcordance To Do Items / Locate_references / Rewrite as a class)
+- Whether or not the question has been answered. @done(14-04-03) @project(SEConcordance To Do Items / Locate_references / Rewrite as a class)
+- TODO: Add &lt;SPAN class='verse_reference' reference='Malachi 1:2-5'&gt;Mal 1:2-5&lt;/SPAN&gt; tags to found references in body @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Rewrite as a class: @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Pull in tags in addition to the body @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+    So, here's the deal - only questions have tags, but I'm thinking answers to those same questions should be "tagged" the same way.  As such, the logic for processing each post would need to be something like this -
+    Get the post
+    If it is a question, 
+    requery the api for particular question, and retrieve the tags
+    else (answer)
+    find the question it related to
+    retrieve the details there...  (Question: Do I just want this as a separate table, so as to minimize data?)
+- Psalm 151, Susanna, and 4 Maccabees need a new canonical order @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Logging: @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Log to Screen and file: http://stackoverflow.com/questions/9321741/printing-to-screen-and-writing-to-a-file-at-the-same-time @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Locate_References should look at seconcord.ini [Last_run] to get the list of sites.  That way, I don't have to modify the script if the list of sites expands... @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Get importer class to match locate_references functionality @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Expand the Model to accomidate tags, is_answered, is_closed, closed_reason, base_question_id @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Conciously consider Info, Debug, Warn, and Exception this time... @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Certain questions don't link correctly.  e.g. the Land of Nod question (4603) takes you to 4602.  Could this be a deleted question? @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- BUG: Error saving the data, because there is no default value for owner... (Probably that's true of anything less than a full fieldset) @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+- Add these new fields (tags, etc...) to importer write @done(14-04-03) @project(SEConcordance To Do Items / Locate_references)
+</code></pre>
+<ul>
+<li>There is a top border on .question and .answer that needs to be overriden @done(14-04-02) @project(SEConcordance To Do Items / Views)</li>
+<li>Extract the base elements (css, etc..) into a template @done(14-04-02) @project(SEConcordance To Do Items / Views)</li>
+<li>Extract the Header and Menu to separate files @done(14-04-02) @project(SEConcordance To Do Items / Views)</li>
+<li>Add a url that will let me view the last run date information for each site and log @done(14-04-02) @project(SEConcordance To Do Items / Ancilliaries)</li>
+<li>Add a Readme.md @done(14-04-02) @project(SEConcordance To Do Items / Known Limitations)
+    @done - Handle duplicate post
+    @done - Note: My search filter is going to be wrong if I do something like Matthew 1 - 20.  Verses in Chapter 20 will be forgotten, because 20:1 &gt; 20:0.  Basically I need to add a thing that says 0 = 1000
+    @done Be able to specify a range of verses to display
+    @done Add C.SE style sheets
+    @done When it comes time to do a full-up import of hermeneutics and christianity, I should put a delay in there of 1 second per post.  I only get 5000 calls per hour, so a little bit of throttling is in order.
+    @done - Have a search button that actually calls search
+    @done - Incorporate the Score metric (and consider - up/downvote split instead of raw score?)
+    @done - Tag the actual reference to biblia.
+    @done - Be sure to credit biblia.com (see their website)
+    @done - Fix the widths afforded to references and who answred
+    @done - Note: I may want to consider using the /?tag biblia api to add reference tags to all answers, then looking for the <cites>  That way, I get hypertext links everywhere.</li>
+</ul></body></html>
