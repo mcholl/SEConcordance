@@ -22,72 +22,38 @@ class TagBalancer:
 		#For ease of parsing, the regex will also get the tag name, or a closing tag 
 		#(e.g. <SPAN, </SPAN, in addition to a naked <')
 
-		find_tags = r'\<[\w+/[\w+]*]*'
-		tag_name = r'(?<=\<)/?\w+'  #matches SPAN or /SPAN, intended to be in a tag group
-
-		potential_tag_groups = re.findall(find_tags, testString)
-
 		self.tag_groups = []
-		nLeft = 0
-
 		nOrder = 0
-		for tag in potential_tag_groups:
+		find_tags_match_expression = r'\<[\w+/[\w+]*]*'
+
+		pattern_find_tags = re.compile(find_tags_match_expression)
+		for m in pattern_find_tags.finditer(testString):
+
+			snippet = m.group()
+			#Append everything up to the next ">" or the end of the string, whichever comes first
+
+			endpos = testString.find('>', m.start())
+			if endpos == -1:
+				snippet = testString[m.start():]
+			else:
+				snippet = testString[m.start():endpos+1]
+			
+
 			nOrder = nOrder + 1
 
 			#Start some info about each potential tag
+			# print "----- Adding Tag =>{0}<= ------".format(snippet)
 			tg = TagGroup()
+			tg.parse(snippet)
 
-			tg.name = ""
+			tg.pos = m.start()
+			tg.endpos = endpos
 			tg.order = nOrder
-			tg.tag_match = tag
-			tg.is_self_closing = False
-			tg.is_balanced = False
-			tg.is_incomplete = False
-			tg.is_closetag = False
-			tg.pos = testString.find(tg.tag_match, nLeft+1)
-
-			nLeft = tg.pos+1
-
-			#Tags that don't have an ending angle bracket are unbalanced, end of story
-			tg.endpos = testString.find(">", nLeft)
-			if(tg.endpos == -1):
-				tg.whole_tag = testString[tg.pos:]
-				tg.is_incomplete = True
-				self.tag_groups.append(tg)
-				break
-
-			#Set attributes
-			tg.whole_tag = testString[tg.pos:tg.endpos+1]
-			try:
-				tg.name = re.findall(tag_name, tg.whole_tag)[0]
-			except:
-				pass
-
-			tg.is_closetag =  tg.name.startswith('/')
-			if tg.is_closetag:
-				tg.name = tg.name[1:]
-
-			#Self-Closing tags are Balanced
-			if(tg.whole_tag.find("/>") > 0):
-				tg.is_balanced = True
-				tg.is_self_closing = True
-				self.tag_groups.append(tg)
-				break
 
 			self.tag_groups.append(tg)
 
 		#Make sure the list is in positional order
 		self.tag_groups.sort(key=lambda x: x.pos)
-
-		# #Question: When I updated the property, did it save?
-		# for tag in self.tag_groups:
-		# 	print "#{0}.{2} Name: {1}  from {3} to {4} ".format(tag.order, tag.name, tag.whole_tag, tag.pos, tag.endpos)
-		# 	if tag.is_balanced:
-		# 		print "		Is Balanced" 
-		# 	if tag.is_closetag:	
-		# 		print "		CLOSING tag"  
-		# 	else:
-		# 		print "     OPENING tag"
 
 		#Check each complete but non-self-closing tag for a matchvafter the fact, 
 		#and mark them as balanced 
@@ -124,7 +90,6 @@ class TagBalancer:
 				break
 
 			n = n+1
-
 
 		if n >= len(self.tag_groups):
 			# print "Couldn't locate the position of the first tag!"
@@ -240,9 +205,67 @@ class TagBalancer:
 
 
 class TagGroup:
-	pass
+
+	def __init__(self):
+		self.name = ""
+		self.is_self_closing = False
+		self.is_balanced = False
+		self.is_incomplete = False
+		self.is_closetag = False
+		self.whole_tag = ""
+
+		self.pos = -1
+		self.endpos = -1
+		self.order = -1
+
+	def parse(self, snippet):
+		self.whole_tag = snippet
+
+		#Tags that don't have an ending angle bracket are unbalanced, end of story
+		if snippet.find(">") == -1:
+			self.is_incomplete = True
+
+		#matches SPAN or /SPAN, intended to be in a tag group
+		tag_name_match_expression = r'(?<=\<)/?\w+'
+		m = re.findall(tag_name_match_expression, snippet)
+		if m == []:
+			self.name = ""
+		else:
+			self.name = m[0]
+
+		self.is_closetag =  self.name.startswith('/')
+		if self.is_closetag:
+			self.name = self.name[1:]
+
+		#Self-Closing tags are Balanced
+		if(self.whole_tag.find("/>") > 0):
+			self.is_balanced = True
+			self.is_closetag = True
+			self.is_self_closing = True
+
+	def display_state(self):
+		print "#{0}.{2} Name: {1}  from {3} to {4} ".format(self.order, self.name, self.whole_tag, self.pos, self.endpos)
+		if self.is_balanced:
+			print "		Is Balanced" 
+		if self.is_closetag:	
+			print "		CLOSING tag"  
+		else:
+			print "     OPENING tag"
+
+
 			
 def tests():
+	s1 = "11. This is a string that has breaks at the begining of a tag <"
+	expected_result = "11. This is a string that has breaks at the begining of a tag "
+	tb = TagBalancer(s1)
+	tb.display_state()
+	assert tb.is_balanced() == False
+	print "=>{0}<=".format(tb.correct_snippet())
+	print "=>{0}<=".format(expected_result)
+	# assert expected_result == tb.correct_snippet()
+	#I don't know why the assertion is failing...
+
+
 	s1 = "1. This is a string that has no tags."
 	tb = TagBalancer(s1)
 	# tb.display_state()
@@ -298,26 +321,47 @@ def tests():
 	# tb.display_state()
 	assert tb.is_balanced() == False
 	assert s1+"</SPAN>" == tb.correct_snippet()
-	print tb.correct_snippet()
+	# print tb.correct_snippet()
 
 	s1 = "8b. This is a <DIV class='1'>string that has <SPAN class='2'>nested spans<SPAN class='3'> and two of them aren't closed </SPAN>..."
 	tb = TagBalancer(s1)
 	# tb.display_state()
 	assert tb.is_balanced() == False
 	assert s1+"</SPAN></DIV>" == tb.correct_snippet()
-	print tb.correct_snippet()
+	# print tb.correct_snippet()
 
 	s1 = "8c. This string has unclosed tags at the beginning</SPAN></DIV> is a <SPAN class='1'>string that has a nested closed</SPAN> making for an unbalanced quote ..."
 	tb = TagBalancer(s1)
 	assert tb.is_balanced() == False
 	assert "<DIV><SPAN>"+s1 == tb.correct_snippet()
 
+	s1 = "9. This is a <SPAN class='1'>string that has a nested closed <SPAN /> in the middl of an otherwise balanced quote </SPAN>..."
+	tb = TagBalancer(s1)
+	# tb.display_state()
+	assert tb.is_balanced() == True
+	# print tb.correct_snippet()
+	assert s1 == tb.correct_snippet()
+
+
+	s1 = "<p>They are stoning him, and as such take him outside the city to a pit.  There, they will strip him and hurl rocks on him until he dies.  They are to aim for the chest, but precision is impossible.</p>\n\n<p>Under <a href=\"http://www.jewishvirtuallibrary.org/jsource/Talmud/sanhedrin6.html\" rel=\"nofol"
+	corrected = "<p>They are stoning him, and as such take him outside the city to a pit.  There, they will strip him and hurl rocks on him until he dies.  They are to aim for the chest, but precision is impossible.</p>\n\n<p>Under </p>"
+	tb = TagBalancer(s1)
+	assert tb.is_balanced() == False
+	assert corrected == tb.correct_snippet()
+
+
+	s1 = "10. This is a string that has breaks in the middle of a <SPA"
+	expected_result = "10. This is a string that has breaks in the middle of a "
+	tb = TagBalancer(s1)
+	# tb.display_state()
+	assert tb.is_balanced() == False
+	assert tb.correct_snippet() == expected_result
 
 
 	s1 = "12. This is a string that has breaks in the middle of the <SPAN class=''>closing tag</SP"
 	expected_result = s1+"AN>"
 	tb = TagBalancer(s1)
-	tb.display_state()
+	# tb.display_state()
 	assert tb.is_balanced() == False
 	assert expected_result == tb.correct_snippet()
 
@@ -326,39 +370,11 @@ def tests():
 	s1 = "13. This is a string that has breaks in an unbalanced quote <SPAN class='"
 	expected_result = "13. This is a string that has breaks in an unbalanced quote "
 	tb = TagBalancer(s1)
-	tb.display_state()
+	# tb.display_state()
 	assert tb.is_balanced() == False
 	assert expected_result == tb.correct_snippet()
 
 
-	#Failing Tests...
 
-	s1 = "10. This is a string that has breaks in the middle of a <SPA"
-	expected_result = "10. This is a string that has breaks in the middle of a "
-	tb = TagBalancer(s1)
-	tb.display_state()
-	assert tb.is_balanced() == False
-	print "=>{0}<=".format(tb.correct_snippet())
-	print "=>{0}<=".format(expected_result)
-
-	#These look the same, but aren't.  Why?
-	# assert tb.correct_snippet() == expected_result
-
-	s1 = "11. This is a string that has breaks at the begining of a tag <"
-	expected_result = "11. This is a string that has breaks at the begining of a tag "
-	tb = TagBalancer(s1)
-	tb.display_state()
-	assert tb.is_balanced() == False
-	print "=>{0}<=".format(tb.correct_snippet())
-	print "=>{0}<=".format(expected_result)
-	# assert corrected == tb.correct_snippet()
-
-
-	s1 = "9. This is a <SPAN class='1'>string that has a nested closed <SPAN /> in the middl of an otherwise balanced quote </SPAN>..."
-	tb = TagBalancer(s1)
-	tb.display_state()
-	#assert tb.is_balanced() == True
-	# print tb.correct_snippet()
-	# assert s1 == tb.correct_snippet()
 
 tests()

@@ -20,3 +20,7 @@ ignore/db.sql
 ignore/notes.txt
 
 ignore/test.py
+
+seconcordance.html
+
+seconcordance/concordance/templatetags/balance_tags.html
